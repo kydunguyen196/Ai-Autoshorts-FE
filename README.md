@@ -1,36 +1,122 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+﻿# AutoShorts AI Frontend (Next.js MVP)
 
-## Getting Started
+Production-minded MVP dashboard for AutoShorts AI using real backend APIs.
 
-First, run the development server:
+## Stack
+
+- Next.js (App Router)
+- TypeScript
+- Tailwind CSS
+- React Query
+- Axios
+
+## Backend Assumption
+
+Backend is already running at:
+
+- `http://localhost:8080`
+
+Configured via:
+
+- `NEXT_PUBLIC_API_BASE_URL` in `.env.local`
+
+## Features Implemented
+
+- Public landing page at `/`
+- Auth: register/login/logout with JWT stored client-side
+- Protected dashboard app shell (`/app/*`)
+- Current-user bootstrap (`/api/auth/me`)
+- Active channel selector persisted in local storage
+- Frontend bootstrap metadata integration (`/api/frontend/bootstrap`)
+- Dashboard overview with recent jobs/topics and queue snapshot
+- Jobs feed + detail + retry + non-terminal polling
+- Single video generation form
+- Topics feed + create + import
+- Batch generation with multi-item editor + result summary
+- Channels list + create + active channel switching
+
+## Run
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Configure env:
+
+```bash
+cp .env.local.example .env.local
+```
+
+3. Start dev server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `http://localhost:3000`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Scripts
 
-## Learn More
+- `npm run dev` - start local dev server
+- `npm run lint` - run ESLint
+- `npm run build` - production build
+- `npm run start` - run production server
 
-To learn more about Next.js, take a look at the following resources:
+## Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```text
+src/
+  app/
+    (auth)/
+      login/
+      register/
+    (dashboard)/app/
+      batch/
+      channels/
+      generate/
+      jobs/
+      topics/
+    layout.tsx
+    page.tsx
+  components/
+    layout/
+    providers/
+    ui/
+  features/
+    auth/
+    jobs/
+  hooks/
+  lib/
+  services/
+  types/
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## API Contracts Used
 
-## Deploy on Vercel
+- `POST /api/auth/register`
+- `POST /api/auth/login`
+- `GET /api/auth/me`
+- `GET /api/channels`
+- `POST /api/channels`
+- `GET /api/frontend/bootstrap`
+- `GET /api/videos/feed`
+- `GET /api/videos/{jobId}`
+- `GET /api/videos`
+- `POST /api/videos/generate`
+- `POST /api/videos/batch-generate`
+- `POST /api/videos/{jobId}/retry`
+- `GET /api/topics/feed`
+- `POST /api/topics`
+- `POST /api/topics/import`
+- `GET /api/topics`
+- `GET /api/health`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Notes
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- No mock backend is used.
+- Channel ownership is respected by always including selected `channelId`/`defaultChannelId` where needed.
+- Jobs page/detail automatically polls for non-terminal states (`PENDING`/`PROCESSING`).

@@ -9,12 +9,14 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import { useAuth } from "@/features/auth/use-auth";
+import { useI18n } from "@/features/i18n/language-context";
 import { useBootstrapMetadata } from "@/hooks/use-bootstrap";
 
 export function ProtectedAppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const { isHydrated, isAuthenticated, isBootstrappingUser, userBootstrapError, logout } = useAuth();
+  const { t } = useI18n();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const bootstrapQuery = useBootstrapMetadata();
@@ -35,7 +37,7 @@ export function ProtectedAppShell({ children }: { children: React.ReactNode }) {
       <div className="flex min-h-screen items-center justify-center bg-zinc-950 text-zinc-300">
         <div className="flex items-center gap-3 rounded-xl border border-zinc-800 bg-zinc-900/60 px-5 py-4">
           <Spinner className="h-4 w-4" />
-          Loading your workspace...
+          {t("shell.loadingWorkspace")}
         </div>
       </div>
     );
@@ -45,10 +47,10 @@ export function ProtectedAppShell({ children }: { children: React.ReactNode }) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-zinc-950 px-4">
         <Card className="max-w-lg">
-          <h2 className="text-lg font-semibold text-zinc-100">Session expired</h2>
+          <h2 className="text-lg font-semibold text-zinc-100">{t("shell.sessionExpired")}</h2>
           <p className="mt-2 text-sm text-zinc-400">{userBootstrapError}</p>
           <div className="mt-6 flex gap-3">
-            <Button onClick={logout}>Sign in again</Button>
+            <Button onClick={logout}>{t("shell.signInAgain")}</Button>
           </div>
         </Card>
       </div>
@@ -65,7 +67,7 @@ export function ProtectedAppShell({ children }: { children: React.ReactNode }) {
 
           {bootstrapQuery.isError ? (
             <div className="mx-4 mt-4 rounded-xl border border-amber-700/50 bg-amber-500/10 p-3 text-sm text-amber-200 md:mx-6">
-              Could not load frontend metadata. Forms may fallback to manual values.
+              {t("shell.metadataFallback")}
             </div>
           ) : null}
 

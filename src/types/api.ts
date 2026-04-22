@@ -11,6 +11,23 @@ export type GenerationStep =
 
 export type TopicStatus = "PENDING" | "PROCESSING" | "USED" | "FAILED";
 
+export type ContentGenerationMode = "REAL" | "MOCK" | "FALLBACK";
+export type AudioGenerationMode = "REAL" | "MOCK" | "FALLBACK";
+
+export type ReviewStatus = "DRAFT" | "GENERATED" | "APPROVED" | "REJECTED";
+
+export type PublishStatus =
+  | "NOT_PUBLISHED"
+  | "READY_TO_PUBLISH"
+  | "PUBLISHING"
+  | "PUBLISHED"
+  | "PUBLISH_FAILED";
+
+export type CharacterProfileStatus = "ACTIVE" | "INACTIVE" | "ARCHIVED";
+export type CharacterCampaignStatus = "DRAFT" | "ACTIVE" | "PAUSED" | "COMPLETED" | "ARCHIVED";
+
+export type TikTokConnectionStatus = "PENDING" | "ACTIVE" | "EXPIRED" | "REVOKED" | "ERROR";
+
 export interface ApiErrorResponse {
   timestamp?: string;
   status?: number;
@@ -80,6 +97,7 @@ export interface VideoJob {
   style: string;
   voiceId?: string | null;
   durationSeconds: number;
+
   scriptText?: string | null;
   hookText?: string | null;
   ctaText?: string | null;
@@ -88,9 +106,68 @@ export interface VideoJob {
   sceneBreakdownJson?: string | null;
   resolvedStyle?: string | null;
   promptTemplateId?: string | null;
+  contentGenerationMode?: ContentGenerationMode | null;
+  contentVariantKey?: string | null;
+  hookStrategy?: string | null;
+  ctaStrategy?: string | null;
+  structureStrategy?: string | null;
+  hookStrengthScore?: number | null;
+  engagementScore?: number | null;
+  engagementTagsJson?: string | null;
+
+  generationBatchId?: string | null;
+  generationGroupId?: string | null;
+  characterProfileId?: string | null;
+  characterCampaignId?: string | null;
+  storyAngle?: string | null;
+  productPlacementMode?: string | null;
+  adDisclosureMode?: string | null;
+  sceneCountTarget?: number | null;
+  characterConsistencyMode?: string | null;
+
+  variantIndex?: number | null;
+  variantCount?: number | null;
+  rankingScore?: number | null;
+  isTopCandidate?: boolean | null;
+  topCandidateRank?: number | null;
+
+  reviewStatus?: ReviewStatus | null;
+  reviewedAt?: string | null;
+  reviewedBy?: string | null;
+  rejectionReason?: string | null;
+  selectedForPublish?: boolean | null;
+
+  publishStatus?: PublishStatus | null;
+  scheduledPublishAt?: string | null;
+  publishPlatform?: string | null;
+  publishReadyAt?: string | null;
+  publishRequestedAt?: string | null;
+  publishStartedAt?: string | null;
+  publishedAt?: string | null;
+  publishAttemptCount?: number | null;
+  publishProvider?: string | null;
+  publishExternalId?: string | null;
+  publishTargetAccountId?: string | null;
+  publishRequestPayloadJson?: string | null;
+  publishResponsePayloadJson?: string | null;
+  publishFailureReason?: string | null;
+  publishFailureDetails?: string | null;
+  publishLastErrorAt?: string | null;
+  publishLastStatusCheckAt?: string | null;
+
   audioUrl?: string | null;
+  audioGenerationMode?: AudioGenerationMode | null;
+  audioProvider?: string | null;
+  audioVoiceId?: string | null;
+  audioModelId?: string | null;
+  audioOutputFormat?: string | null;
+  audioProviderRequestDurationMs?: number | null;
+  audioFailureReason?: string | null;
+  audioFailureDetails?: string | null;
+
   subtitleUrl?: string | null;
   finalVideoUrl?: string | null;
+
   errorMessage?: string | null;
   currentStep?: GenerationStep | null;
   stepErrorDetails?: string | null;
@@ -108,7 +185,17 @@ export interface GenerateVideoRequest {
   contentStyle?: string;
   voiceId?: string;
   channelId?: string;
+
+  characterProfileId?: string;
+  characterCampaignId?: string;
+  storyAngle?: string;
+  productPlacementMode?: string;
+  adDisclosureMode?: string;
+  sceneCountTarget?: number;
+  characterConsistencyMode?: string;
+
   durationSeconds: number;
+  variantCount?: number;
 }
 
 export interface BatchGenerateItemRequest {
@@ -117,7 +204,17 @@ export interface BatchGenerateItemRequest {
   contentStyle?: string;
   voiceId?: string;
   channelId?: string;
+
+  characterProfileId?: string;
+  characterCampaignId?: string;
+  storyAngle?: string;
+  productPlacementMode?: string;
+  adDisclosureMode?: string;
+  sceneCountTarget?: number;
+  characterConsistencyMode?: string;
+
   durationSeconds?: number;
+  variantCount?: number;
 }
 
 export interface BatchGenerateRequest {
@@ -125,12 +222,27 @@ export interface BatchGenerateRequest {
   defaultContentStyle?: string;
   defaultVoiceId?: string;
   defaultChannelId?: string;
+
+  defaultCharacterProfileId?: string;
+  defaultCharacterCampaignId?: string;
+  defaultStoryAngle?: string;
+  defaultProductPlacementMode?: string;
+  defaultAdDisclosureMode?: string;
+  defaultSceneCountTarget?: number;
+  defaultCharacterConsistencyMode?: string;
+
   defaultDurationSeconds?: number;
+  defaultVariantCount?: number;
+
   items: BatchGenerateItemRequest[];
 }
 
 export interface BatchGenerateJobResult {
   jobId?: string;
+  batchId?: string;
+  generationGroupId?: string;
+  variantIndex?: number;
+  variantCount?: number;
   status?: JobStatus;
   topic?: string;
   errorMessage?: string;
@@ -139,6 +251,7 @@ export interface BatchGenerateJobResult {
 export interface BatchGenerateResponse {
   batchId: string;
   totalRequested: number;
+  totalVariantsRequested?: number;
   totalAccepted: number;
   createdAt: string;
   jobs: BatchGenerateJobResult[];
@@ -180,6 +293,143 @@ export interface TopicImportResponse {
   totalImported: number;
   createdAt: string;
   topics: Topic[];
+}
+
+export interface CharacterProfile {
+  id: string;
+  channelId: string;
+  name: string;
+  archetype?: string | null;
+  personality?: string | null;
+  toneOfVoice?: string | null;
+  speakingStyle?: string | null;
+  catchphrases?: string | null;
+  visualStyle?: string | null;
+  language?: string | null;
+  targetAudience?: string | null;
+  allowedTopics?: string | null;
+  forbiddenTopics?: string | null;
+  defaultVoiceProvider?: string | null;
+  defaultVoiceId?: string | null;
+  status: CharacterProfileStatus;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface CharacterProfileUpsertRequest {
+  channelId?: string;
+  name: string;
+  archetype?: string;
+  personality?: string;
+  toneOfVoice?: string;
+  speakingStyle?: string;
+  catchphrases?: string;
+  visualStyle?: string;
+  language?: string;
+  targetAudience?: string;
+  allowedTopics?: string;
+  forbiddenTopics?: string;
+  defaultVoiceProvider?: string;
+  defaultVoiceId?: string;
+  status?: CharacterProfileStatus;
+}
+
+export interface CharacterCampaign {
+  id: string;
+  channelId: string;
+  characterProfileId?: string | null;
+  productName: string;
+  productType?: string | null;
+  productDescription?: string | null;
+  productUrl?: string | null;
+  targetPlatform?: string | null;
+  campaignObjective?: string | null;
+  callToAction?: string | null;
+  targetAudience?: string | null;
+  offerSummary?: string | null;
+  status: CharacterCampaignStatus;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface CharacterCampaignUpsertRequest {
+  channelId?: string;
+  characterProfileId?: string;
+  productName: string;
+  productType?: string;
+  productDescription?: string;
+  productUrl?: string;
+  targetPlatform?: string;
+  campaignObjective?: string;
+  callToAction?: string;
+  targetAudience?: string;
+  offerSummary?: string;
+  status?: CharacterCampaignStatus;
+}
+
+export interface PublishVideoRequest {
+  publishPlatform?: string;
+}
+
+export interface RejectVideoRequest {
+  rejectionReason: string;
+}
+
+export interface VideoPublishStatus {
+  jobId: string;
+  publishStatus?: PublishStatus | null;
+  publishPlatform?: string | null;
+  publishProvider?: string | null;
+  publishExternalId?: string | null;
+  publishTargetAccountId?: string | null;
+  publishRequestPayloadJson?: string | null;
+  publishResponsePayloadJson?: string | null;
+  publishReadyAt?: string | null;
+  publishRequestedAt?: string | null;
+  publishStartedAt?: string | null;
+  publishedAt?: string | null;
+  publishAttemptCount?: number | null;
+  publishFailureReason?: string | null;
+  publishFailureDetails?: string | null;
+  publishLastErrorAt?: string | null;
+  publishLastStatusCheckAt?: string | null;
+  reviewStatus?: ReviewStatus | null;
+  selectedForPublish?: boolean | null;
+  publishable?: boolean | null;
+  publishReadinessReason?: string | null;
+  tiktokConnectionStatus?: string | null;
+}
+
+export interface GroupReviewSummary {
+  generationGroupId: string;
+  totalJobs: number;
+  selectedJobId?: string | null;
+  reviewStatusCounts: Record<string, number>;
+}
+
+export interface TikTokConnectionStatusResponse {
+  id?: string;
+  channelId: string;
+  platformAccountId?: string | null;
+  platformUsername?: string | null;
+  tokenExpiresAt?: string | null;
+  scopes?: string[];
+  status: TikTokConnectionStatus;
+  active?: boolean;
+  lastSyncAt?: string | null;
+  createdAt?: string | null;
+  updatedAt?: string | null;
+}
+
+export interface TikTokConnectionUpsertRequest {
+  channelId?: string;
+  platformAccountId?: string;
+  platformUsername?: string;
+  accessToken?: string;
+  refreshToken?: string;
+  tokenExpiresAt?: string;
+  scopes?: string[];
+  status?: TikTokConnectionStatus;
 }
 
 export interface FrontendBootstrapDefaults {

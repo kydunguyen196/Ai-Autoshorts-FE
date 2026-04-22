@@ -3,24 +3,33 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
+  BookOpenText,
   Bot,
+  Link2,
+  Megaphone,
   FolderKanban,
   Layers,
   LayoutDashboard,
   ListChecks,
   Sparkles,
+  UserRound,
   X,
 } from "lucide-react";
 
+import { useI18n } from "@/features/i18n/language-context";
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { href: "/app", label: "Overview", icon: LayoutDashboard },
-  { href: "/app/generate", label: "Generate", icon: Sparkles },
-  { href: "/app/jobs", label: "Jobs", icon: ListChecks },
-  { href: "/app/topics", label: "Topics", icon: Layers },
-  { href: "/app/batch", label: "Batch", icon: Bot },
-  { href: "/app/channels", label: "Channels", icon: FolderKanban },
+  { href: "/app", labelKey: "nav.overview", icon: LayoutDashboard },
+  { href: "/app/generate", labelKey: "nav.generate", icon: Sparkles },
+  { href: "/app/jobs", labelKey: "nav.jobs", icon: ListChecks },
+  { href: "/app/topics", labelKey: "nav.topics", icon: Layers },
+  { href: "/app/batch", labelKey: "nav.batch", icon: Bot },
+  { href: "/app/channels", labelKey: "nav.channels", icon: FolderKanban },
+  { href: "/app/characters/profiles", labelKey: "nav.characters", icon: UserRound },
+  { href: "/app/characters/campaigns", labelKey: "nav.campaigns", icon: Megaphone },
+  { href: "/app/integrations/tiktok", labelKey: "nav.tiktok", icon: Link2 },
+  { href: "/app/guide", labelKey: "nav.guide", icon: BookOpenText },
 ];
 
 export function AppSidebar({
@@ -69,12 +78,14 @@ function SidebarContent({
   pathname: string;
   onNavigate: () => void;
 }) {
+  const { t } = useI18n();
+
   return (
     <>
       <div className="mb-8">
-        <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">AutoShorts AI</p>
-        <h1 className="mt-2 text-xl font-semibold text-zinc-100">Video Automation</h1>
-        <p className="mt-1 text-sm text-zinc-400">AI workflows for creators</p>
+        <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">{t("sidebar.appName")}</p>
+        <h1 className="mt-2 text-xl font-semibold text-zinc-100">{t("sidebar.title")}</h1>
+        <p className="mt-1 text-sm text-zinc-400">{t("sidebar.subtitle")}</p>
       </div>
 
       <nav className="space-y-2">
@@ -95,7 +106,7 @@ function SidebarContent({
               )}
             >
               <Icon className="h-4 w-4" />
-              {item.label}
+              {t(item.labelKey)}
             </Link>
           );
         })}

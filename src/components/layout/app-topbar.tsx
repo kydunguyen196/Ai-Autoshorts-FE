@@ -3,11 +3,14 @@
 import { Menu } from "lucide-react";
 
 import { ChannelSelector } from "@/components/layout/channel-selector";
+import { LanguageSwitcher } from "@/components/layout/language-switcher";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/features/auth/use-auth";
+import { useI18n } from "@/features/i18n/language-context";
 
 export function AppTopbar({ onOpenMenu }: { onOpenMenu: () => void }) {
   const { user, logout } = useAuth();
+  const { t } = useI18n();
 
   return (
     <header className="sticky top-0 z-20 border-b border-zinc-800/70 bg-zinc-950/80 px-4 py-3 backdrop-blur md:px-6">
@@ -24,12 +27,13 @@ export function AppTopbar({ onOpenMenu }: { onOpenMenu: () => void }) {
         </div>
 
         <div className="flex items-center gap-3">
+          <LanguageSwitcher />
           <div className="hidden text-right sm:block">
-            <p className="text-sm font-medium text-zinc-100">{user?.displayName ?? "User"}</p>
+            <p className="text-sm font-medium text-zinc-100">{user?.displayName ?? t("topbar.userFallback")}</p>
             <p className="text-xs text-zinc-400">{user?.email}</p>
           </div>
           <Button variant="secondary" size="sm" onClick={logout}>
-            Logout
+            {t("topbar.logout")}
           </Button>
         </div>
       </div>

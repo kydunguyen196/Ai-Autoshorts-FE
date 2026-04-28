@@ -6,6 +6,7 @@ export type GenerationStep =
   | "SCRIPT_GENERATION"
   | "AUDIO_SYNTHESIS"
   | "SUBTITLE_GENERATION"
+  | "VISUAL_ASSET_GENERATION"
   | "VIDEO_COMPOSITION"
   | "COMPLETED";
 
@@ -13,6 +14,7 @@ export type TopicStatus = "PENDING" | "PROCESSING" | "USED" | "FAILED";
 
 export type ContentGenerationMode = "REAL" | "MOCK" | "FALLBACK";
 export type AudioGenerationMode = "REAL" | "MOCK" | "FALLBACK";
+export type VisualGenerationMode = "REAL" | "MOCK" | "FALLBACK";
 
 export type ReviewStatus = "DRAFT" | "GENERATED" | "APPROVED" | "REJECTED";
 
@@ -104,6 +106,7 @@ export interface VideoJob {
   captionText?: string | null;
   hashtags?: string[] | null;
   sceneBreakdownJson?: string | null;
+  sceneAssetsJson?: string | null;
   resolvedStyle?: string | null;
   promptTemplateId?: string | null;
   contentGenerationMode?: ContentGenerationMode | null;
@@ -164,6 +167,11 @@ export interface VideoJob {
   audioProviderRequestDurationMs?: number | null;
   audioFailureReason?: string | null;
   audioFailureDetails?: string | null;
+  visualGenerationMode?: VisualGenerationMode | null;
+  visualProvider?: string | null;
+  visualModelId?: string | null;
+  visualFailureReason?: string | null;
+  visualFailureDetails?: string | null;
 
   subtitleUrl?: string | null;
   finalVideoUrl?: string | null;

@@ -416,6 +416,55 @@ export default function JobDetailPage() {
           </Card>
 
           <Card>
+            <h3 className="text-lg font-semibold text-zinc-100">Visual Metadata</h3>
+            <div className="mt-4 grid gap-3 text-sm md:grid-cols-2 lg:grid-cols-3">
+              <InfoRow label="Visual Mode" value={job.visualGenerationMode || "-"} />
+              <InfoRow label="Visual Provider" value={job.visualProvider || "-"} />
+              <InfoRow label="Visual Model ID" value={job.visualModelId || "-"} />
+              <InfoRow label="Visual Failure Reason" value={job.visualFailureReason || "-"} />
+            </div>
+
+            {job.visualFailureDetails ? (
+              <pre className="mt-4 max-h-64 overflow-auto rounded-lg border border-zinc-800 bg-zinc-950/70 p-3 text-xs text-zinc-200">
+                {job.visualFailureDetails}
+              </pre>
+            ) : null}
+
+            {parseSceneAssets(job.sceneAssetsJson).length > 0 ? (
+              <div className="mt-4 grid gap-3 md:grid-cols-2">
+                {parseSceneAssets(job.sceneAssetsJson).map((scene) => (
+                  <div key={`scene-${scene.index}-${scene.assetUrl}`} className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-3">
+                    <p className="text-xs text-zinc-500">
+                      Scene {scene.index} • {scene.startSec}s - {scene.endSec}s
+                    </p>
+                    <p className="mt-1 text-xs text-zinc-400">
+                      {scene.mode || "-"} • {scene.provider || "-"}
+                    </p>
+                    {scene.assetUrl ? (
+                      <a
+                        href={scene.assetUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="mt-2 block overflow-hidden rounded-lg border border-zinc-700 bg-zinc-950"
+                      >
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={scene.assetUrl}
+                          alt={`Scene ${scene.index}`}
+                          className="h-52 w-full object-cover"
+                        />
+                      </a>
+                    ) : null}
+                    {scene.prompt ? (
+                      <p className="mt-2 text-xs text-zinc-400">{scene.prompt}</p>
+                    ) : null}
+                  </div>
+                ))}
+              </div>
+            ) : null}
+          </Card>
+
+          <Card>
             <h3 className="text-lg font-semibold text-zinc-100">Output Assets</h3>
             <div className="mt-4 grid gap-3 text-sm">
               <AssetRow label="Audio URL" url={job.audioUrl} />
@@ -496,4 +545,39 @@ function AssetRow({ label, url }: { label: string; url?: string | null }) {
       )}
     </div>
   );
+}
+
+type SceneAssetRow = {
+  index: number;
+  startSec: number;
+  endSec: number;
+  prompt?: string | null;
+  assetUrl?: string | null;
+  mode?: string | null;
+  provider?: string | null;
+};
+
+function parseSceneAssets(sceneAssetsJson?: string | null): SceneAssetRow[] {
+  if (!sceneAssetsJson) {
+    return [];
+  }
+  try {
+    const parsed = JSON.parse(sceneAssetsJson);
+    if (!Array.isArray(parsed)) {
+      return [];
+    }
+    return parsed
+      .map((item, idx) => ({
+        index: Number(item?.index) || idx + 1,
+        startSec: Number(item?.startSec) || 0,
+        endSec: Number(item?.endSec) || 0,
+        prompt: typeof item?.prompt === "string" ? item.prompt : null,
+        assetUrl: typeof item?.assetUrl === "string" ? item.assetUrl : null,
+        mode: typeof item?.mode === "string" ? item.mode : null,
+        provider: typeof item?.provider === "string" ? item.provider : null,
+      }))
+      .filter((item) => item.assetUrl || item.prompt);
+  } catch {
+    return [];
+  }
 }

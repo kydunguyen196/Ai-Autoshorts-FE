@@ -129,6 +129,11 @@ export default function JobDetailPage() {
     return Object.entries(counts);
   }, [groupReviewSummaryQuery.data?.reviewStatusCounts]);
 
+  const failureDetails = useMemo(
+    () => parseStepErrorDetails(job?.stepErrorDetails),
+    [job?.stepErrorDetails],
+  );
+
   const hasActionPending =
     retryMutation.isPending ||
     approveMutation.isPending ||
@@ -193,12 +198,51 @@ export default function JobDetailPage() {
 
             {job.errorMessage ? (
               <div className="mt-5 rounded-xl border border-red-700/60 bg-red-500/10 p-4">
-                <p className="text-sm font-medium text-red-200">Error</p>
-                <p className="mt-1 text-sm text-red-100">{job.errorMessage}</p>
+                <div className="flex flex-wrap items-start justify-between gap-3">
+                  <div>
+                    <p className="text-sm font-medium text-red-200">Generation failed</p>
+                    <p className="mt-1 text-sm text-red-100">{job.errorMessage}</p>
+                  </div>
+                  <div className="rounded-full border border-red-700/70 px-3 py-1 text-xs text-red-100">
+                    {getGenerationStepLabel(failureDetails.step || job.currentStep)}
+                  </div>
+                </div>
+
+                <div className="mt-4 grid gap-2 text-sm md:grid-cols-3">
+                  <InfoRow label="Failed Step" value={getGenerationStepLabel(failureDetails.step || job.currentStep)} />
+                  <InfoRow label="Last Error" value={formatDateTime(job.lastErrorAt)} />
+                  <InfoRow label="Attempt" value={String(job.attemptCount ?? 0)} />
+                </div>
+
+                {failureDetails.exception || failureDetails.rootCauseMessage ? (
+                  <div className="mt-4 rounded-lg border border-red-800/70 bg-black/20 p-3 text-xs text-red-100">
+                    {failureDetails.rootCauseMessage ? (
+                      <p>
+                        <span className="text-red-300">Root cause:</span> {failureDetails.rootCauseMessage}
+                      </p>
+                    ) : null}
+                    {failureDetails.exception ? (
+                      <p className="mt-1">
+                        <span className="text-red-300">Exception:</span> {failureDetails.exception}
+                      </p>
+                    ) : null}
+                    {failureDetails.occurredAt ? (
+                      <p className="mt-1">
+                        <span className="text-red-300">Captured:</span> {formatDateTime(failureDetails.occurredAt)}
+                      </p>
+                    ) : null}
+                  </div>
+                ) : null}
+
                 {job.stepErrorDetails ? (
-                  <pre className="mt-3 max-h-60 overflow-auto rounded-lg bg-black/40 p-3 text-xs text-red-100">
-                    {job.stepErrorDetails}
-                  </pre>
+                  <details className="mt-3">
+                    <summary className="cursor-pointer text-xs font-medium text-red-200 hover:text-red-100">
+                      Show technical details
+                    </summary>
+                    <pre className="mt-3 max-h-60 overflow-auto rounded-lg bg-black/40 p-3 text-xs text-red-100">
+                      {job.stepErrorDetails}
+                    </pre>
+                  </details>
                 ) : null}
               </div>
             ) : null}
@@ -545,6 +589,68 @@ function AssetRow({ label, url }: { label: string; url?: string | null }) {
       )}
     </div>
   );
+}
+
+type ParsedStepErrorDetails = {
+  occurredAt?: string;
+  step?: string;
+  exception?: string;
+  rootCauseMessage?: string;
+};
+
+function parseStepErrorDetails(details?: string | null): ParsedStepErrorDetails {
+  if (!details) {
+    return {};
+  }
+
+  return details.split("\n").reduce<ParsedStepErrorDetails>((acc, line) => {
+    const separatorIndex = line.indexOf("=");
+    if (separatorIndex <= 0) {
+      return acc;
+    }
+
+    const key = line.slice(0, separatorIndex).trim();
+    const value = line.slice(separatorIndex + 1).trim();
+    if (!value) {
+      return acc;
+    }
+
+    if (key === "occurredAt") {
+      acc.occurredAt = value;
+    }
+    if (key === "step") {
+      acc.step = value;
+    }
+    if (key === "exception") {
+      acc.exception = value;
+    }
+    if (key === "rootCauseMessage" || key === "message") {
+      acc.rootCauseMessage = acc.rootCauseMessage || value;
+    }
+    return acc;
+  }, {});
+}
+
+function getGenerationStepLabel(step?: string | null) {
+  switch (step) {
+    case "QUEUED":
+      return "Queue handoff";
+    case "CONTENT_PREPARATION":
+    case "SCRIPT_GENERATION":
+      return "Script/content generation";
+    case "AUDIO_SYNTHESIS":
+      return "Audio synthesis";
+    case "SUBTITLE_GENERATION":
+      return "Subtitle generation";
+    case "VISUAL_ASSET_GENERATION":
+      return "Visual asset generation";
+    case "VIDEO_COMPOSITION":
+      return "Video composition";
+    case "COMPLETED":
+      return "Completion finalization";
+    default:
+      return "Unknown step";
+  }
 }
 
 type SceneAssetRow = {

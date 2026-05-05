@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import {
   BookOpenText,
   Bot,
+  CreditCard,
   Link2,
   Megaphone,
   FolderKanban,
@@ -29,6 +30,7 @@ const navItems = [
   { href: "/app/characters/profiles", labelKey: "nav.characters", icon: UserRound },
   { href: "/app/characters/campaigns", labelKey: "nav.campaigns", icon: Megaphone },
   { href: "/app/integrations/tiktok", labelKey: "nav.tiktok", icon: Link2 },
+  { href: "/app/billing", labelKey: "nav.billing", icon: CreditCard },
   { href: "/app/guide", labelKey: "nav.guide", icon: BookOpenText },
 ];
 

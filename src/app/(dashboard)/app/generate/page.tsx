@@ -49,6 +49,13 @@ export default function GeneratePage() {
   const [voiceId, setVoiceId] = useState(defaults?.defaultVoiceId || "");
   const [durationSeconds, setDurationSeconds] = useState(defaults?.defaultDurationSeconds ?? 30);
   const [variantCount, setVariantCount] = useState(1);
+  const [niche, setNiche] = useState("affiliate");
+  const [platform, setPlatform] = useState("tiktok");
+  const [subtitleStyle, setSubtitleStyle] = useState("tiktok-bold");
+  const [visualMode, setVisualMode] = useState("ai-scenes");
+  const [voiceProvider, setVoiceProvider] = useState("");
+  const [voicePersona, setVoicePersona] = useState("energetic-creator");
+  const [qualityPreset, setQualityPreset] = useState("viral-faceless");
 
   const [characterProfileId, setCharacterProfileId] = useState("");
   const [characterCampaignId, setCharacterCampaignId] = useState("");
@@ -79,6 +86,13 @@ export default function GeneratePage() {
         adDisclosureMode: adDisclosureMode || undefined,
         sceneCountTarget: parseOptionalInt(sceneCountTarget),
         characterConsistencyMode: characterConsistencyMode || undefined,
+        niche,
+        platform,
+        subtitleStyle,
+        visualMode,
+        voiceProvider: voiceProvider || undefined,
+        voicePersona,
+        qualityPreset,
       }),
     onSuccess: (job) => {
       router.push(`/app/jobs/${job.jobId}`);
@@ -167,6 +181,74 @@ export default function GeneratePage() {
                 required
               />
             </label>
+          </div>
+
+          <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4">
+            <h3 className="text-sm font-semibold uppercase tracking-wide text-emerald-100">Commercial Quality Controls</h3>
+            <div className="mt-4 grid gap-4 md:grid-cols-3">
+              <label className="block space-y-2">
+                <span className="text-sm text-zinc-300">Niche</span>
+                <Select value={niche} onChange={(event) => setNiche(event.target.value)}>
+                  <option value="affiliate">Affiliate</option>
+                  <option value="product-facts">Product facts</option>
+                  <option value="money-tips">Money tips</option>
+                  <option value="motivation">Motivation</option>
+                  <option value="story-lessons">Story lessons</option>
+                </Select>
+              </label>
+
+              <label className="block space-y-2">
+                <span className="text-sm text-zinc-300">Platform</span>
+                <Select value={platform} onChange={(event) => setPlatform(event.target.value)}>
+                  <option value="tiktok">TikTok</option>
+                  <option value="youtube-shorts">YouTube Shorts</option>
+                  <option value="instagram-reels">Instagram Reels</option>
+                </Select>
+              </label>
+
+              <label className="block space-y-2">
+                <span className="text-sm text-zinc-300">Quality Preset</span>
+                <Select value={qualityPreset} onChange={(event) => setQualityPreset(event.target.value)}>
+                  <option value="viral-faceless">Viral faceless</option>
+                  <option value="affiliate-conversion">Affiliate conversion</option>
+                  <option value="educational-retention">Educational retention</option>
+                </Select>
+              </label>
+
+              <label className="block space-y-2">
+                <span className="text-sm text-zinc-300">Subtitle Style</span>
+                <Select value={subtitleStyle} onChange={(event) => setSubtitleStyle(event.target.value)}>
+                  <option value="tiktok-bold">TikTok bold</option>
+                  <option value="clean-captions">Clean captions</option>
+                  <option value="affiliate-sales">Affiliate sales</option>
+                  <option value="educational">Educational</option>
+                </Select>
+              </label>
+
+              <label className="block space-y-2">
+                <span className="text-sm text-zinc-300">Visual Mode</span>
+                <Select value={visualMode} onChange={(event) => setVisualMode(event.target.value)}>
+                  <option value="ai-scenes">AI image scenes</option>
+                  <option value="stock-broll">Stock/B-roll ready</option>
+                  <option value="generated-abstract">Generated abstract</option>
+                  <option value="mock-preview">Mock preview</option>
+                </Select>
+              </label>
+
+              <label className="block space-y-2">
+                <span className="text-sm text-zinc-300">Voice Persona</span>
+                <Input value={voicePersona} onChange={(event) => setVoicePersona(event.target.value)} />
+              </label>
+
+              <label className="block space-y-2 md:col-span-3">
+                <span className="text-sm text-zinc-300">Voice Provider Override</span>
+                <Input
+                  value={voiceProvider}
+                  onChange={(event) => setVoiceProvider(event.target.value)}
+                  placeholder="Optional, e.g. elevenlabs, 9router, mock"
+                />
+              </label>
+            </div>
           </div>
 
           <div className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-4">

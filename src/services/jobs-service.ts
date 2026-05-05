@@ -99,6 +99,11 @@ export async function getJobPublishStatus(jobId: string) {
   return data;
 }
 
+export async function exportJob(jobId: string) {
+  const { data } = await httpClient.post<VideoJob>(`/api/videos/${jobId}/export`);
+  return data;
+}
+
 export async function batchGenerate(payload: BatchGenerateRequest) {
   const { data } = await httpClient.post<BatchGenerateResponse>(
     "/api/videos/batch-generate",

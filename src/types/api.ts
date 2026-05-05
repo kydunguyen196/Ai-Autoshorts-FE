@@ -30,6 +30,8 @@ export type CharacterCampaignStatus = "DRAFT" | "ACTIVE" | "PAUSED" | "COMPLETED
 
 export type TikTokConnectionStatus = "PENDING" | "ACTIVE" | "EXPIRED" | "REVOKED" | "ERROR";
 
+export type ExportStatus = "NOT_READY" | "EXPORTING" | "EXPORT_READY" | "EXPORT_FAILED";
+
 export interface ApiErrorResponse {
   timestamp?: string;
   status?: number;
@@ -127,6 +129,13 @@ export interface VideoJob {
   adDisclosureMode?: string | null;
   sceneCountTarget?: number | null;
   characterConsistencyMode?: string | null;
+  niche?: string | null;
+  platform?: string | null;
+  subtitleStyle?: string | null;
+  visualMode?: string | null;
+  voiceProvider?: string | null;
+  voicePersona?: string | null;
+  qualityPreset?: string | null;
 
   variantIndex?: number | null;
   variantCount?: number | null;
@@ -157,6 +166,10 @@ export interface VideoJob {
   publishFailureDetails?: string | null;
   publishLastErrorAt?: string | null;
   publishLastStatusCheckAt?: string | null;
+  exportStatus?: ExportStatus | null;
+  downloadUrl?: string | null;
+  providerModes?: string | null;
+  estimatedCostCredits?: number | null;
 
   audioUrl?: string | null;
   audioGenerationMode?: AudioGenerationMode | null;
@@ -201,6 +214,13 @@ export interface GenerateVideoRequest {
   adDisclosureMode?: string;
   sceneCountTarget?: number;
   characterConsistencyMode?: string;
+  niche?: string;
+  platform?: string;
+  subtitleStyle?: string;
+  visualMode?: string;
+  voiceProvider?: string;
+  voicePersona?: string;
+  qualityPreset?: string;
 
   durationSeconds: number;
   variantCount?: number;
@@ -220,6 +240,13 @@ export interface BatchGenerateItemRequest {
   adDisclosureMode?: string;
   sceneCountTarget?: number;
   characterConsistencyMode?: string;
+  niche?: string;
+  platform?: string;
+  subtitleStyle?: string;
+  visualMode?: string;
+  voiceProvider?: string;
+  voicePersona?: string;
+  qualityPreset?: string;
 
   durationSeconds?: number;
   variantCount?: number;
@@ -238,6 +265,13 @@ export interface BatchGenerateRequest {
   defaultAdDisclosureMode?: string;
   defaultSceneCountTarget?: number;
   defaultCharacterConsistencyMode?: string;
+  defaultNiche?: string;
+  defaultPlatform?: string;
+  defaultSubtitleStyle?: string;
+  defaultVisualMode?: string;
+  defaultVoiceProvider?: string;
+  defaultVoicePersona?: string;
+  defaultQualityPreset?: string;
 
   defaultDurationSeconds?: number;
   defaultVariantCount?: number;
@@ -470,4 +504,38 @@ export interface HealthResponse {
   queueRoutingKey?: string;
   queueDeadLetterName?: string;
   queueMaxProcessingAttempts?: number;
+}
+
+export interface BillingPlan {
+  planKey: string;
+  name: string;
+  monthlyCredits: number;
+  monthlyPriceUsdCents: number;
+  audience: string;
+}
+
+export interface BillingSubscription {
+  planKey: string;
+  status: string;
+  creditsBalance: number;
+  updatedAt?: string;
+}
+
+export interface BillingCredits {
+  creditsBalance: number;
+  lowCreditThreshold: number;
+}
+
+export interface BillingUsageEntry {
+  id: string;
+  amount: number;
+  balanceAfter: number;
+  reason: string;
+  referenceId?: string | null;
+  createdAt?: string;
+}
+
+export interface BillingPortalResponse {
+  url: string;
+  mode: string;
 }

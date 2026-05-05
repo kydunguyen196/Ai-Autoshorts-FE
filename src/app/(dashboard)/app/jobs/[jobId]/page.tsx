@@ -18,6 +18,7 @@ import { useRetryJobMutation } from "@/hooks/use-retry-job";
 import { formatDateTime, getErrorMessage, isTerminalJobStatus } from "@/lib/utils";
 import {
   approveJob,
+  exportJob,
   getGroupReviewSummary,
   getJob,
   getJobPublishStatus,
@@ -105,6 +106,13 @@ export default function JobDetailPage() {
     },
   });
 
+  const exportMutation = useMutation({
+    mutationFn: (id: string) => exportJob(id),
+    onSuccess: (job) => {
+      refreshJobData(queryClient, job.jobId);
+    },
+  });
+
   const job = jobQuery.data;
   const publishStatus = publishStatusQuery.data;
 
@@ -139,7 +147,8 @@ export default function JobDetailPage() {
     approveMutation.isPending ||
     rejectMutation.isPending ||
     selectMutation.isPending ||
-    publishMutation.isPending;
+    publishMutation.isPending ||
+    exportMutation.isPending;
 
   return (
     <div>
@@ -188,6 +197,15 @@ export default function JobDetailPage() {
               <InfoRow label="Review Status" value={job.reviewStatus || "-"} />
               <InfoRow label="Selected For Publish" value={job.selectedForPublish ? "Yes" : "No"} />
               <InfoRow label="Publish Status" value={job.publishStatus || "-"} />
+              <InfoRow label="Export Status" value={job.exportStatus || "-"} />
+              <InfoRow label="Estimated Credits" value={String(job.estimatedCostCredits ?? "-")} />
+              <InfoRow label="Provider Modes" value={job.providerModes || "-"} />
+              <InfoRow label="Niche" value={job.niche || "-"} />
+              <InfoRow label="Platform" value={job.platform || "-"} />
+              <InfoRow label="Quality Preset" value={job.qualityPreset || "-"} />
+              <InfoRow label="Subtitle Style" value={job.subtitleStyle || "-"} />
+              <InfoRow label="Visual Mode" value={job.visualMode || "-"} />
+              <InfoRow label="Voice Persona" value={job.voicePersona || "-"} />
               <InfoRow label="Attempt" value={String(job.attemptCount ?? 0)} />
               <InfoRow label="Created" value={formatDateTime(job.createdAt)} />
               <InfoRow label="Updated" value={formatDateTime(job.updatedAt)} />
@@ -321,7 +339,9 @@ export default function JobDetailPage() {
                   <InfoRow label="Attempt Count" value={String(publishStatus.publishAttemptCount ?? 0)} />
                   <InfoRow label="Requested At" value={formatDateTime(publishStatus.publishRequestedAt)} />
                   <InfoRow label="Published At" value={formatDateTime(publishStatus.publishedAt)} />
-                  <InfoRow label="External ID" value={publishStatus.publishExternalId || "-"} />
+              <InfoRow label="External ID" value={publishStatus.publishExternalId || "-"} />
+                  <InfoRow label="Export Status" value={job.exportStatus || "-"} />
+                  <InfoRow label="Download URL" value={job.downloadUrl || "-"} />
                 </div>
 
                 <div className="mt-4 grid gap-3 md:grid-cols-[1fr_auto]">
@@ -340,6 +360,16 @@ export default function JobDetailPage() {
                     disabled={!canPublish || hasActionPending}
                   >
                     Publish Now
+                  </Button>
+                </div>
+
+                <div className="mt-3">
+                  <Button
+                    variant="secondary"
+                    onClick={() => exportMutation.mutate(job.jobId)}
+                    disabled={job.status !== "COMPLETED" || hasActionPending}
+                  >
+                    Prepare Download Export
                   </Button>
                 </div>
 
@@ -514,7 +544,21 @@ export default function JobDetailPage() {
               <AssetRow label="Audio URL" url={job.audioUrl} />
               <AssetRow label="Subtitle URL" url={job.subtitleUrl} />
               <AssetRow label="Final Video URL" url={job.finalVideoUrl} />
+              <AssetRow label="Download URL" url={job.downloadUrl} />
             </div>
+
+            {job.downloadUrl ? (
+              <div className="mt-4">
+                <a
+                  className="inline-flex h-10 items-center justify-center rounded-xl border border-indigo-500/50 bg-indigo-500/15 px-4 text-sm font-medium text-indigo-100 hover:bg-indigo-500/25"
+                  href={job.downloadUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Download Export
+                </a>
+              </div>
+            ) : null}
 
             {job.finalVideoUrl ? (
               <div className="mt-5 overflow-hidden rounded-xl border border-zinc-800">

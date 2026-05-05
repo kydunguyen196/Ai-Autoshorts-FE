@@ -1,8 +1,8 @@
 ﻿import Link from "next/link";
 import { ArrowRight, Bot, Layers, Sparkles } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 
 const features = [
   {
@@ -26,6 +26,16 @@ const features = [
 ];
 
 export default function LandingPage() {
+  const primaryLinkClass = cn(
+    "inline-flex h-11 items-center justify-center rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 px-5 text-base font-medium text-white shadow-[0_8px_24px_rgba(99,102,241,0.35)] transition hover:brightness-110",
+  );
+  const secondaryLinkClass = cn(
+    "inline-flex h-11 items-center justify-center rounded-xl border border-zinc-700 bg-zinc-900/70 px-5 text-base font-medium text-zinc-100 transition hover:bg-zinc-800",
+  );
+  const ghostLinkClass = cn(
+    "inline-flex h-10 items-center justify-center rounded-xl px-4 text-sm font-medium text-zinc-300 transition hover:bg-zinc-800/60",
+  );
+
   return (
     <div className="relative min-h-screen overflow-hidden bg-[radial-gradient(1200px_640px_at_10%_-10%,rgba(99,102,241,0.35),transparent),radial-gradient(1000px_600px_at_90%_0%,rgba(56,189,248,0.22),transparent),#07070b]">
       <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.02),transparent_40%)]" />
@@ -38,11 +48,14 @@ export default function LandingPage() {
           </div>
 
           <div className="flex items-center gap-3">
-            <Link href="/login">
-              <Button variant="ghost">Sign In</Button>
+            <Link className={ghostLinkClass} href="/login">
+              Sign In
             </Link>
-            <Link href="/register">
-              <Button>Get Started</Button>
+            <Link
+              className="inline-flex h-10 items-center justify-center rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 px-4 text-sm font-medium text-white shadow-[0_8px_24px_rgba(99,102,241,0.35)] transition hover:brightness-110"
+              href="/register"
+            >
+              Get Started
             </Link>
           </div>
         </header>
@@ -60,15 +73,11 @@ export default function LandingPage() {
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/register">
-              <Button size="lg" className="gap-2">
-                Start Building <ArrowRight className="h-4 w-4" />
-              </Button>
+            <Link className={cn(primaryLinkClass, "gap-2")} href="/register">
+              Start Building <ArrowRight className="h-4 w-4" />
             </Link>
-            <Link href="/login">
-              <Button size="lg" variant="secondary">
-                Open Dashboard
-              </Button>
+            <Link className={secondaryLinkClass} href="/login">
+              Open Dashboard
             </Link>
           </div>
         </section>

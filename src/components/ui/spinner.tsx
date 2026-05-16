@@ -1,7 +1,7 @@
 ﻿export function Spinner({ className = "h-4 w-4" }: { className?: string }) {
   return (
     <span
-      className={`${className} inline-block animate-spin rounded-full border-2 border-[#0066cc] border-r-transparent`}
+      className={`${className} inline-block animate-spin rounded-full border-2 border-[#11100e] border-r-transparent`}
       aria-hidden="true"
     />
   );

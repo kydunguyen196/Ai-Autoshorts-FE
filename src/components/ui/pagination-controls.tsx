@@ -15,7 +15,7 @@ export function PaginationControls({
 }) {
   return (
     <div className="mt-6 flex items-center justify-between gap-3">
-      <p className="text-[14px] tracking-[-0.224px] text-[#7a7a7a]">
+      <p className="font-mono text-[12px] uppercase tracking-[0.18em] text-[#686157]">
         Page {page + 1}{totalPages > 0 ? ` of ${totalPages}` : ""}
       </p>
       <div className="flex gap-2">

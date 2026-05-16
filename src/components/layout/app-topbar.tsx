@@ -10,10 +10,6 @@ import { useAuth } from "@/features/auth/use-auth";
 import { useI18n } from "@/features/i18n/language-context";
 import { getBillingCredits } from "@/services/billing-service";
 
-/**
- * Apple sub-nav-frosted: parchment 80% + backdrop blur, 52px height.
- * Persistent right-aligned primary CTA pattern.
- */
 export function AppTopbar({ onOpenMenu }: { onOpenMenu: () => void }) {
   const { user, logout } = useAuth();
   const { t } = useI18n();
@@ -24,12 +20,12 @@ export function AppTopbar({ onOpenMenu }: { onOpenMenu: () => void }) {
   });
 
   return (
-    <header className="nav-frosted sticky top-0 z-20 border-b border-[#e0e0e0] px-5 py-0 h-[52px] flex items-center">
+    <header className="nav-frosted sticky top-0 z-20 flex h-[60px] items-center border-b border-[#11100e] px-5 py-0">
       <div className="flex w-full items-center justify-between gap-3">
         {/* Left: hamburger (mobile) + channel selector */}
         <div className="flex items-center gap-3">
           <button
-            className="rounded-[8px] p-2 text-[#1d1d1f] hover:bg-black/05 md:hidden"
+            className="rounded-full border border-[#11100e] p-2 text-[#11100e] hover:bg-[#c9ff4a] md:hidden"
             onClick={onOpenMenu}
             aria-label="Open menu"
           >
@@ -41,7 +37,7 @@ export function AppTopbar({ onOpenMenu }: { onOpenMenu: () => void }) {
         {/* Right: credits + language + user + logout */}
         <div className="flex items-center gap-4">
           {creditsQuery.data ? (
-            <span className="hidden text-[14px] tracking-[-0.224px] text-[#7a7a7a] sm:block">
+            <span className="hidden font-mono text-[12px] uppercase tracking-[0.16em] text-[#686157] sm:block">
               {creditsQuery.data.creditsBalance} credits
             </span>
           ) : null}
@@ -49,10 +45,10 @@ export function AppTopbar({ onOpenMenu }: { onOpenMenu: () => void }) {
           <LanguageSwitcher />
 
           <div className="hidden text-right sm:block">
-            <p className="text-[14px] font-semibold tracking-[-0.224px] text-[#1d1d1f]">
+            <p className="text-[14px] font-semibold text-[#11100e]">
               {user?.displayName ?? t("topbar.userFallback")}
             </p>
-            <p className="text-[12px] tracking-[-0.12px] text-[#7a7a7a]">{user?.email}</p>
+            <p className="text-[12px] text-[#686157]">{user?.email}</p>
           </div>
 
           <Button variant="ghost" size="sm" onClick={logout}>

@@ -159,16 +159,16 @@ export default function JobsPage() {
         </div>
 
         {approveMutation.isError ? (
-          <p className="mt-3 text-sm text-red-300">{getErrorMessage(approveMutation.error)}</p>
+          <p className="mt-3 text-sm text-[#b42318]">{getErrorMessage(approveMutation.error)}</p>
         ) : null}
         {rejectMutation.isError ? (
-          <p className="mt-2 text-sm text-red-300">{getErrorMessage(rejectMutation.error)}</p>
+          <p className="mt-2 text-sm text-[#b42318]">{getErrorMessage(rejectMutation.error)}</p>
         ) : null}
         {selectMutation.isError ? (
-          <p className="mt-2 text-sm text-red-300">{getErrorMessage(selectMutation.error)}</p>
+          <p className="mt-2 text-sm text-[#b42318]">{getErrorMessage(selectMutation.error)}</p>
         ) : null}
         {publishMutation.isError ? (
-          <p className="mt-2 text-sm text-red-300">{getErrorMessage(publishMutation.error)}</p>
+          <p className="mt-2 text-sm text-[#b42318]">{getErrorMessage(publishMutation.error)}</p>
         ) : null}
 
         <div className="mt-5">
@@ -179,7 +179,7 @@ export default function JobsPage() {
               <Skeleton className="h-16 w-full" />
             </div>
           ) : jobsQuery.isError ? (
-            <p className="text-sm text-red-300">Failed to load jobs feed.</p>
+            <p className="text-sm text-[#b42318]">Failed to load jobs feed.</p>
           ) : filteredItems.length === 0 ? (
             <EmptyState
               title="No jobs found"
@@ -191,9 +191,9 @@ export default function JobsPage() {
               }
             />
           ) : (
-            <div className="overflow-x-auto rounded-xl border border-zinc-800">
+            <div className="overflow-x-auto rounded-none border border-[#d8d0c1]">
               <table className="min-w-[1280px] text-left text-sm">
-                <thead className="bg-zinc-900/60 text-zinc-400">
+                <thead className="bg-[#eee7da] text-[#686157]">
                   <tr>
                     <th className="px-4 py-3 font-medium">Topic</th>
                     <th className="px-4 py-3 font-medium">Status</th>
@@ -220,10 +220,10 @@ export default function JobsPage() {
                       job.publishStatus !== "PUBLISHING";
 
                     return (
-                      <tr key={job.jobId} className="border-t border-zinc-800/80 align-top">
-                        <td className="px-4 py-3 text-zinc-100">
+                      <tr key={job.jobId} className="border-t border-[#d8d0c1] align-top">
+                        <td className="px-4 py-3 text-[#11100e]">
                           <p className="font-medium">{job.topic}</p>
-                          <p className="mt-1 text-xs text-zinc-500">
+                          <p className="mt-1 text-xs text-[#9a948b]">
                             {job.style}
                             {job.variantIndex && job.variantCount
                               ? ` • variant ${job.variantIndex}/${job.variantCount}`
@@ -238,13 +238,13 @@ export default function JobsPage() {
                         </td>
                         <td className="px-4 py-3">
                           <ReviewStatusBadge status={job.reviewStatus} />
-                          {job.selectedForPublish ? <p className="mt-1 text-xs text-emerald-300">Selected</p> : null}
+                          {job.selectedForPublish ? <p className="mt-1 text-xs text-[#126b42]">Selected</p> : null}
                         </td>
                         <td className="px-4 py-3">
                           <PublishStatusBadge status={job.publishStatus} />
                         </td>
-                        <td className="px-4 py-3 text-xs text-zinc-500">{job.generationGroupId || "-"}</td>
-                        <td className="px-4 py-3 text-zinc-400">{formatDateTime(job.updatedAt)}</td>
+                        <td className="px-4 py-3 text-xs text-[#9a948b]">{job.generationGroupId || "-"}</td>
+                        <td className="px-4 py-3 text-[#686157]">{formatDateTime(job.updatedAt)}</td>
                         <td className="px-4 py-3">
                           <div className="flex flex-wrap gap-2">
                             <Link href={`/app/jobs/${job.jobId}`}>

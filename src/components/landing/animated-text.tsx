@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useMemo, useRef } from "react";
 import { animate, stagger } from "animejs";

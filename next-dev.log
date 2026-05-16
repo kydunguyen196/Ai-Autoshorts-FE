@@ -15,3 +15,11 @@
  GET / 200 in 400ms (next.js: 137ms, application-code: 263ms)
  GET / 200 in 185ms (next.js: 5ms, application-code: 180ms)
  GET / 200 in 108ms (next.js: 4ms, application-code: 104ms)
+✓ Compiled in 368ms
+ GET / 200 in 1618ms (next.js: 527ms, application-code: 1091ms)
+ GET / 200 in 791ms (next.js: 16ms, application-code: 775ms)
+ GET /login 200 in 612ms (next.js: 99ms, application-code: 513ms)
+ GET / 200 in 1841ms (next.js: 479ms, application-code: 1362ms)
+ GET /login 200 in 839ms (next.js: 116ms, application-code: 723ms)
+○ Compiling /register ...
+ GET /register 200 in 3.8s (next.js: 3.3s, application-code: 453ms)

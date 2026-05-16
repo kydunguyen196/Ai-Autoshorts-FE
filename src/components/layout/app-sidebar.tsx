@@ -45,8 +45,7 @@ export function AppSidebar({
 
   return (
     <>
-      {/* Desktop sidebar — Apple near-black tile */}
-      <aside className="hidden w-64 shrink-0 bg-[#1d1d1f] md:flex md:flex-col">
+      <aside className="hidden w-72 shrink-0 border-r border-[#11100e] bg-[#fffaf0] md:flex md:flex-col">
         <SidebarContent pathname={pathname} onNavigate={onClose} />
       </aside>
 
@@ -58,10 +57,10 @@ export function AppSidebar({
             aria-label="Close menu"
             onClick={onClose}
           />
-          <aside className="w-64 bg-[#1d1d1f] flex flex-col">
+          <aside className="flex w-72 flex-col border-l border-[#11100e] bg-[#fffaf0]">
             <div className="flex justify-end p-4">
               <button
-                className="rounded-[8px] p-2 text-[#cccccc] hover:bg-white/10"
+                className="rounded-full border border-[#11100e] p-2 text-[#11100e] hover:bg-[#c9ff4a]"
                 onClick={onClose}
                 aria-label="Close"
               >
@@ -86,22 +85,21 @@ function SidebarContent({
   const { t } = useI18n();
 
   return (
-    <div className="flex flex-col flex-1 overflow-y-auto px-4 py-6">
-      {/* Brand */}
-      <div className="mb-8 px-2">
-        <p className="text-[12px] font-normal tracking-[-0.12px] text-[#cccccc]">
+    <div className="flex flex-1 flex-col overflow-y-auto px-4 py-6">
+      <div className="mb-8 border-b border-[#11100e] px-2 pb-6">
+        <p className="font-mono text-[11px] uppercase tracking-[0.26em] text-[#686157]">
           {t("sidebar.appName")}
         </p>
-        <h1 className="mt-1 text-[21px] font-semibold tracking-[0.231px] text-white">
+        <h1 className="mt-3 text-[32px] font-semibold leading-[0.95] text-[#11100e]">
           {t("sidebar.title")}
         </h1>
-        <p className="mt-0.5 text-[14px] tracking-[-0.224px] text-[#7a7a7a]">
+        <p className="mt-3 text-[13px] leading-5 text-[#686157]">
           {t("sidebar.subtitle")}
         </p>
       </div>
 
       {/* Nav */}
-      <nav className="space-y-0.5">
+      <nav className="space-y-1">
         {navItems.map((item) => {
           const Icon = item.icon;
           const active =
@@ -114,15 +112,17 @@ function SidebarContent({
               href={item.href}
               onClick={onNavigate}
               className={cn(
-                "flex items-center gap-3 rounded-[8px] px-3 py-2.5",
-                "text-[14px] tracking-[-0.224px] transition-colors duration-100",
+                "flex items-center justify-between gap-3 border border-transparent px-3 py-2.5",
+                "text-[13px] transition-colors duration-100",
                 active
-                  ? "bg-white/15 text-white"
-                  : "text-[#cccccc] hover:bg-white/08 hover:text-white",
+                  ? "border-[#11100e] bg-[#c9ff4a] text-[#11100e]"
+                  : "text-[#686157] hover:border-[#d8d0c1] hover:bg-[#f6f0e5] hover:text-[#11100e]",
               )}
             >
-              <Icon className="h-4 w-4 shrink-0" />
-              {t(item.labelKey)}
+              <span className="flex min-w-0 items-center gap-3">
+                <Icon className="h-4 w-4 shrink-0" />
+                {t(item.labelKey)}
+              </span>
             </Link>
           );
         })}

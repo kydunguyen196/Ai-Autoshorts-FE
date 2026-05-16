@@ -139,7 +139,7 @@ export default function CharacterCampaignsPage() {
       <section className="grid gap-4 xl:grid-cols-2">
         <Card>
           <div className="flex items-center justify-between gap-3">
-            <h2 className="text-lg font-semibold text-zinc-100">
+            <h2 className="text-lg font-semibold text-[#11100e]">
               {editingId ? "Edit Campaign" : "Create Campaign"}
             </h2>
             {editingId ? (
@@ -164,7 +164,7 @@ export default function CharacterCampaignsPage() {
             }}
           >
             <label className="block space-y-2">
-              <span className="text-sm text-zinc-300">Product Name</span>
+              <span className="text-sm text-[#3f3b34]">Product Name</span>
               <Input
                 value={form.productName}
                 onChange={(event) => setForm((current) => ({ ...current, productName: event.target.value }))}
@@ -181,7 +181,7 @@ export default function CharacterCampaignsPage() {
               <Field label="Product URL" value={form.productUrl} onChange={(value) => setForm((current) => ({ ...current, productUrl: value }))} />
 
               <label className="block space-y-2">
-                <span className="text-sm text-zinc-300">Character Profile</span>
+                <span className="text-sm text-[#3f3b34]">Character Profile</span>
                 <Select
                   value={form.characterProfileId}
                   onChange={(event) => setForm((current) => ({ ...current, characterProfileId: event.target.value }))}
@@ -196,7 +196,7 @@ export default function CharacterCampaignsPage() {
               </label>
 
               <label className="block space-y-2">
-                <span className="text-sm text-zinc-300">Status</span>
+                <span className="text-sm text-[#3f3b34]">Status</span>
                 <Select
                   value={form.status}
                   onChange={(event) =>
@@ -217,7 +217,7 @@ export default function CharacterCampaignsPage() {
             <LongField label="Offer Summary" value={form.offerSummary} onChange={(value) => setForm((current) => ({ ...current, offerSummary: value }))} />
 
             {saveMutation.isError ? (
-              <p className="rounded-lg border border-red-700/60 bg-red-500/10 px-3 py-2 text-sm text-red-200">
+              <p className="rounded-none border border-[#b42318]/30 bg-[#b42318]/10 px-3 py-2 text-sm text-[#b42318]">
                 {getErrorMessage(saveMutation.error)}
               </p>
             ) : null}
@@ -238,8 +238,8 @@ export default function CharacterCampaignsPage() {
 
         <Card>
           <div className="flex items-center justify-between gap-3">
-            <h2 className="text-lg font-semibold text-zinc-100">Campaigns</h2>
-            <p className="text-sm text-zinc-400">{campaignCountText}</p>
+            <h2 className="text-lg font-semibold text-[#11100e]">Campaigns</h2>
+            <p className="text-sm text-[#686157]">{campaignCountText}</p>
           </div>
 
           {!activeChannelId ? (
@@ -249,20 +249,20 @@ export default function CharacterCampaignsPage() {
               description="Select an active channel from the top bar to manage campaigns."
             />
           ) : campaignsQuery.isLoading ? (
-            <p className="mt-4 text-sm text-zinc-400">Loading campaigns...</p>
+            <p className="mt-4 text-sm text-[#686157]">Loading campaigns...</p>
           ) : campaignsQuery.isError ? (
-            <p className="mt-4 text-sm text-red-300">Failed to load campaigns.</p>
+            <p className="mt-4 text-sm text-[#b42318]">Failed to load campaigns.</p>
           ) : campaignsQuery.data && campaignsQuery.data.length > 0 ? (
             <div className="mt-4 space-y-3">
               {campaignsQuery.data.map((campaign) => (
-                <div key={campaign.id} className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-4">
+                <div key={campaign.id} className="rounded-none border border-[#d8d0c1] bg-[#fffaf0] p-4">
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <p className="font-medium text-zinc-100">{campaign.productName}</p>
-                      <p className="mt-1 text-xs text-zinc-500">
+                      <p className="font-medium text-[#11100e]">{campaign.productName}</p>
+                      <p className="mt-1 text-xs text-[#9a948b]">
                         {campaign.status} • Updated {formatDateTime(campaign.updatedAt)}
                       </p>
-                      <p className="mt-2 text-sm text-zinc-300">
+                      <p className="mt-2 text-sm text-[#3f3b34]">
                         {campaign.targetPlatform || "No platform"}
                         {campaign.characterProfileId ? ` • profile ${campaign.characterProfileId}` : ""}
                       </p>
@@ -299,7 +299,7 @@ export default function CharacterCampaignsPage() {
           )}
 
           {deleteMutation.isError ? (
-            <p className="mt-4 text-sm text-red-300">{getErrorMessage(deleteMutation.error)}</p>
+            <p className="mt-4 text-sm text-[#b42318]">{getErrorMessage(deleteMutation.error)}</p>
           ) : null}
         </Card>
       </section>
@@ -334,7 +334,7 @@ function Field({
 }) {
   return (
     <label className="block space-y-2">
-      <span className="text-sm text-zinc-300">{label}</span>
+      <span className="text-sm text-[#3f3b34]">{label}</span>
       <Input value={value} onChange={(event) => onChange(event.target.value)} />
     </label>
   );
@@ -351,7 +351,7 @@ function LongField({
 }) {
   return (
     <label className="block space-y-2">
-      <span className="text-sm text-zinc-300">{label}</span>
+      <span className="text-sm text-[#3f3b34]">{label}</span>
       <Textarea value={value} onChange={(event) => onChange(event.target.value)} className="min-h-20" />
     </label>
   );

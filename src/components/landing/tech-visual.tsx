@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useRef } from "react";
 import { animate, createTimeline, stagger } from "animejs";
@@ -65,9 +65,9 @@ export function TechVisual() {
     >
       <defs>
         <linearGradient id="lineGradient" x1="0" x2="1" y1="0" y2="1">
-          <stop offset="0%" stopColor="#67e8f9" />
-          <stop offset="52%" stopColor="#a78bfa" />
-          <stop offset="100%" stopColor="#34d399" />
+          <stop offset="0%" stopColor="#11100e" />
+          <stop offset="58%" stopColor="#4b6fff" />
+          <stop offset="100%" stopColor="#c9ff4a" />
         </linearGradient>
         <filter id="softGlow">
           <feGaussianBlur stdDeviation="4" result="blur" />
@@ -79,15 +79,15 @@ export function TechVisual() {
       </defs>
 
       <g data-orbit opacity="0.7">
-        <ellipse cx="260" cy="220" fill="none" rx="178" ry="88" stroke="#67e8f9" strokeOpacity="0.18" />
+        <ellipse cx="260" cy="220" fill="none" rx="178" ry="88" stroke="#11100e" strokeOpacity="0.18" />
         <ellipse
           cx="260"
           cy="220"
           fill="none"
           rx="108"
           ry="190"
-          stroke="#c084fc"
-          strokeOpacity="0.16"
+          stroke="#4b6fff"
+          strokeOpacity="0.18"
           transform="rotate(24 260 220)"
         />
       </g>
@@ -108,7 +108,7 @@ export function TechVisual() {
         data-draw
         fill="none"
         pathLength="520"
-        stroke="#67e8f9"
+        stroke="#11100e"
         strokeDasharray="520"
         strokeDashoffset="520"
         strokeLinecap="round"
@@ -121,7 +121,7 @@ export function TechVisual() {
         data-draw
         fill="none"
         pathLength="520"
-        stroke="#34d399"
+        stroke="#4b6fff"
         strokeDasharray="520"
         strokeDashoffset="520"
         strokeLinecap="round"
@@ -143,17 +143,17 @@ export function TechVisual() {
           [354, 316],
           [438, 132],
         ].map(([cx, cy]) => (
-          <circle cx={cx} cy={cy} data-node fill="#f8fafc" key={`${cx}-${cy}`} r="4.5" />
+          <circle cx={cx} cy={cy} data-node fill="#11100e" key={`${cx}-${cy}`} r="4.5" />
         ))}
       </g>
 
-      <rect data-scan fill="#67e8f9" height="250" opacity="0" rx="18" width="26" x="247" y="95" />
+      <rect data-scan fill="#c9ff4a" height="250" opacity="0" rx="18" width="26" x="247" y="95" />
       <rect
         fill="none"
         height="260"
         rx="28"
-        stroke="white"
-        strokeOpacity="0.12"
+        stroke="#11100e"
+        strokeOpacity="0.16"
         width="360"
         x="80"
         y="90"

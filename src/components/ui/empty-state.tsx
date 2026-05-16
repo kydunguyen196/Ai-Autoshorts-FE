@@ -14,8 +14,8 @@ export function EmptyState({
 }) {
   return (
     <Card className={cn("py-12 text-center", className)}>
-      <h3 className="text-[21px] font-semibold tracking-[-0.374px] text-[#1d1d1f]">{title}</h3>
-      <p className="mt-2 text-[17px] text-[#7a7a7a] tracking-[-0.374px]">{description}</p>
+      <h3 className="text-[24px] font-semibold leading-tight text-[#11100e]">{title}</h3>
+      <p className="mt-2 text-[16px] text-[#686157]">{description}</p>
       {action ? <div className="mt-6 flex justify-center">{action}</div> : null}
     </Card>
   );

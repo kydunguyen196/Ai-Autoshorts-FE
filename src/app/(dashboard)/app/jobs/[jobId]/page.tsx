@@ -172,15 +172,15 @@ export default function JobDetailPage() {
         </Card>
       ) : jobQuery.isError || !job ? (
         <Card>
-          <p className="text-sm text-red-300">Unable to load job details.</p>
+          <p className="text-sm text-[#b42318]">Unable to load job details.</p>
         </Card>
       ) : (
         <div className="space-y-4">
           <Card>
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div>
-                <h2 className="text-xl font-semibold text-zinc-100">{job.topic}</h2>
-                <p className="mt-2 text-sm text-zinc-400">Job ID: {job.jobId}</p>
+                <h2 className="text-xl font-semibold text-[#11100e]">{job.topic}</h2>
+                <p className="mt-2 text-sm text-[#686157]">Job ID: {job.jobId}</p>
               </div>
               <div className="flex flex-wrap items-center gap-2">
                 <JobStatusBadge status={job.status} />
@@ -190,7 +190,7 @@ export default function JobDetailPage() {
               </div>
             </div>
 
-            <div className="mt-6 grid gap-3 text-sm text-zinc-300 md:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-6 grid gap-3 text-sm text-[#3f3b34] md:grid-cols-2 lg:grid-cols-3">
               <InfoRow label="Style" value={job.style} />
               <InfoRow label="Voice ID" value={job.voiceId || "-"} />
               <InfoRow label="Duration" value={`${job.durationSeconds}s`} />
@@ -215,13 +215,13 @@ export default function JobDetailPage() {
             </div>
 
             {job.errorMessage ? (
-              <div className="mt-5 rounded-xl border border-red-700/60 bg-red-500/10 p-4">
+              <div className="mt-5 rounded-none border border-[#b42318]/30 bg-[#b42318]/10 p-4">
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div>
-                    <p className="text-sm font-medium text-red-200">Generation failed</p>
-                    <p className="mt-1 text-sm text-red-100">{job.errorMessage}</p>
+                    <p className="text-sm font-medium text-[#b42318]">Generation failed</p>
+                    <p className="mt-1 text-sm text-[#b42318]">{job.errorMessage}</p>
                   </div>
-                  <div className="rounded-full border border-red-700/70 px-3 py-1 text-xs text-red-100">
+                  <div className="rounded-full border border-red-700/70 px-3 py-1 text-xs text-[#b42318]">
                     {getGenerationStepLabel(failureDetails.step || job.currentStep)}
                   </div>
                 </div>
@@ -233,20 +233,20 @@ export default function JobDetailPage() {
                 </div>
 
                 {failureDetails.exception || failureDetails.rootCauseMessage ? (
-                  <div className="mt-4 rounded-lg border border-red-800/70 bg-black/20 p-3 text-xs text-red-100">
+                  <div className="mt-4 rounded-none border border-[#b42318]/30 bg-[#fffaf0] p-3 text-xs text-[#b42318]">
                     {failureDetails.rootCauseMessage ? (
                       <p>
-                        <span className="text-red-300">Root cause:</span> {failureDetails.rootCauseMessage}
+                        <span className="text-[#b42318]">Root cause:</span> {failureDetails.rootCauseMessage}
                       </p>
                     ) : null}
                     {failureDetails.exception ? (
                       <p className="mt-1">
-                        <span className="text-red-300">Exception:</span> {failureDetails.exception}
+                        <span className="text-[#b42318]">Exception:</span> {failureDetails.exception}
                       </p>
                     ) : null}
                     {failureDetails.occurredAt ? (
                       <p className="mt-1">
-                        <span className="text-red-300">Captured:</span> {formatDateTime(failureDetails.occurredAt)}
+                        <span className="text-[#b42318]">Captured:</span> {formatDateTime(failureDetails.occurredAt)}
                       </p>
                     ) : null}
                   </div>
@@ -254,10 +254,10 @@ export default function JobDetailPage() {
 
                 {job.stepErrorDetails ? (
                   <details className="mt-3">
-                    <summary className="cursor-pointer text-xs font-medium text-red-200 hover:text-red-100">
+                    <summary className="cursor-pointer text-xs font-medium text-[#b42318] hover:text-[#b42318]">
                       Show technical details
                     </summary>
-                    <pre className="mt-3 max-h-60 overflow-auto rounded-lg bg-black/40 p-3 text-xs text-red-100">
+                    <pre className="mt-3 max-h-60 overflow-auto rounded-none bg-[#11100e] p-3 text-xs text-[#b42318]">
                       {job.stepErrorDetails}
                     </pre>
                   </details>
@@ -275,7 +275,7 @@ export default function JobDetailPage() {
           </Card>
 
           <Card>
-            <h3 className="text-lg font-semibold text-zinc-100">Review Actions</h3>
+            <h3 className="text-lg font-semibold text-[#11100e]">Review Actions</h3>
 
             <div className="mt-4 flex flex-wrap gap-2">
               <Button
@@ -311,23 +311,23 @@ export default function JobDetailPage() {
             </div>
 
             {approveMutation.isError ? (
-              <p className="mt-3 text-sm text-red-300">{getErrorMessage(approveMutation.error)}</p>
+              <p className="mt-3 text-sm text-[#b42318]">{getErrorMessage(approveMutation.error)}</p>
             ) : null}
             {rejectMutation.isError ? (
-              <p className="mt-2 text-sm text-red-300">{getErrorMessage(rejectMutation.error)}</p>
+              <p className="mt-2 text-sm text-[#b42318]">{getErrorMessage(rejectMutation.error)}</p>
             ) : null}
             {selectMutation.isError ? (
-              <p className="mt-2 text-sm text-red-300">{getErrorMessage(selectMutation.error)}</p>
+              <p className="mt-2 text-sm text-[#b42318]">{getErrorMessage(selectMutation.error)}</p>
             ) : null}
           </Card>
 
           <Card>
-            <h3 className="text-lg font-semibold text-zinc-100">Publish Readiness</h3>
+            <h3 className="text-lg font-semibold text-[#11100e]">Publish Readiness</h3>
 
             {publishStatusQuery.isLoading ? (
-              <p className="mt-3 text-sm text-zinc-400">Loading publish status...</p>
+              <p className="mt-3 text-sm text-[#686157]">Loading publish status...</p>
             ) : publishStatusQuery.isError || !publishStatus ? (
-              <p className="mt-3 text-sm text-red-300">Failed to load publish status.</p>
+              <p className="mt-3 text-sm text-[#b42318]">Failed to load publish status.</p>
             ) : (
               <>
                 <div className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
@@ -374,11 +374,11 @@ export default function JobDetailPage() {
                 </div>
 
                 {publishStatus.publishFailureReason ? (
-                  <div className="mt-4 rounded-xl border border-red-700/60 bg-red-500/10 p-4">
-                    <p className="text-sm font-medium text-red-200">Last publish failure</p>
-                    <p className="mt-1 text-sm text-red-100">{publishStatus.publishFailureReason}</p>
+                  <div className="mt-4 rounded-none border border-[#b42318]/30 bg-[#b42318]/10 p-4">
+                    <p className="text-sm font-medium text-[#b42318]">Last publish failure</p>
+                    <p className="mt-1 text-sm text-[#b42318]">{publishStatus.publishFailureReason}</p>
                     {publishStatus.publishFailureDetails ? (
-                      <pre className="mt-3 max-h-56 overflow-auto rounded-lg bg-black/40 p-3 text-xs text-red-100">
+                      <pre className="mt-3 max-h-56 overflow-auto rounded-none bg-[#11100e] p-3 text-xs text-[#b42318]">
                         {publishStatus.publishFailureDetails}
                       </pre>
                     ) : null}
@@ -388,18 +388,18 @@ export default function JobDetailPage() {
             )}
 
             {publishMutation.isError ? (
-              <p className="mt-3 text-sm text-red-300">{getErrorMessage(publishMutation.error)}</p>
+              <p className="mt-3 text-sm text-[#b42318]">{getErrorMessage(publishMutation.error)}</p>
             ) : null}
           </Card>
 
           {groupId ? (
             <Card>
-              <h3 className="text-lg font-semibold text-zinc-100">Generation Group Review Summary</h3>
+              <h3 className="text-lg font-semibold text-[#11100e]">Generation Group Review Summary</h3>
 
               {groupReviewSummaryQuery.isLoading ? (
-                <p className="mt-3 text-sm text-zinc-400">Loading group summary...</p>
+                <p className="mt-3 text-sm text-[#686157]">Loading group summary...</p>
               ) : groupReviewSummaryQuery.isError || !groupReviewSummaryQuery.data ? (
-                <p className="mt-3 text-sm text-red-300">Failed to load group summary.</p>
+                <p className="mt-3 text-sm text-[#b42318]">Failed to load group summary.</p>
               ) : (
                 <>
                   <div className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
@@ -411,9 +411,9 @@ export default function JobDetailPage() {
                   {reviewCountRows.length > 0 ? (
                     <div className="mt-4 grid gap-2 md:grid-cols-4">
                       {reviewCountRows.map(([status, count]) => (
-                        <div key={status} className="rounded-xl border border-zinc-800 bg-zinc-900/40 px-3 py-2">
-                          <p className="text-xs text-zinc-500">{status}</p>
-                          <p className="mt-1 text-sm text-zinc-100">{count}</p>
+                        <div key={status} className="rounded-none border border-[#d8d0c1] bg-[#fffaf0] px-3 py-2">
+                          <p className="text-xs text-[#9a948b]">{status}</p>
+                          <p className="mt-1 text-sm text-[#11100e]">{count}</p>
                         </div>
                       ))}
                     </div>
@@ -422,9 +422,9 @@ export default function JobDetailPage() {
               )}
 
               {topCandidatesQuery.data && topCandidatesQuery.data.items.length > 0 ? (
-                <div className="mt-5 overflow-x-auto rounded-xl border border-zinc-800">
+                <div className="mt-5 overflow-x-auto rounded-none border border-[#d8d0c1]">
                   <table className="min-w-full text-left text-sm">
-                    <thead className="bg-zinc-900/60 text-zinc-400">
+                    <thead className="bg-[#eee7da] text-[#686157]">
                       <tr>
                         <th className="px-4 py-3 font-medium">Job ID</th>
                         <th className="px-4 py-3 font-medium">Rank</th>
@@ -434,10 +434,10 @@ export default function JobDetailPage() {
                     </thead>
                     <tbody>
                       {topCandidatesQuery.data.items.map((candidate) => (
-                        <tr key={candidate.jobId} className="border-t border-zinc-800/80">
-                          <td className="px-4 py-3 text-zinc-300">{candidate.jobId}</td>
-                          <td className="px-4 py-3 text-zinc-300">{candidate.topCandidateRank ?? "-"}</td>
-                          <td className="px-4 py-3 text-zinc-300">{candidate.rankingScore ?? "-"}</td>
+                        <tr key={candidate.jobId} className="border-t border-[#d8d0c1]">
+                          <td className="px-4 py-3 text-[#3f3b34]">{candidate.jobId}</td>
+                          <td className="px-4 py-3 text-[#3f3b34]">{candidate.topCandidateRank ?? "-"}</td>
+                          <td className="px-4 py-3 text-[#3f3b34]">{candidate.rankingScore ?? "-"}</td>
                           <td className="px-4 py-3">
                             <ReviewStatusBadge status={candidate.reviewStatus} />
                           </td>
@@ -451,7 +451,7 @@ export default function JobDetailPage() {
           ) : null}
 
           <Card>
-            <h3 className="text-lg font-semibold text-zinc-100">Generated Metadata</h3>
+            <h3 className="text-lg font-semibold text-[#11100e]">Generated Metadata</h3>
             <div className="mt-4 space-y-4 text-sm">
               <MetaBlock title="Hook" value={job.hookText} />
               <MetaBlock title="Script" value={job.scriptText} />
@@ -469,7 +469,7 @@ export default function JobDetailPage() {
           </Card>
 
           <Card>
-            <h3 className="text-lg font-semibold text-zinc-100">Audio Metadata</h3>
+            <h3 className="text-lg font-semibold text-[#11100e]">Audio Metadata</h3>
             <div className="mt-4 grid gap-3 text-sm md:grid-cols-2 lg:grid-cols-3">
               <InfoRow label="Audio Mode" value={job.audioGenerationMode || "-"} />
               <InfoRow label="Audio Provider" value={job.audioProvider || "-"} />
@@ -483,14 +483,14 @@ export default function JobDetailPage() {
               <InfoRow label="Audio Failure Reason" value={job.audioFailureReason || "-"} />
             </div>
             {job.audioFailureDetails ? (
-              <pre className="mt-4 max-h-64 overflow-auto rounded-lg border border-zinc-800 bg-zinc-950/70 p-3 text-xs text-zinc-200">
+              <pre className="mt-4 max-h-64 overflow-auto rounded-none border border-[#d8d0c1] bg-[#11100e] p-3 text-xs text-[#2c2a25]">
                 {job.audioFailureDetails}
               </pre>
             ) : null}
           </Card>
 
           <Card>
-            <h3 className="text-lg font-semibold text-zinc-100">Visual Metadata</h3>
+            <h3 className="text-lg font-semibold text-[#11100e]">Visual Metadata</h3>
             <div className="mt-4 grid gap-3 text-sm md:grid-cols-2 lg:grid-cols-3">
               <InfoRow label="Visual Mode" value={job.visualGenerationMode || "-"} />
               <InfoRow label="Visual Provider" value={job.visualProvider || "-"} />
@@ -499,7 +499,7 @@ export default function JobDetailPage() {
             </div>
 
             {job.visualFailureDetails ? (
-              <pre className="mt-4 max-h-64 overflow-auto rounded-lg border border-zinc-800 bg-zinc-950/70 p-3 text-xs text-zinc-200">
+              <pre className="mt-4 max-h-64 overflow-auto rounded-none border border-[#d8d0c1] bg-[#11100e] p-3 text-xs text-[#2c2a25]">
                 {job.visualFailureDetails}
               </pre>
             ) : null}
@@ -507,11 +507,11 @@ export default function JobDetailPage() {
             {parseSceneAssets(job.sceneAssetsJson).length > 0 ? (
               <div className="mt-4 grid gap-3 md:grid-cols-2">
                 {parseSceneAssets(job.sceneAssetsJson).map((scene) => (
-                  <div key={`scene-${scene.index}-${scene.assetUrl}`} className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-3">
-                    <p className="text-xs text-zinc-500">
+                  <div key={`scene-${scene.index}-${scene.assetUrl}`} className="rounded-none border border-[#d8d0c1] bg-[#fffaf0] p-3">
+                    <p className="text-xs text-[#9a948b]">
                       Scene {scene.index} • {scene.startSec}s - {scene.endSec}s
                     </p>
-                    <p className="mt-1 text-xs text-zinc-400">
+                    <p className="mt-1 text-xs text-[#686157]">
                       {scene.mode || "-"} • {scene.provider || "-"}
                     </p>
                     {scene.assetUrl ? (
@@ -519,7 +519,7 @@ export default function JobDetailPage() {
                         href={scene.assetUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="mt-2 block overflow-hidden rounded-lg border border-zinc-700 bg-zinc-950"
+                        className="mt-2 block overflow-hidden rounded-none border border-[#d8d0c1] bg-[#11100e]"
                       >
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
@@ -530,7 +530,7 @@ export default function JobDetailPage() {
                       </a>
                     ) : null}
                     {scene.prompt ? (
-                      <p className="mt-2 text-xs text-zinc-400">{scene.prompt}</p>
+                      <p className="mt-2 text-xs text-[#686157]">{scene.prompt}</p>
                     ) : null}
                   </div>
                 ))}
@@ -539,7 +539,7 @@ export default function JobDetailPage() {
           </Card>
 
           <Card>
-            <h3 className="text-lg font-semibold text-zinc-100">Output Assets</h3>
+            <h3 className="text-lg font-semibold text-[#11100e]">Output Assets</h3>
             <div className="mt-4 grid gap-3 text-sm">
               <AssetRow label="Audio URL" url={job.audioUrl} />
               <AssetRow label="Subtitle URL" url={job.subtitleUrl} />
@@ -550,7 +550,7 @@ export default function JobDetailPage() {
             {job.downloadUrl ? (
               <div className="mt-4">
                 <a
-                  className="inline-flex h-10 items-center justify-center rounded-xl border border-indigo-500/50 bg-indigo-500/15 px-4 text-sm font-medium text-indigo-100 hover:bg-indigo-500/25"
+                  className="inline-flex h-10 items-center justify-center rounded-none border border-[#11100e] bg-[#c9ff4a] px-4 text-sm font-medium text-[#11100e] hover:bg-[#c9ff4a]"
                   href={job.downloadUrl}
                   target="_blank"
                   rel="noreferrer"
@@ -561,7 +561,7 @@ export default function JobDetailPage() {
             ) : null}
 
             {job.finalVideoUrl ? (
-              <div className="mt-5 overflow-hidden rounded-xl border border-zinc-800">
+              <div className="mt-5 overflow-hidden rounded-none border border-[#d8d0c1]">
                 <video controls className="w-full" src={job.finalVideoUrl} />
               </div>
             ) : null}
@@ -581,9 +581,9 @@ function refreshJobData(queryClient: ReturnType<typeof useQueryClient>, jobId: s
 
 function InfoRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-xl border border-zinc-800 bg-zinc-900/40 px-3 py-2">
-      <p className="text-xs uppercase tracking-wide text-zinc-500">{label}</p>
-      <p className="mt-1 break-all text-zinc-100">{value}</p>
+    <div className="rounded-none border border-[#d8d0c1] bg-[#fffaf0] px-3 py-2">
+      <p className="text-xs uppercase tracking-wide text-[#9a948b]">{label}</p>
+      <p className="mt-1 break-all text-[#11100e]">{value}</p>
     </div>
   );
 }
@@ -599,17 +599,17 @@ function MetaBlock({
 }) {
   return (
     <div>
-      <p className="text-xs uppercase tracking-wide text-zinc-500">{title}</p>
+      <p className="text-xs uppercase tracking-wide text-[#9a948b]">{title}</p>
       {value ? (
         isCode ? (
-          <pre className="mt-2 max-h-64 overflow-auto rounded-lg border border-zinc-800 bg-zinc-950/70 p-3 text-xs text-zinc-200">
+          <pre className="mt-2 max-h-64 overflow-auto rounded-none border border-[#d8d0c1] bg-[#11100e] p-3 text-xs text-[#2c2a25]">
             {value}
           </pre>
         ) : (
-          <p className="mt-1 whitespace-pre-wrap text-zinc-200">{value}</p>
+          <p className="mt-1 whitespace-pre-wrap text-[#2c2a25]">{value}</p>
         )
       ) : (
-        <p className="mt-1 text-zinc-500">-</p>
+        <p className="mt-1 text-[#9a948b]">-</p>
       )}
     </div>
   );
@@ -617,11 +617,11 @@ function MetaBlock({
 
 function AssetRow({ label, url }: { label: string; url?: string | null }) {
   return (
-    <div className="rounded-xl border border-zinc-800 bg-zinc-900/40 px-3 py-2">
-      <p className="text-xs uppercase tracking-wide text-zinc-500">{label}</p>
+    <div className="rounded-none border border-[#d8d0c1] bg-[#fffaf0] px-3 py-2">
+      <p className="text-xs uppercase tracking-wide text-[#9a948b]">{label}</p>
       {url ? (
         <a
-          className="mt-1 inline-block break-all text-indigo-300 hover:text-indigo-200"
+          className="mt-1 inline-block break-all text-[#243fbd] hover:text-[#243fbd]"
           href={url}
           target="_blank"
           rel="noreferrer"
@@ -629,7 +629,7 @@ function AssetRow({ label, url }: { label: string; url?: string | null }) {
           {url}
         </a>
       ) : (
-        <p className="mt-1 text-zinc-500">Not available yet</p>
+        <p className="mt-1 text-[#9a948b]">Not available yet</p>
       )}
     </div>
   );

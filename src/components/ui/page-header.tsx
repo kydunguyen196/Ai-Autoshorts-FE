@@ -12,13 +12,14 @@ export function PageHeader({
   className?: string;
 }) {
   return (
-    <div className={cn("mb-8 flex flex-wrap items-start justify-between gap-4", className)}>
+    <div className={cn("mb-8 border-b border-[#11100e] pb-6 flex flex-wrap items-end justify-between gap-4", className)}>
       <div>
-        <h1 className="text-[34px] font-semibold leading-[1.47] tracking-[-0.374px] text-[#1d1d1f]">
+        <p className="studio-kicker mb-3">AutoShorts AI</p>
+        <h1 className="max-w-4xl text-[clamp(2.4rem,6vw,5rem)] font-semibold leading-[0.95] text-[#11100e]">
           {title}
         </h1>
         {description ? (
-          <p className="mt-2 text-[17px] leading-[1.47] tracking-[-0.374px] text-[#7a7a7a]">
+          <p className="mt-4 max-w-2xl text-[16px] leading-7 text-[#686157]">
             {description}
           </p>
         ) : null}

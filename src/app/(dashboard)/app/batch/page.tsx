@@ -132,11 +132,11 @@ export default function BatchGeneratePage() {
       />
 
       <Card>
-        <h2 className="text-lg font-semibold text-zinc-100">Batch Defaults</h2>
+        <h2 className="text-lg font-semibold text-[#11100e]">Batch Defaults</h2>
 
         <div className="mt-4 grid gap-3 md:grid-cols-4">
           <label className="block space-y-2 md:col-span-2">
-            <span className="text-sm text-zinc-300">Default Style</span>
+            <span className="text-sm text-[#3f3b34]">Default Style</span>
             <Select value={defaultStyle} onChange={(event) => setDefaultStyle(event.target.value)}>
               {styles.map((style) => (
                 <option key={style} value={style}>
@@ -147,7 +147,7 @@ export default function BatchGeneratePage() {
           </label>
 
           <label className="block space-y-2 md:col-span-2">
-            <span className="text-sm text-zinc-300">Default Content Style</span>
+            <span className="text-sm text-[#3f3b34]">Default Content Style</span>
             <Input
               value={defaultContentStyle}
               onChange={(event) => setDefaultContentStyle(event.target.value)}
@@ -156,7 +156,7 @@ export default function BatchGeneratePage() {
           </label>
 
           <label className="block space-y-2">
-            <span className="text-sm text-zinc-300">Default Voice ID</span>
+            <span className="text-sm text-[#3f3b34]">Default Voice ID</span>
             <Input
               value={defaultVoiceId}
               onChange={(event) => setDefaultVoiceId(event.target.value)}
@@ -165,7 +165,7 @@ export default function BatchGeneratePage() {
           </label>
 
           <label className="block space-y-2">
-            <span className="text-sm text-zinc-300">Default Duration</span>
+            <span className="text-sm text-[#3f3b34]">Default Duration</span>
             <Input
               type="number"
               min={defaults?.minDurationSeconds ?? 10}
@@ -176,7 +176,7 @@ export default function BatchGeneratePage() {
           </label>
 
           <label className="block space-y-2">
-            <span className="text-sm text-zinc-300">Default Variant Count</span>
+            <span className="text-sm text-[#3f3b34]">Default Variant Count</span>
             <Input
               type="number"
               min={1}
@@ -187,7 +187,7 @@ export default function BatchGeneratePage() {
           </label>
 
           <label className="block space-y-2">
-            <span className="text-sm text-zinc-300">Default Scene Count</span>
+            <span className="text-sm text-[#3f3b34]">Default Scene Count</span>
             <Input
               type="number"
               min={1}
@@ -199,7 +199,7 @@ export default function BatchGeneratePage() {
           </label>
 
           <label className="block space-y-2">
-            <span className="text-sm text-zinc-300">Default Character Profile</span>
+            <span className="text-sm text-[#3f3b34]">Default Character Profile</span>
             <Select
               value={defaultCharacterProfileId}
               onChange={(event) => setDefaultCharacterProfileId(event.target.value)}
@@ -215,7 +215,7 @@ export default function BatchGeneratePage() {
           </label>
 
           <label className="block space-y-2">
-            <span className="text-sm text-zinc-300">Default Campaign</span>
+            <span className="text-sm text-[#3f3b34]">Default Campaign</span>
             <Select
               value={defaultCharacterCampaignId}
               onChange={(event) => setDefaultCharacterCampaignId(event.target.value)}
@@ -231,7 +231,7 @@ export default function BatchGeneratePage() {
           </label>
 
           <label className="block space-y-2">
-            <span className="text-sm text-zinc-300">Default Story Angle</span>
+            <span className="text-sm text-[#3f3b34]">Default Story Angle</span>
             <Input
               value={defaultStoryAngle}
               onChange={(event) => setDefaultStoryAngle(event.target.value)}
@@ -240,7 +240,7 @@ export default function BatchGeneratePage() {
           </label>
 
           <label className="block space-y-2">
-            <span className="text-sm text-zinc-300">Default Product Placement</span>
+            <span className="text-sm text-[#3f3b34]">Default Product Placement</span>
             <Input
               value={defaultProductPlacementMode}
               onChange={(event) => setDefaultProductPlacementMode(event.target.value)}
@@ -249,7 +249,7 @@ export default function BatchGeneratePage() {
           </label>
 
           <label className="block space-y-2">
-            <span className="text-sm text-zinc-300">Default Ad Disclosure</span>
+            <span className="text-sm text-[#3f3b34]">Default Ad Disclosure</span>
             <Input
               value={defaultAdDisclosureMode}
               onChange={(event) => setDefaultAdDisclosureMode(event.target.value)}
@@ -258,7 +258,7 @@ export default function BatchGeneratePage() {
           </label>
 
           <label className="block space-y-2 md:col-span-4">
-            <span className="text-sm text-zinc-300">Default Character Consistency Mode</span>
+            <span className="text-sm text-[#3f3b34]">Default Character Consistency Mode</span>
             <Input
               value={defaultCharacterConsistencyMode}
               onChange={(event) => setDefaultCharacterConsistencyMode(event.target.value)}
@@ -267,15 +267,15 @@ export default function BatchGeneratePage() {
           </label>
         </div>
 
-        <p className="mt-4 text-xs text-zinc-500">Per-item fields below can override these defaults.</p>
+        <p className="mt-4 text-xs text-[#9a948b]">Per-item fields below can override these defaults.</p>
       </Card>
 
       <Card className="mt-6">
         <div className="space-y-4">
           {items.map((item, index) => (
-            <div key={item.id} className="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-4">
+            <div key={item.id} className="rounded-none border border-[#d8d0c1] bg-[#fffaf0] p-4">
               <div className="mb-3 flex items-center justify-between">
-                <p className="text-sm font-medium text-zinc-100">Item {index + 1}</p>
+                <p className="text-sm font-medium text-[#11100e]">Item {index + 1}</p>
                 <Button variant="ghost" size="sm" onClick={() => removeItem(item.id)}>
                   Remove
                 </Button>
@@ -413,27 +413,27 @@ export default function BatchGeneratePage() {
         </div>
 
         {mutation.isError ? (
-          <p className="mt-4 rounded-lg border border-red-700/60 bg-red-500/10 px-3 py-2 text-sm text-red-200">
+          <p className="mt-4 rounded-none border border-[#b42318]/30 bg-[#b42318]/10 px-3 py-2 text-sm text-[#b42318]">
             {getErrorMessage(mutation.error)}
           </p>
         ) : null}
 
         {!activeChannelId ? (
-          <p className="mt-4 text-sm text-amber-200">Please select an active channel in the top bar.</p>
+          <p className="mt-4 text-sm text-[#5d4100]">Please select an active channel in the top bar.</p>
         ) : null}
       </Card>
 
       {result ? (
         <Card className="mt-6">
-          <h2 className="text-lg font-semibold text-zinc-100">Batch Summary</h2>
-          <p className="mt-2 text-sm text-zinc-400">
+          <h2 className="text-lg font-semibold text-[#11100e]">Batch Summary</h2>
+          <p className="mt-2 text-sm text-[#686157]">
             Batch {result.batchId} - accepted {result.totalAccepted}/{result.totalRequested} requests
             {result.totalVariantsRequested ? ` (${result.totalVariantsRequested} variants requested)` : ""}
           </p>
 
-          <div className="mt-4 overflow-x-auto rounded-xl border border-zinc-800">
+          <div className="mt-4 overflow-x-auto rounded-none border border-[#d8d0c1]">
             <table className="min-w-full text-left text-sm">
-              <thead className="bg-zinc-900/60 text-zinc-400">
+              <thead className="bg-[#eee7da] text-[#686157]">
                 <tr>
                   <th className="px-4 py-3 font-medium">Topic</th>
                   <th className="px-4 py-3 font-medium">Status</th>
@@ -445,25 +445,25 @@ export default function BatchGeneratePage() {
               </thead>
               <tbody>
                 {result.jobs.map((job, index) => (
-                  <tr key={`${job.jobId ?? "no-job"}-${index}`} className="border-t border-zinc-800/80">
-                    <td className="px-4 py-3 text-zinc-100">{job.topic || "-"}</td>
-                    <td className="px-4 py-3 text-zinc-300">{job.status || "SKIPPED"}</td>
-                    <td className="px-4 py-3 text-zinc-400">{job.generationGroupId || "-"}</td>
-                    <td className="px-4 py-3 text-zinc-400">
+                  <tr key={`${job.jobId ?? "no-job"}-${index}`} className="border-t border-[#d8d0c1]">
+                    <td className="px-4 py-3 text-[#11100e]">{job.topic || "-"}</td>
+                    <td className="px-4 py-3 text-[#3f3b34]">{job.status || "SKIPPED"}</td>
+                    <td className="px-4 py-3 text-[#686157]">{job.generationGroupId || "-"}</td>
+                    <td className="px-4 py-3 text-[#686157]">
                       {job.variantIndex && job.variantCount
                         ? `${job.variantIndex}/${job.variantCount}`
                         : "-"}
                     </td>
                     <td className="px-4 py-3">
                       {job.jobId ? (
-                        <Link className="text-indigo-300 hover:text-indigo-200" href={`/app/jobs/${job.jobId}`}>
+                        <Link className="text-[#243fbd] hover:text-[#243fbd]" href={`/app/jobs/${job.jobId}`}>
                           {job.jobId}
                         </Link>
                       ) : (
-                        <span className="text-zinc-500">-</span>
+                        <span className="text-[#9a948b]">-</span>
                       )}
                     </td>
-                    <td className="px-4 py-3 text-zinc-400">{job.errorMessage || "-"}</td>
+                    <td className="px-4 py-3 text-[#686157]">{job.errorMessage || "-"}</td>
                   </tr>
                 ))}
               </tbody>

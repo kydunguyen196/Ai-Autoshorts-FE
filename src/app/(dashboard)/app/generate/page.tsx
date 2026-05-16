@@ -107,7 +107,7 @@ export default function GeneratePage() {
       />
 
       <Card className="max-w-5xl">
-        <div className="mb-5 rounded-xl border border-indigo-500/30 bg-indigo-500/10 px-4 py-3 text-sm text-indigo-100">
+        <div className="mb-5 rounded-none border border-[#4b6fff]/30 bg-[#4b6fff]/10 px-4 py-3 text-sm text-[#11100e]">
           Active channel: <span className="font-medium">{selectedChannelName}</span>
         </div>
 
@@ -119,7 +119,7 @@ export default function GeneratePage() {
           }}
         >
           <label className="block space-y-2">
-            <span className="text-sm text-zinc-300">Topic</span>
+            <span className="text-sm text-[#3f3b34]">Topic</span>
             <Textarea
               value={topic}
               onChange={(event) => setTopic(event.target.value)}
@@ -130,7 +130,7 @@ export default function GeneratePage() {
 
           <div className="grid gap-4 md:grid-cols-5">
             <label className="block space-y-2 md:col-span-2">
-              <span className="text-sm text-zinc-300">Style</span>
+              <span className="text-sm text-[#3f3b34]">Style</span>
               <Select value={style} onChange={(event) => setStyle(event.target.value)}>
                 {styles.map((item) => (
                   <option key={item} value={item}>
@@ -141,7 +141,7 @@ export default function GeneratePage() {
             </label>
 
             <label className="block space-y-2 md:col-span-3">
-              <span className="text-sm text-zinc-300">Content Style (optional override)</span>
+              <span className="text-sm text-[#3f3b34]">Content Style (optional override)</span>
               <Input
                 value={contentStyle}
                 onChange={(event) => setContentStyle(event.target.value)}
@@ -150,7 +150,7 @@ export default function GeneratePage() {
             </label>
 
             <label className="block space-y-2">
-              <span className="text-sm text-zinc-300">Voice ID</span>
+              <span className="text-sm text-[#3f3b34]">Voice ID</span>
               <Input
                 value={voiceId}
                 onChange={(event) => setVoiceId(event.target.value)}
@@ -159,7 +159,7 @@ export default function GeneratePage() {
             </label>
 
             <label className="block space-y-2">
-              <span className="text-sm text-zinc-300">Duration (seconds)</span>
+              <span className="text-sm text-[#3f3b34]">Duration (seconds)</span>
               <Input
                 type="number"
                 min={defaults?.minDurationSeconds ?? 10}
@@ -171,7 +171,7 @@ export default function GeneratePage() {
             </label>
 
             <label className="block space-y-2">
-              <span className="text-sm text-zinc-300">Variant Count</span>
+              <span className="text-sm text-[#3f3b34]">Variant Count</span>
               <Input
                 type="number"
                 min={1}
@@ -183,11 +183,11 @@ export default function GeneratePage() {
             </label>
           </div>
 
-          <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4">
-            <h3 className="text-sm font-semibold uppercase tracking-wide text-emerald-100">Commercial Quality Controls</h3>
+          <div className="rounded-none border border-[#126b42]/30 bg-[#126b42]/10 p-4">
+            <h3 className="text-sm font-semibold uppercase tracking-wide text-[#126b42]">Commercial Quality Controls</h3>
             <div className="mt-4 grid gap-4 md:grid-cols-3">
               <label className="block space-y-2">
-                <span className="text-sm text-zinc-300">Niche</span>
+                <span className="text-sm text-[#3f3b34]">Niche</span>
                 <Select value={niche} onChange={(event) => setNiche(event.target.value)}>
                   <option value="affiliate">Affiliate</option>
                   <option value="product-facts">Product facts</option>
@@ -198,7 +198,7 @@ export default function GeneratePage() {
               </label>
 
               <label className="block space-y-2">
-                <span className="text-sm text-zinc-300">Platform</span>
+                <span className="text-sm text-[#3f3b34]">Platform</span>
                 <Select value={platform} onChange={(event) => setPlatform(event.target.value)}>
                   <option value="tiktok">TikTok</option>
                   <option value="youtube-shorts">YouTube Shorts</option>
@@ -207,7 +207,7 @@ export default function GeneratePage() {
               </label>
 
               <label className="block space-y-2">
-                <span className="text-sm text-zinc-300">Quality Preset</span>
+                <span className="text-sm text-[#3f3b34]">Quality Preset</span>
                 <Select value={qualityPreset} onChange={(event) => setQualityPreset(event.target.value)}>
                   <option value="viral-faceless">Viral faceless</option>
                   <option value="affiliate-conversion">Affiliate conversion</option>
@@ -216,7 +216,7 @@ export default function GeneratePage() {
               </label>
 
               <label className="block space-y-2">
-                <span className="text-sm text-zinc-300">Subtitle Style</span>
+                <span className="text-sm text-[#3f3b34]">Subtitle Style</span>
                 <Select value={subtitleStyle} onChange={(event) => setSubtitleStyle(event.target.value)}>
                   <option value="tiktok-bold">TikTok bold</option>
                   <option value="clean-captions">Clean captions</option>
@@ -226,7 +226,7 @@ export default function GeneratePage() {
               </label>
 
               <label className="block space-y-2">
-                <span className="text-sm text-zinc-300">Visual Mode</span>
+                <span className="text-sm text-[#3f3b34]">Visual Mode</span>
                 <Select value={visualMode} onChange={(event) => setVisualMode(event.target.value)}>
                   <option value="ai-scenes">AI image scenes</option>
                   <option value="stock-broll">Stock/B-roll ready</option>
@@ -236,12 +236,12 @@ export default function GeneratePage() {
               </label>
 
               <label className="block space-y-2">
-                <span className="text-sm text-zinc-300">Voice Persona</span>
+                <span className="text-sm text-[#3f3b34]">Voice Persona</span>
                 <Input value={voicePersona} onChange={(event) => setVoicePersona(event.target.value)} />
               </label>
 
               <label className="block space-y-2 md:col-span-3">
-                <span className="text-sm text-zinc-300">Voice Provider Override</span>
+                <span className="text-sm text-[#3f3b34]">Voice Provider Override</span>
                 <Input
                   value={voiceProvider}
                   onChange={(event) => setVoiceProvider(event.target.value)}
@@ -251,12 +251,12 @@ export default function GeneratePage() {
             </div>
           </div>
 
-          <div className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-4">
-            <h3 className="text-sm font-semibold uppercase tracking-wide text-zinc-300">Character Story Ads Inputs</h3>
+          <div className="rounded-none border border-[#d8d0c1] bg-[#fffaf0] p-4">
+            <h3 className="text-sm font-semibold uppercase tracking-wide text-[#3f3b34]">Character Story Ads Inputs</h3>
 
             <div className="mt-4 grid gap-4 md:grid-cols-2">
               <label className="block space-y-2">
-                <span className="text-sm text-zinc-300">Character Profile</span>
+                <span className="text-sm text-[#3f3b34]">Character Profile</span>
                 <Select
                   value={characterProfileId}
                   onChange={(event) => setCharacterProfileId(event.target.value)}
@@ -272,7 +272,7 @@ export default function GeneratePage() {
               </label>
 
               <label className="block space-y-2">
-                <span className="text-sm text-zinc-300">Character Campaign</span>
+                <span className="text-sm text-[#3f3b34]">Character Campaign</span>
                 <Select
                   value={characterCampaignId}
                   onChange={(event) => setCharacterCampaignId(event.target.value)}
@@ -288,7 +288,7 @@ export default function GeneratePage() {
               </label>
 
               <label className="block space-y-2">
-                <span className="text-sm text-zinc-300">Story Angle</span>
+                <span className="text-sm text-[#3f3b34]">Story Angle</span>
                 <Input
                   value={storyAngle}
                   onChange={(event) => setStoryAngle(event.target.value)}
@@ -297,7 +297,7 @@ export default function GeneratePage() {
               </label>
 
               <label className="block space-y-2">
-                <span className="text-sm text-zinc-300">Product Placement Mode</span>
+                <span className="text-sm text-[#3f3b34]">Product Placement Mode</span>
                 <Input
                   value={productPlacementMode}
                   onChange={(event) => setProductPlacementMode(event.target.value)}
@@ -306,7 +306,7 @@ export default function GeneratePage() {
               </label>
 
               <label className="block space-y-2">
-                <span className="text-sm text-zinc-300">Ad Disclosure Mode</span>
+                <span className="text-sm text-[#3f3b34]">Ad Disclosure Mode</span>
                 <Input
                   value={adDisclosureMode}
                   onChange={(event) => setAdDisclosureMode(event.target.value)}
@@ -315,7 +315,7 @@ export default function GeneratePage() {
               </label>
 
               <label className="block space-y-2">
-                <span className="text-sm text-zinc-300">Scene Count Target</span>
+                <span className="text-sm text-[#3f3b34]">Scene Count Target</span>
                 <Input
                   type="number"
                   min={1}
@@ -327,7 +327,7 @@ export default function GeneratePage() {
               </label>
 
               <label className="block space-y-2 md:col-span-2">
-                <span className="text-sm text-zinc-300">Character Consistency Mode</span>
+                <span className="text-sm text-[#3f3b34]">Character Consistency Mode</span>
                 <Input
                   value={characterConsistencyMode}
                   onChange={(event) => setCharacterConsistencyMode(event.target.value)}
@@ -337,15 +337,15 @@ export default function GeneratePage() {
             </div>
 
             {profilesQuery.isError ? (
-              <p className="mt-3 text-xs text-amber-200">Could not load character profiles for this channel.</p>
+              <p className="mt-3 text-xs text-[#5d4100]">Could not load character profiles for this channel.</p>
             ) : null}
             {campaignsQuery.isError ? (
-              <p className="mt-2 text-xs text-amber-200">Could not load campaigns for this channel.</p>
+              <p className="mt-2 text-xs text-[#5d4100]">Could not load campaigns for this channel.</p>
             ) : null}
           </div>
 
           {generateMutation.isError ? (
-            <p className="rounded-lg border border-red-700/60 bg-red-500/10 px-3 py-2 text-sm text-red-200">
+            <p className="rounded-none border border-[#b42318]/30 bg-[#b42318]/10 px-3 py-2 text-sm text-[#b42318]">
               {getErrorMessage(generateMutation.error, "Failed to submit generation")}
             </p>
           ) : null}
@@ -364,7 +364,7 @@ export default function GeneratePage() {
               )}
             </Button>
             {!activeChannelId ? (
-              <p className="text-sm text-amber-200">Select an active channel in the top bar first.</p>
+              <p className="text-sm text-[#5d4100]">Select an active channel in the top bar first.</p>
             ) : null}
           </div>
         </form>

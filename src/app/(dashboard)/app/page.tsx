@@ -49,23 +49,23 @@ export default function DashboardHomePage() {
         }
       />
 
-      {/* ── Stat tiles ─────────────────────────────────────────────────── */}
+      {/* -- Stat tiles --------------------------------------------------- */}
       <section className="grid gap-4 md:grid-cols-3">
         <StatCard label="Recent Jobs" value={jobCount} />
         <StatCard label="Processing Queue" value={processingCount} />
         <StatCard label="Recent Topics" value={topicCount} />
       </section>
 
-      {/* ── Latest jobs + system snapshot ──────────────────────────────── */}
+      {/* -- Latest jobs + system snapshot -------------------------------- */}
       <section className="mt-6 grid gap-4 xl:grid-cols-3">
         <Card className="xl:col-span-2">
           <div className="mb-5 flex items-center justify-between">
-            <h2 className="text-[21px] font-semibold tracking-[-0.374px] text-[#1d1d1f]">
+            <h2 className="text-[21px] font-semibold  text-[#11100e]">
               Latest Jobs
             </h2>
             <Link
               href="/app/jobs"
-              className="text-[14px] tracking-[-0.224px] text-[#0066cc] hover:underline"
+              className="text-[14px]  text-[#11100e] hover:underline"
             >
               View all
             </Link>
@@ -85,13 +85,13 @@ export default function DashboardHomePage() {
                 <Link
                   key={job.jobId}
                   href={`/app/jobs/${job.jobId}`}
-                  className="flex items-center justify-between gap-3 rounded-[11px] border border-[#e0e0e0] bg-[#f5f5f7] px-4 py-3 transition-colors hover:border-[#0066cc]/40 hover:bg-white"
+                  className="flex items-center justify-between gap-3 rounded-none border border-[#d8d0c1] bg-[#f6f0e5] px-4 py-3 transition-colors hover:border-[#11100e] hover:bg-[#fffaf0]"
                 >
                   <div>
-                    <p className="text-[17px] font-normal tracking-[-0.374px] text-[#1d1d1f]">
+                    <p className="text-[17px] font-normal  text-[#11100e]">
                       {job.topic}
                     </p>
-                    <p className="mt-0.5 text-[12px] tracking-[-0.12px] text-[#7a7a7a]">
+                    <p className="mt-0.5 text-[12px]  text-[#686157]">
                       {formatDateTime(job.createdAt)}
                     </p>
                   </div>
@@ -114,7 +114,7 @@ export default function DashboardHomePage() {
 
         {/* System snapshot */}
         <Card>
-          <h2 className="text-[21px] font-semibold tracking-[-0.374px] text-[#1d1d1f]">
+          <h2 className="text-[21px] font-semibold  text-[#11100e]">
             System Snapshot
           </h2>
           <div className="mt-4 space-y-2">
@@ -128,7 +128,7 @@ export default function DashboardHomePage() {
         </Card>
       </section>
 
-      {/* ── Quick actions ───────────────────────────────────────────────── */}
+      {/* -- Quick actions ------------------------------------------------- */}
       <section className="mt-6 grid gap-4 md:grid-cols-3">
         <QuickActionCard
           href="/app/generate"
@@ -150,10 +150,10 @@ export default function DashboardHomePage() {
         />
       </section>
 
-      {/* ── Recent topics ───────────────────────────────────────────────── */}
+      {/* -- Recent topics ------------------------------------------------- */}
       <section className="mt-6">
         <Card>
-          <h2 className="mb-5 text-[21px] font-semibold tracking-[-0.374px] text-[#1d1d1f]">
+          <h2 className="mb-5 text-[21px] font-semibold  text-[#11100e]">
             Recent Topics
           </h2>
 
@@ -169,10 +169,10 @@ export default function DashboardHomePage() {
               {topicsQuery.data.map((topic) => (
                 <div
                   key={topic.id}
-                  className="rounded-[11px] border border-[#e0e0e0] bg-[#f5f5f7] p-4"
+                  className="rounded-none border border-[#d8d0c1] bg-[#f6f0e5] p-4"
                 >
-                  <p className="text-[17px] tracking-[-0.374px] text-[#1d1d1f]">{topic.topic}</p>
-                  <p className="mt-1 text-[12px] tracking-[-0.12px] text-[#7a7a7a]">
+                  <p className="text-[17px]  text-[#11100e]">{topic.topic}</p>
+                  <p className="mt-1 text-[12px]  text-[#686157]">
                     {topic.contentStyle || "No style"} · {topic.status}
                   </p>
                 </div>
@@ -195,13 +195,13 @@ export default function DashboardHomePage() {
   );
 }
 
-/* ── Sub-components ──────────────────────────────────────────────────────── */
+/* -- Sub-components -------------------------------------------------------- */
 
 function StatCard({ label, value }: { label: string; value: number }) {
   return (
     <Card>
-      <p className="text-[14px] tracking-[-0.224px] text-[#7a7a7a]">{label}</p>
-      <p className="mt-2 text-[40px] font-semibold leading-[1.1] tracking-[-0.374px] text-[#1d1d1f]">
+      <p className="text-[14px]  text-[#686157]">{label}</p>
+      <p className="mt-2 text-[40px] font-semibold leading-[1.1]  text-[#11100e]">
         {value}
       </p>
     </Card>
@@ -210,9 +210,9 @@ function StatCard({ label, value }: { label: string; value: number }) {
 
 function SnapshotRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-[11px] border border-[#e0e0e0] bg-[#f5f5f7] px-4 py-3">
-      <p className="text-[12px] tracking-[-0.12px] text-[#7a7a7a]">{label}</p>
-      <p className="mt-0.5 text-[17px] tracking-[-0.374px] text-[#1d1d1f]">{value}</p>
+    <div className="rounded-none border border-[#d8d0c1] bg-[#f6f0e5] px-4 py-3">
+      <p className="text-[12px]  text-[#686157]">{label}</p>
+      <p className="mt-0.5 text-[17px]  text-[#11100e]">{value}</p>
     </div>
   );
 }
@@ -230,15 +230,15 @@ function QuickActionCard({
 }) {
   return (
     <Link href={href} className="group block">
-      <Card className="h-full transition-colors hover:border-[#0066cc]/40">
-        <div className="flex h-10 w-10 items-center justify-center rounded-[8px] bg-[#0066cc]/10 text-[#0066cc]">
+      <Card className="h-full transition-colors hover:border-[#11100e]">
+        <div className="flex h-10 w-10 items-center justify-center rounded-none bg-[#c9ff4a] text-[#11100e]">
           {icon}
         </div>
-        <h3 className="mt-4 text-[21px] font-semibold tracking-[-0.374px] text-[#1d1d1f]">{title}</h3>
-        <p className="mt-2 text-[17px] leading-[1.47] tracking-[-0.374px] text-[#7a7a7a]">
+        <h3 className="mt-4 text-[21px] font-semibold  text-[#11100e]">{title}</h3>
+        <p className="mt-2 text-[17px] leading-[1.47]  text-[#686157]">
           {description}
         </p>
-        <span className="mt-5 inline-flex items-center gap-1 text-[17px] tracking-[-0.374px] text-[#0066cc] group-hover:underline">
+        <span className="mt-5 inline-flex items-center gap-1 text-[17px]  text-[#11100e] group-hover:underline">
           Open <ArrowRight className="h-4 w-4" />
         </span>
       </Card>

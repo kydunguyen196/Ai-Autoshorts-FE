@@ -1,0 +1,15 @@
+⨯ ./src/app/layout.tsx:8:1
+Module not found: Can't resolve './globals.css'
+  [90m 6 |[0m [36mimport[0m { env } [36mfrom[0m [32m"@/lib/env"[0m;
+  [90m 7 |[0m
+[31m[1m>[0m [90m 8 |[0m [36mimport[0m [32m"./globals.css"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 9 |[0m
+  [90m10 |[0m [36mconst[0m inter = [33mInter[0m({
+  [90m11 |[0m   variable: [32m"--font-inter"[0m,
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+

@@ -137,7 +137,7 @@ export default function CharacterProfilesPage() {
       <section className="grid gap-4 xl:grid-cols-2">
         <Card>
           <div className="flex items-center justify-between gap-3">
-            <h2 className="text-lg font-semibold text-zinc-100">
+            <h2 className="text-lg font-semibold text-[#11100e]">
               {editingId ? "Edit Profile" : "Create Profile"}
             </h2>
             {editingId ? (
@@ -162,7 +162,7 @@ export default function CharacterProfilesPage() {
             }}
           >
             <label className="block space-y-2">
-              <span className="text-sm text-zinc-300">Name</span>
+              <span className="text-sm text-[#3f3b34]">Name</span>
               <Input
                 value={form.name}
                 onChange={(event) => setForm((current) => ({ ...current, name: event.target.value }))}
@@ -181,7 +181,7 @@ export default function CharacterProfilesPage() {
               <Field label="Target Audience" value={form.targetAudience} onChange={(value) => setForm((current) => ({ ...current, targetAudience: value }))} />
 
               <label className="block space-y-2">
-                <span className="text-sm text-zinc-300">Status</span>
+                <span className="text-sm text-[#3f3b34]">Status</span>
                 <Select
                   value={form.status}
                   onChange={(event) => setForm((current) => ({ ...current, status: event.target.value as CharacterProfileStatus }))}
@@ -202,7 +202,7 @@ export default function CharacterProfilesPage() {
             <LongField label="Forbidden Topics" value={form.forbiddenTopics} onChange={(value) => setForm((current) => ({ ...current, forbiddenTopics: value }))} />
 
             {saveMutation.isError ? (
-              <p className="rounded-lg border border-red-700/60 bg-red-500/10 px-3 py-2 text-sm text-red-200">
+              <p className="rounded-none border border-[#b42318]/30 bg-[#b42318]/10 px-3 py-2 text-sm text-[#b42318]">
                 {getErrorMessage(saveMutation.error)}
               </p>
             ) : null}
@@ -223,8 +223,8 @@ export default function CharacterProfilesPage() {
 
         <Card>
           <div className="flex items-center justify-between gap-3">
-            <h2 className="text-lg font-semibold text-zinc-100">Profiles</h2>
-            <p className="text-sm text-zinc-400">{profileCountText}</p>
+            <h2 className="text-lg font-semibold text-[#11100e]">Profiles</h2>
+            <p className="text-sm text-[#686157]">{profileCountText}</p>
           </div>
 
           {!activeChannelId ? (
@@ -234,20 +234,20 @@ export default function CharacterProfilesPage() {
               description="Select an active channel from the top bar to manage character profiles."
             />
           ) : profilesQuery.isLoading ? (
-            <p className="mt-4 text-sm text-zinc-400">Loading profiles...</p>
+            <p className="mt-4 text-sm text-[#686157]">Loading profiles...</p>
           ) : profilesQuery.isError ? (
-            <p className="mt-4 text-sm text-red-300">Failed to load profiles.</p>
+            <p className="mt-4 text-sm text-[#b42318]">Failed to load profiles.</p>
           ) : profilesQuery.data && profilesQuery.data.length > 0 ? (
             <div className="mt-4 space-y-3">
               {profilesQuery.data.map((profile) => (
-                <div key={profile.id} className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-4">
+                <div key={profile.id} className="rounded-none border border-[#d8d0c1] bg-[#fffaf0] p-4">
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <p className="font-medium text-zinc-100">{profile.name}</p>
-                      <p className="mt-1 text-xs text-zinc-500">
+                      <p className="font-medium text-[#11100e]">{profile.name}</p>
+                      <p className="mt-1 text-xs text-[#9a948b]">
                         {profile.status} • Updated {formatDateTime(profile.updatedAt)}
                       </p>
-                      <p className="mt-2 text-sm text-zinc-300">
+                      <p className="mt-2 text-sm text-[#3f3b34]">
                         {profile.archetype || "No archetype"}
                         {profile.defaultVoiceId ? ` • voice ${profile.defaultVoiceId}` : ""}
                       </p>
@@ -284,7 +284,7 @@ export default function CharacterProfilesPage() {
           )}
 
           {deleteMutation.isError ? (
-            <p className="mt-4 text-sm text-red-300">{getErrorMessage(deleteMutation.error)}</p>
+            <p className="mt-4 text-sm text-[#b42318]">{getErrorMessage(deleteMutation.error)}</p>
           ) : null}
         </Card>
       </section>
@@ -322,7 +322,7 @@ function Field({
 }) {
   return (
     <label className="block space-y-2">
-      <span className="text-sm text-zinc-300">{label}</span>
+      <span className="text-sm text-[#3f3b34]">{label}</span>
       <Input value={value} onChange={(event) => onChange(event.target.value)} />
     </label>
   );
@@ -339,7 +339,7 @@ function LongField({
 }) {
   return (
     <label className="block space-y-2">
-      <span className="text-sm text-zinc-300">{label}</span>
+      <span className="text-sm text-[#3f3b34]">{label}</span>
       <Textarea value={value} onChange={(event) => onChange(event.target.value)} className="min-h-20" />
     </label>
   );

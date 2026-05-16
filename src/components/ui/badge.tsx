@@ -5,11 +5,11 @@
  * Pill shape, 14px caption text, hairline border.
  */
 const intentStyles = {
-  neutral: "border-[#e0e0e0] bg-[#f5f5f7] text-[#1d1d1f]",
-  success: "border-[#34c759]/40 bg-[#34c759]/10 text-[#1a7f37]",
-  warning: "border-[#ff9500]/40 bg-[#ff9500]/10 text-[#7d4e00]",
-  danger:  "border-[#ff3b30]/40 bg-[#ff3b30]/10 text-[#c0392b]",
-  info:    "border-[#0066cc]/30 bg-[#0066cc]/08 text-[#0066cc]",
+  neutral: "border-[#d8d0c1] bg-[#fffaf0] text-[#11100e]",
+  success: "border-[#126b42]/30 bg-[#126b42]/10 text-[#126b42]",
+  warning: "border-[#8a5a00]/30 bg-[#c9ff4a]/25 text-[#5d4100]",
+  danger: "border-[#b42318]/30 bg-[#b42318]/10 text-[#b42318]",
+  info: "border-[#4b6fff]/30 bg-[#4b6fff]/10 text-[#243fbd]",
 } as const;
 
 export function Badge({
@@ -27,7 +27,7 @@ export function Badge({
     <span
       className={cn(
         "inline-flex items-center rounded-full border px-[10px] py-[4px]",
-        "text-[14px] font-normal tracking-[-0.224px]",
+        "font-mono text-[11px] font-normal uppercase tracking-[0.18em]",
         intentStyles[intent],
         className,
       )}

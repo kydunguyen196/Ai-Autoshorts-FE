@@ -38,19 +38,19 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="rounded-[18px] border border-[#e0e0e0] bg-white p-8">
-      <p className="text-[12px] font-normal tracking-[-0.12px] text-[#0066cc]">AutoShorts AI</p>
+    <div className="studio-card p-8">
+      <p className="studio-kicker">AutoShorts AI</p>
 
-      <h1 className="mt-3 text-[34px] font-semibold leading-[1.1] tracking-[-0.374px] text-[#1d1d1f]">
+      <h1 className="mt-5 text-[48px] font-semibold leading-[0.92] text-[#11100e]">
         Create your workspace.
       </h1>
-      <p className="mt-2 text-[17px] leading-[1.47] tracking-[-0.374px] text-[#7a7a7a]">
+      <p className="mt-4 text-[16px] leading-7 text-[#686157]">
         Start generating AI-powered shorts with queue-safe automation.
       </p>
 
       <form className="mt-8 space-y-4" onSubmit={handleSubmit}>
         <label className="block space-y-1.5">
-          <span className="text-[14px] font-semibold tracking-[-0.224px] text-[#1d1d1f]">Display name</span>
+          <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#686157]">Display name</span>
           <Input
             value={displayName}
             onChange={(e) => setDisplayName(e.target.value)}
@@ -60,7 +60,7 @@ export default function RegisterPage() {
         </label>
 
         <label className="block space-y-1.5">
-          <span className="text-[14px] font-semibold tracking-[-0.224px] text-[#1d1d1f]">Email</span>
+          <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#686157]">Email</span>
           <Input
             type="email"
             value={email}
@@ -71,7 +71,7 @@ export default function RegisterPage() {
         </label>
 
         <label className="block space-y-1.5">
-          <span className="text-[14px] font-semibold tracking-[-0.224px] text-[#1d1d1f]">Password</span>
+          <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#686157]">Password</span>
           <Input
             type="password"
             value={password}
@@ -83,7 +83,7 @@ export default function RegisterPage() {
         </label>
 
         {error ? (
-          <p className="rounded-[11px] border border-[#ff3b30]/40 bg-[#ff3b30]/08 px-4 py-2.5 text-[14px] tracking-[-0.224px] text-[#c0392b]">
+          <p className="border border-[#b42318]/30 bg-[#b42318]/10 px-4 py-2.5 text-[14px] text-[#b42318]">
             {error}
           </p>
         ) : null}
@@ -99,9 +99,9 @@ export default function RegisterPage() {
         </Button>
       </form>
 
-      <p className="mt-6 text-[14px] tracking-[-0.224px] text-[#7a7a7a]">
+      <p className="mt-6 text-[14px] text-[#686157]">
         Already have an account?{" "}
-        <Link className="text-[#0066cc] hover:underline" href="/login">
+        <Link className="font-medium text-[#11100e] underline decoration-[#c9ff4a] decoration-4 underline-offset-4" href="/login">
           Sign in
         </Link>
       </p>

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useI18n, type Language } from "@/features/i18n/language-context";
 
@@ -7,14 +7,14 @@ export function LanguageSwitcher() {
 
   return (
     <label className="flex items-center gap-1.5">
-      <span className="hidden text-[12px] tracking-[-0.12px] text-[#7a7a7a] lg:inline">
+      <span className="hidden font-mono text-[11px] uppercase tracking-[0.18em] text-[#686157] lg:inline">
         {t("language.label")}
       </span>
       <select
         value={language}
         onChange={(e) => setLanguage(e.target.value as Language)}
         aria-label={t("language.label")}
-        className="h-8 rounded-full border border-[rgba(0,0,0,0.08)] bg-white px-3 text-[12px] tracking-[-0.12px] text-[#1d1d1f] focus:outline-2 focus:outline-[#0071e3] cursor-pointer appearance-none"
+        className="h-8 cursor-pointer appearance-none rounded-full border border-[#d8d0c1] bg-[#fffaf0] px-3 font-mono text-[11px] uppercase tracking-[0.14em] text-[#11100e] focus:outline-2 focus:outline-[#4b6fff]"
       >
         <option value="en">{t("language.english")}</option>
         <option value="vi">{t("language.vietnamese")}</option>

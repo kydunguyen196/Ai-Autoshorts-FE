@@ -1,0 +1,17 @@
+
+> autoshorts-fe@0.1.0 dev
+> next dev -p 3000
+
+▲ Next.js 16.2.3 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://172.16.7.62:3000
+- Environments: .env.local
+✓ Ready in 1657ms
+
+ GET / 200 in 1212ms (next.js: 609ms, application-code: 603ms)
+ GET / 200 in 192ms (next.js: 8ms, application-code: 184ms)
+ GET / 200 in 652ms (next.js: 261ms, application-code: 391ms)
+ GET / 200 in 575ms (next.js: 193ms, application-code: 382ms)
+ GET / 200 in 400ms (next.js: 137ms, application-code: 263ms)
+ GET / 200 in 185ms (next.js: 5ms, application-code: 180ms)
+ GET / 200 in 108ms (next.js: 4ms, application-code: 104ms)

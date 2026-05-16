@@ -14,9 +14,9 @@ export function PaginationControls({
   onChange: (nextPage: number) => void;
 }) {
   return (
-    <div className="mt-5 flex items-center justify-between gap-3 text-sm text-zinc-400">
-      <p>
-        Page {page + 1} {totalPages > 0 ? `of ${totalPages}` : ""}
+    <div className="mt-6 flex items-center justify-between gap-3">
+      <p className="text-[14px] tracking-[-0.224px] text-[#7a7a7a]">
+        Page {page + 1}{totalPages > 0 ? ` of ${totalPages}` : ""}
       </p>
       <div className="flex gap-2">
         <Button variant="secondary" size="sm" disabled={!hasPrevious} onClick={() => onChange(page - 1)}>

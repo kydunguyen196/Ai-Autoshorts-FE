@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";
 import { useAuth } from "@/features/auth/use-auth";
@@ -15,74 +14,73 @@ export default function LoginPage() {
   const router = useRouter();
   const { login, isAuthenticated, isHydrated } = useAuth();
   const [nextPath, setNextPath] = useState("/app");
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    if (isHydrated && isAuthenticated) {
-      router.replace("/app");
-    }
+    if (isHydrated && isAuthenticated) router.replace("/app");
   }, [isHydrated, isAuthenticated, router]);
 
   useEffect(() => {
-    if (typeof window === "undefined") {
-      return;
-    }
+    if (typeof window === "undefined") return;
     const params = new URLSearchParams(window.location.search);
     setNextPath(params.get("next") || "/app");
   }, []);
 
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
     setError(null);
     setIsSubmitting(true);
-
     try {
       await login({ email, password });
       router.replace(nextPath);
     } catch (err) {
-      setError(getErrorMessage(err, "Unable to login"));
+      setError(getErrorMessage(err, "Unable to sign in"));
     } finally {
       setIsSubmitting(false);
     }
   }
 
   return (
-    <Card className="w-full max-w-md border-indigo-500/20 bg-zinc-950/70">
-      <p className="text-xs uppercase tracking-[0.18em] text-indigo-300">Welcome Back</p>
-      <h1 className="mt-2 text-3xl font-semibold text-white">Sign in to AutoShorts AI</h1>
-      <p className="mt-2 text-sm text-zinc-400">
-        Continue building your AI video automation pipeline.
+    /* Apple white card on near-black tile */
+    <div className="rounded-[18px] border border-[#e0e0e0] bg-white p-8">
+      {/* Eyebrow */}
+      <p className="text-[12px] font-normal tracking-[-0.12px] text-[#0066cc]">AutoShorts AI</p>
+
+      <h1 className="mt-3 text-[34px] font-semibold leading-[1.1] tracking-[-0.374px] text-[#1d1d1f]">
+        Sign in.
+      </h1>
+      <p className="mt-2 text-[17px] leading-[1.47] tracking-[-0.374px] text-[#7a7a7a]">
+        Continue building your AI video pipeline.
       </p>
 
       <form className="mt-8 space-y-4" onSubmit={handleSubmit}>
-        <label className="block space-y-2">
-          <span className="text-sm text-zinc-300">Email</span>
+        <label className="block space-y-1.5">
+          <span className="text-[14px] font-semibold tracking-[-0.224px] text-[#1d1d1f]">Email</span>
           <Input
             type="email"
             value={email}
-            onChange={(event) => setEmail(event.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="you@creator.com"
             required
           />
         </label>
 
-        <label className="block space-y-2">
-          <span className="text-sm text-zinc-300">Password</span>
+        <label className="block space-y-1.5">
+          <span className="text-[14px] font-semibold tracking-[-0.224px] text-[#1d1d1f]">Password</span>
           <Input
             type="password"
             value={password}
-            onChange={(event) => setPassword(event.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="••••••••"
             required
           />
         </label>
 
         {error ? (
-          <p className="rounded-lg border border-red-700/60 bg-red-500/10 px-3 py-2 text-sm text-red-200">
+          <p className="rounded-[11px] border border-[#ff3b30]/40 bg-[#ff3b30]/08 px-4 py-2.5 text-[14px] tracking-[-0.224px] text-[#c0392b]">
             {error}
           </p>
         ) : null}
@@ -90,7 +88,7 @@ export default function LoginPage() {
         <Button className="w-full" type="submit" disabled={isSubmitting}>
           {isSubmitting ? (
             <span className="flex items-center gap-2">
-              <Spinner /> Signing in...
+              <Spinner className="h-4 w-4 border-white border-r-transparent" /> Signing in…
             </span>
           ) : (
             "Sign In"
@@ -98,12 +96,12 @@ export default function LoginPage() {
         </Button>
       </form>
 
-      <p className="mt-6 text-sm text-zinc-400">
+      <p className="mt-6 text-[14px] tracking-[-0.224px] text-[#7a7a7a]">
         New here?{" "}
-        <Link className="text-indigo-300 hover:text-indigo-200" href="/register">
+        <Link className="text-[#0066cc] hover:underline" href="/register">
           Create account
         </Link>
       </p>
-    </Card>
+    </div>
   );
 }

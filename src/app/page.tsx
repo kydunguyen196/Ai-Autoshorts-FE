@@ -1,8 +1,131 @@
 ﻿import Link from "next/link";
 import { ArrowRight, Bot, Layers, Sparkles } from "lucide-react";
 
-import { Card } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
+/**
+ * Landing page — Apple full-bleed tile rhythm.
+ * Tile 1: near-black hero (product-tile-dark)
+ * Tile 2: white feature grid (product-tile-light)
+ * Tile 3: parchment CTA (product-tile-parchment)
+ */
+export default function LandingPage() {
+  return (
+    <div className="min-h-screen">
+
+      {/* ── Global Nav — true black ─────────────────────────────────────── */}
+      <nav className="sticky top-0 z-50 flex h-[44px] items-center justify-between bg-black px-5 md:px-10">
+        <span className="text-[12px] tracking-[-0.12px] text-white/80">AutoShorts AI</span>
+        <div className="flex items-center gap-5">
+          <Link
+            href="/login"
+            className="text-[12px] tracking-[-0.12px] text-white/80 hover:text-white transition-colors"
+          >
+            Sign In
+          </Link>
+          <Link
+            href="/register"
+            className="btn-press inline-flex h-8 items-center rounded-full bg-[#0066cc] px-4 text-[12px] text-white transition-all hover:bg-[#0077ed]"
+          >
+            Get Started
+          </Link>
+        </div>
+      </nav>
+
+      {/* ── Tile 1: Dark hero ───────────────────────────────────────────── */}
+      <section className="flex min-h-screen flex-col items-center justify-center bg-[#272729] px-6 py-[80px] text-center">
+        <p className="text-[14px] tracking-[-0.224px] text-[#2997ff]">
+          AI video automation for creators
+        </p>
+        <h1 className="mt-5 max-w-3xl text-[56px] font-semibold leading-[1.07] tracking-[-0.28px] text-white md:text-[56px]">
+          Your short-form content engine.
+        </h1>
+        <p className="mt-5 max-w-xl text-[28px] font-normal leading-[1.14] text-[#cccccc]">
+          Queue-safe AI workflows. Step-level visibility. Creator-ready outputs.
+        </p>
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <Link
+            href="/register"
+            className="btn-press inline-flex h-[44px] items-center gap-2 rounded-full bg-[#0066cc] px-[22px] text-[17px] text-white transition-all hover:bg-[#0077ed]"
+          >
+            Start Building <ArrowRight className="h-4 w-4" />
+          </Link>
+          <Link
+            href="/login"
+            className="btn-press inline-flex h-[44px] items-center rounded-full border border-white/30 bg-transparent px-[22px] text-[17px] text-white transition-all hover:bg-white/10"
+          >
+            Open Dashboard
+          </Link>
+        </div>
+      </section>
+
+      {/* ── Tile 2: White feature grid ──────────────────────────────────── */}
+      <section className="bg-white px-6 py-[80px]">
+        <div className="mx-auto max-w-[980px]">
+          <h2 className="text-center text-[40px] font-semibold leading-[1.1] tracking-[-0.374px] text-[#1d1d1f]">
+            Everything you need to ship.
+          </h2>
+          <p className="mt-4 text-center text-[21px] font-normal leading-[1.19] tracking-[0.231px] text-[#7a7a7a]">
+            From topic to published video — one pipeline.
+          </p>
+
+          <div className="mt-12 grid gap-5 md:grid-cols-3">
+            {features.map((f) => {
+              const Icon = f.icon;
+              return (
+                <div
+                  key={f.title}
+                  className="rounded-[18px] border border-[#e0e0e0] bg-[#f5f5f7] p-6"
+                >
+                  <div className="flex h-10 w-10 items-center justify-center rounded-[8px] bg-[#0066cc]/10 text-[#0066cc]">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="mt-4 text-[21px] font-semibold tracking-[-0.374px] text-[#1d1d1f]">
+                    {f.title}
+                  </h3>
+                  <p className="mt-2 text-[17px] leading-[1.47] tracking-[-0.374px] text-[#7a7a7a]">
+                    {f.description}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Tile 3: Parchment CTA ───────────────────────────────────────── */}
+      <section className="flex flex-col items-center justify-center bg-[#f5f5f7] px-6 py-[80px] text-center">
+        <h2 className="text-[40px] font-semibold leading-[1.1] tracking-[-0.374px] text-[#1d1d1f]">
+          Ready to automate?
+        </h2>
+        <p className="mt-4 text-[21px] font-normal leading-[1.19] tracking-[0.231px] text-[#7a7a7a]">
+          Free to start. No credit card required.
+        </p>
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <Link
+            href="/register"
+            className="btn-press inline-flex h-[44px] items-center rounded-full bg-[#0066cc] px-[22px] text-[17px] text-white transition-all hover:bg-[#0077ed]"
+          >
+            Create Account
+          </Link>
+          <Link
+            href="/login"
+            className="btn-press inline-flex h-[44px] items-center rounded-full border border-[#0066cc] bg-transparent px-[22px] text-[17px] text-[#0066cc] transition-all hover:bg-[#0066cc]/05"
+          >
+            Sign In
+          </Link>
+        </div>
+      </section>
+
+      {/* ── Footer ──────────────────────────────────────────────────────── */}
+      <footer className="bg-[#f5f5f7] border-t border-[#e0e0e0] px-6 py-16">
+        <div className="mx-auto max-w-[980px]">
+          <p className="text-[12px] tracking-[-0.12px] text-[#7a7a7a]">
+            Copyright © 2026 AutoShorts AI. All rights reserved.
+          </p>
+        </div>
+      </footer>
+    </div>
+  );
+}
 
 const features = [
   {
@@ -24,80 +147,3 @@ const features = [
     icon: Sparkles,
   },
 ];
-
-export default function LandingPage() {
-  const primaryLinkClass = cn(
-    "inline-flex h-11 items-center justify-center rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 px-5 text-base font-medium text-white shadow-[0_8px_24px_rgba(99,102,241,0.35)] transition hover:brightness-110",
-  );
-  const secondaryLinkClass = cn(
-    "inline-flex h-11 items-center justify-center rounded-xl border border-zinc-700 bg-zinc-900/70 px-5 text-base font-medium text-zinc-100 transition hover:bg-zinc-800",
-  );
-  const ghostLinkClass = cn(
-    "inline-flex h-10 items-center justify-center rounded-xl px-4 text-sm font-medium text-zinc-300 transition hover:bg-zinc-800/60",
-  );
-
-  return (
-    <div className="relative min-h-screen overflow-hidden bg-[radial-gradient(1200px_640px_at_10%_-10%,rgba(99,102,241,0.35),transparent),radial-gradient(1000px_600px_at_90%_0%,rgba(56,189,248,0.22),transparent),#07070b]">
-      <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.02),transparent_40%)]" />
-
-      <div className="relative mx-auto flex min-h-screen w-full max-w-7xl flex-col px-6 py-10 md:px-10">
-        <header className="flex items-center justify-between">
-          <div>
-            <p className="text-xs uppercase tracking-[0.24em] text-indigo-300/90">AutoShorts AI</p>
-            <h1 className="mt-2 text-xl font-semibold text-zinc-100">AI Video Automation</h1>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <Link className={ghostLinkClass} href="/login">
-              Sign In
-            </Link>
-            <Link
-              className="inline-flex h-10 items-center justify-center rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 px-4 text-sm font-medium text-white shadow-[0_8px_24px_rgba(99,102,241,0.35)] transition hover:brightness-110"
-              href="/register"
-            >
-              Get Started
-            </Link>
-          </div>
-        </header>
-
-        <section className="mt-20 max-w-3xl">
-          <p className="mb-4 inline-flex rounded-full border border-indigo-500/40 bg-indigo-500/10 px-3 py-1 text-xs text-indigo-200">
-            AI video automation for creators
-          </p>
-          <h2 className="text-4xl font-semibold leading-tight text-white md:text-6xl">
-            Run your short-form content engine with queue-safe AI workflows.
-          </h2>
-          <p className="mt-6 max-w-2xl text-base text-zinc-300 md:text-lg">
-            AutoShorts AI turns ideas into production-ready short videos with durable job execution,
-            step-level visibility, and creator-focused controls.
-          </p>
-
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link className={cn(primaryLinkClass, "gap-2")} href="/register">
-              Start Building <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link className={secondaryLinkClass} href="/login">
-              Open Dashboard
-            </Link>
-          </div>
-        </section>
-
-        <section className="mt-14 grid gap-4 md:grid-cols-3">
-          {features.map((feature) => {
-            const Icon = feature.icon;
-
-            return (
-              <Card key={feature.title} className="bg-zinc-900/45">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500/40 to-blue-400/30 text-indigo-100">
-                  <Icon className="h-5 w-5" />
-                </div>
-                <h3 className="mt-4 text-lg font-semibold text-zinc-100">{feature.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-zinc-400">{feature.description}</p>
-              </Card>
-            );
-          })}
-        </section>
-      </div>
-    </div>
-  );
-}

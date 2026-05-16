@@ -1,23 +1,24 @@
 "use client";
 
-import { Select } from "@/components/ui/select";
 import { useI18n, type Language } from "@/features/i18n/language-context";
 
 export function LanguageSwitcher() {
   const { language, setLanguage, t } = useI18n();
 
   return (
-    <label className="flex items-center gap-2 text-xs text-zinc-400">
-      <span className="hidden lg:inline">{t("language.label")}</span>
-      <Select
+    <label className="flex items-center gap-1.5">
+      <span className="hidden text-[12px] tracking-[-0.12px] text-[#7a7a7a] lg:inline">
+        {t("language.label")}
+      </span>
+      <select
         value={language}
-        onChange={(event) => setLanguage(event.target.value as Language)}
-        className="h-8 min-w-24 rounded-lg border-zinc-700 bg-zinc-900/70 px-2 py-1 text-xs"
+        onChange={(e) => setLanguage(e.target.value as Language)}
         aria-label={t("language.label")}
+        className="h-8 rounded-full border border-[rgba(0,0,0,0.08)] bg-white px-3 text-[12px] tracking-[-0.12px] text-[#1d1d1f] focus:outline-2 focus:outline-[#0071e3] cursor-pointer appearance-none"
       >
         <option value="en">{t("language.english")}</option>
         <option value="vi">{t("language.vietnamese")}</option>
-      </Select>
+      </select>
     </label>
   );
 }

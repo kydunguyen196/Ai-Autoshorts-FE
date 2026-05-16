@@ -3,7 +3,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { ChevronDown, Loader2 } from "lucide-react";
 
-import { Select } from "@/components/ui/select";
 import { useAuth } from "@/features/auth/use-auth";
 import { listChannels } from "@/services/channels-service";
 
@@ -17,28 +16,28 @@ export function ChannelSelector() {
 
   const value = activeChannelId || defaultChannel?.id || "";
 
+  if (channelsQuery.isLoading) {
+    return (
+      <div className="flex h-9 w-40 items-center justify-center rounded-full border border-[rgba(0,0,0,0.08)] bg-white text-[#7a7a7a]">
+        <Loader2 className="h-4 w-4 animate-spin" />
+      </div>
+    );
+  }
+
   return (
-    <div className="relative min-w-44">
-      {channelsQuery.isLoading ? (
-        <div className="flex h-10 items-center justify-center rounded-xl border border-zinc-700 bg-zinc-900/70 text-zinc-400">
-          <Loader2 className="h-4 w-4 animate-spin" />
-        </div>
-      ) : (
-        <>
-          <Select
-            value={value}
-            onChange={(event) => setActiveChannelId(event.target.value)}
-            className="appearance-none pr-10"
-          >
-            {(channelsQuery.data ?? []).map((channel) => (
-              <option key={channel.id} value={channel.id}>
-                {channel.name}
-              </option>
-            ))}
-          </Select>
-          <ChevronDown className="pointer-events-none absolute right-3 top-3 h-4 w-4 text-zinc-400" />
-        </>
-      )}
+    <div className="relative">
+      <select
+        value={value}
+        onChange={(e) => setActiveChannelId(e.target.value)}
+        className="h-9 appearance-none rounded-full border border-[rgba(0,0,0,0.08)] bg-white pl-4 pr-9 text-[14px] tracking-[-0.224px] text-[#1d1d1f] focus:outline-2 focus:outline-[#0071e3] cursor-pointer"
+      >
+        {(channelsQuery.data ?? []).map((channel) => (
+          <option key={channel.id} value={channel.id}>
+            {channel.name}
+          </option>
+        ))}
+      </select>
+      <ChevronDown className="pointer-events-none absolute right-3 top-2.5 h-4 w-4 text-[#7a7a7a]" />
     </div>
   );
 }

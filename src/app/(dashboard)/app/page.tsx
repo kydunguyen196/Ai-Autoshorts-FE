@@ -2,11 +2,11 @@
 
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowRight, Clock3, Layers, ListChecks, Sparkles } from "lucide-react";
+import { ArrowRight, Layers, ListChecks, Sparkles } from "lucide-react";
 
-import { EmptyState } from "@/components/ui/empty-state";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { EmptyState } from "@/components/ui/empty-state";
 import { PageHeader } from "@/components/ui/page-header";
 import { Skeleton } from "@/components/ui/skeleton";
 import { JobStatusBadge } from "@/features/jobs/job-status-badge";
@@ -20,12 +20,10 @@ export default function DashboardHomePage() {
     queryKey: ["jobs", "recent", 5],
     queryFn: () => listRecentJobs(5),
   });
-
   const topicsQuery = useQuery({
     queryKey: ["topics", "recent", 5],
     queryFn: () => listRecentTopics(5),
   });
-
   const healthQuery = useQuery({
     queryKey: ["health"],
     queryFn: getHealth,
@@ -35,7 +33,7 @@ export default function DashboardHomePage() {
   const jobCount = jobsQuery.data?.length ?? 0;
   const topicCount = topicsQuery.data?.length ?? 0;
   const processingCount =
-    jobsQuery.data?.filter((job) => job.status === "PENDING" || job.status === "PROCESSING").length ?? 0;
+    jobsQuery.data?.filter((j) => j.status === "PENDING" || j.status === "PROCESSING").length ?? 0;
 
   return (
     <div>
@@ -51,26 +49,24 @@ export default function DashboardHomePage() {
         }
       />
 
+      {/* ── Stat tiles ─────────────────────────────────────────────────── */}
       <section className="grid gap-4 md:grid-cols-3">
-        <Card>
-          <p className="text-sm text-zinc-400">Recent Jobs</p>
-          <p className="mt-2 text-3xl font-semibold text-zinc-100">{jobCount}</p>
-        </Card>
-        <Card>
-          <p className="text-sm text-zinc-400">Processing Queue</p>
-          <p className="mt-2 text-3xl font-semibold text-zinc-100">{processingCount}</p>
-        </Card>
-        <Card>
-          <p className="text-sm text-zinc-400">Recent Topics</p>
-          <p className="mt-2 text-3xl font-semibold text-zinc-100">{topicCount}</p>
-        </Card>
+        <StatCard label="Recent Jobs" value={jobCount} />
+        <StatCard label="Processing Queue" value={processingCount} />
+        <StatCard label="Recent Topics" value={topicCount} />
       </section>
 
+      {/* ── Latest jobs + system snapshot ──────────────────────────────── */}
       <section className="mt-6 grid gap-4 xl:grid-cols-3">
         <Card className="xl:col-span-2">
-          <div className="mb-4 flex items-center justify-between">
-            <h2 className="text-lg font-semibold text-zinc-100">Latest Jobs</h2>
-            <Link href="/app/jobs" className="text-sm text-indigo-300 hover:text-indigo-200">
+          <div className="mb-5 flex items-center justify-between">
+            <h2 className="text-[21px] font-semibold tracking-[-0.374px] text-[#1d1d1f]">
+              Latest Jobs
+            </h2>
+            <Link
+              href="/app/jobs"
+              className="text-[14px] tracking-[-0.224px] text-[#0066cc] hover:underline"
+            >
               View all
             </Link>
           </div>
@@ -82,18 +78,22 @@ export default function DashboardHomePage() {
               <Skeleton className="h-16 w-full" />
             </div>
           ) : jobsQuery.isError ? (
-            <p className="text-sm text-red-300">Failed to load jobs.</p>
+            <p className="text-[17px] text-[#ff3b30]">Failed to load jobs.</p>
           ) : jobsQuery.data && jobsQuery.data.length > 0 ? (
-            <div className="space-y-3">
+            <div className="space-y-2">
               {jobsQuery.data.map((job) => (
                 <Link
                   key={job.jobId}
                   href={`/app/jobs/${job.jobId}`}
-                  className="flex items-center justify-between gap-3 rounded-xl border border-zinc-800 bg-zinc-900/40 px-4 py-3 hover:border-indigo-500/50"
+                  className="flex items-center justify-between gap-3 rounded-[11px] border border-[#e0e0e0] bg-[#f5f5f7] px-4 py-3 transition-colors hover:border-[#0066cc]/40 hover:bg-white"
                 >
                   <div>
-                    <p className="font-medium text-zinc-100">{job.topic}</p>
-                    <p className="mt-1 text-xs text-zinc-400">{formatDateTime(job.createdAt)}</p>
+                    <p className="text-[17px] font-normal tracking-[-0.374px] text-[#1d1d1f]">
+                      {job.topic}
+                    </p>
+                    <p className="mt-0.5 text-[12px] tracking-[-0.12px] text-[#7a7a7a]">
+                      {formatDateTime(job.createdAt)}
+                    </p>
                   </div>
                   <JobStatusBadge status={job.status} />
                 </Link>
@@ -112,29 +112,23 @@ export default function DashboardHomePage() {
           )}
         </Card>
 
+        {/* System snapshot */}
         <Card>
-          <h2 className="text-lg font-semibold text-zinc-100">System Snapshot</h2>
-          <div className="mt-4 space-y-3 text-sm text-zinc-300">
-            <div className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-3">
-              <p className="text-zinc-500">Queue Enabled</p>
-              <p className="mt-1 font-medium text-zinc-100">
-                {healthQuery.data?.queueEnabled ? "Yes" : "No"}
-              </p>
-            </div>
-            <div className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-3">
-              <p className="text-zinc-500">Queue Name</p>
-              <p className="mt-1 font-medium text-zinc-100">{healthQuery.data?.queueName ?? "-"}</p>
-            </div>
-            <div className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-3">
-              <p className="text-zinc-500">Max Processing Attempts</p>
-              <p className="mt-1 font-medium text-zinc-100">
-                {healthQuery.data?.queueMaxProcessingAttempts ?? "-"}
-              </p>
-            </div>
+          <h2 className="text-[21px] font-semibold tracking-[-0.374px] text-[#1d1d1f]">
+            System Snapshot
+          </h2>
+          <div className="mt-4 space-y-2">
+            <SnapshotRow label="Queue Enabled" value={healthQuery.data?.queueEnabled ? "Yes" : "No"} />
+            <SnapshotRow label="Queue Name" value={healthQuery.data?.queueName ?? "—"} />
+            <SnapshotRow
+              label="Max Attempts"
+              value={String(healthQuery.data?.queueMaxProcessingAttempts ?? "—")}
+            />
           </div>
         </Card>
       </section>
 
+      {/* ── Quick actions ───────────────────────────────────────────────── */}
       <section className="mt-6 grid gap-4 md:grid-cols-3">
         <QuickActionCard
           href="/app/generate"
@@ -156,12 +150,12 @@ export default function DashboardHomePage() {
         />
       </section>
 
+      {/* ── Recent topics ───────────────────────────────────────────────── */}
       <section className="mt-6">
         <Card>
-          <div className="mb-4 flex items-center gap-2">
-            <Clock3 className="h-4 w-4 text-indigo-300" />
-            <h2 className="text-lg font-semibold text-zinc-100">Recent Topics</h2>
-          </div>
+          <h2 className="mb-5 text-[21px] font-semibold tracking-[-0.374px] text-[#1d1d1f]">
+            Recent Topics
+          </h2>
 
           {topicsQuery.isLoading ? (
             <div className="space-y-3">
@@ -169,14 +163,17 @@ export default function DashboardHomePage() {
               <Skeleton className="h-14 w-full" />
             </div>
           ) : topicsQuery.isError ? (
-            <p className="text-sm text-red-300">Failed to load topics.</p>
+            <p className="text-[17px] text-[#ff3b30]">Failed to load topics.</p>
           ) : topicsQuery.data && topicsQuery.data.length > 0 ? (
             <div className="grid gap-3 md:grid-cols-2">
               {topicsQuery.data.map((topic) => (
-                <div key={topic.id} className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-4">
-                  <p className="font-medium text-zinc-100">{topic.topic}</p>
-                  <p className="mt-1 text-xs text-zinc-400">
-                    {topic.contentStyle || "No style"} • {topic.status}
+                <div
+                  key={topic.id}
+                  className="rounded-[11px] border border-[#e0e0e0] bg-[#f5f5f7] p-4"
+                >
+                  <p className="text-[17px] tracking-[-0.374px] text-[#1d1d1f]">{topic.topic}</p>
+                  <p className="mt-1 text-[12px] tracking-[-0.12px] text-[#7a7a7a]">
+                    {topic.contentStyle || "No style"} · {topic.status}
                   </p>
                 </div>
               ))}
@@ -198,6 +195,28 @@ export default function DashboardHomePage() {
   );
 }
 
+/* ── Sub-components ──────────────────────────────────────────────────────── */
+
+function StatCard({ label, value }: { label: string; value: number }) {
+  return (
+    <Card>
+      <p className="text-[14px] tracking-[-0.224px] text-[#7a7a7a]">{label}</p>
+      <p className="mt-2 text-[40px] font-semibold leading-[1.1] tracking-[-0.374px] text-[#1d1d1f]">
+        {value}
+      </p>
+    </Card>
+  );
+}
+
+function SnapshotRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-[11px] border border-[#e0e0e0] bg-[#f5f5f7] px-4 py-3">
+      <p className="text-[12px] tracking-[-0.12px] text-[#7a7a7a]">{label}</p>
+      <p className="mt-0.5 text-[17px] tracking-[-0.374px] text-[#1d1d1f]">{value}</p>
+    </div>
+  );
+}
+
 function QuickActionCard({
   href,
   icon,
@@ -210,14 +229,16 @@ function QuickActionCard({
   description: string;
 }) {
   return (
-    <Link href={href} className="group">
-      <Card className="h-full transition hover:border-indigo-500/60 hover:bg-zinc-900/70">
-        <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-500/15 text-indigo-200">
+    <Link href={href} className="group block">
+      <Card className="h-full transition-colors hover:border-[#0066cc]/40">
+        <div className="flex h-10 w-10 items-center justify-center rounded-[8px] bg-[#0066cc]/10 text-[#0066cc]">
           {icon}
         </div>
-        <h3 className="mt-4 text-base font-semibold text-zinc-100">{title}</h3>
-        <p className="mt-2 text-sm text-zinc-400">{description}</p>
-        <span className="mt-5 inline-flex items-center gap-1 text-sm text-indigo-300 group-hover:text-indigo-200">
+        <h3 className="mt-4 text-[21px] font-semibold tracking-[-0.374px] text-[#1d1d1f]">{title}</h3>
+        <p className="mt-2 text-[17px] leading-[1.47] tracking-[-0.374px] text-[#7a7a7a]">
+          {description}
+        </p>
+        <span className="mt-5 inline-flex items-center gap-1 text-[17px] tracking-[-0.374px] text-[#0066cc] group-hover:underline">
           Open <ArrowRight className="h-4 w-4" />
         </span>
       </Card>

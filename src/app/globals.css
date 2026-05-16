@@ -1,35 +1,82 @@
 ﻿@import "tailwindcss";
 
+/* ─── Apple Design System Tokens ─────────────────────────────────────────── */
 :root {
-  --background: #07070b;
-  --surface: #0f111a;
-  --foreground: #e5e7eb;
-  --muted: #9ca3af;
+  /* Brand & Accent */
+  --color-primary:          #0066cc;
+  --color-primary-focus:    #0071e3;
+  --color-primary-on-dark:  #2997ff;
+
+  /* Surfaces */
+  --color-canvas:           #ffffff;
+  --color-canvas-parchment: #f5f5f7;
+  --color-surface-pearl:    #fafafc;
+  --color-tile-1:           #272729;
+  --color-tile-2:           #2a2a2c;
+  --color-tile-3:           #252527;
+  --color-surface-black:    #000000;
+
+  /* Text */
+  --color-ink:              #1d1d1f;
+  --color-ink-muted-80:     #333333;
+  --color-ink-muted-48:     #7a7a7a;
+  --color-on-dark:          #ffffff;
+  --color-muted-on-dark:    #cccccc;
+
+  /* Borders */
+  --color-hairline:         #e0e0e0;
+  --color-divider-soft:     #f0f0f0;
+
+  /* Typography scale */
+  --text-hero:    56px;
+  --text-display-lg: 40px;
+  --text-display-md: 34px;
+  --text-lead:    28px;
+  --text-tagline: 21px;
+  --text-body:    17px;
+  --text-caption: 14px;
+  --text-nav:     12px;
+
+  /* Spacing */
+  --space-section: 80px;
+  --space-card:    24px;
+
+  /* Radius */
+  --radius-pill: 9999px;
+  --radius-lg:   18px;
+  --radius-md:   11px;
+  --radius-sm:   8px;
+  --radius-xs:   5px;
+
+  /* Shadow — only one, for product imagery */
+  --shadow-product: rgba(0,0,0,0.22) 3px 5px 30px 0;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-surface: var(--surface);
-  --font-sans: var(--font-jakarta);
+  --color-background: var(--color-canvas-parchment);
+  --color-foreground: var(--color-ink);
+  --font-sans: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: var(--font-geist-mono);
 }
 
-* {
-  border-color: rgb(39 39 42);
+/* ─── Reset ──────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
-html,
-body {
+html, body {
   height: 100%;
 }
 
 body {
-  background: radial-gradient(1200px 700px at -10% -20%, rgba(99, 102, 241, 0.18), transparent),
-    radial-gradient(1100px 650px at 120% -10%, rgba(59, 130, 246, 0.16), transparent),
-    #07070b;
-  color: var(--foreground);
-  font-family: var(--font-jakarta), ui-sans-serif, sans-serif;
+  background-color: var(--color-canvas-parchment);
+  color: var(--color-ink);
+  font-family: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: var(--text-body);
+  line-height: 1.47;
+  letter-spacing: -0.374px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {
@@ -37,7 +84,38 @@ a {
   text-decoration: none;
 }
 
-::selection {
-  background: rgba(99, 102, 241, 0.4);
-  color: #fff;
+/* ─── Apple-style focus ring ─────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-primary-focus);
+  outline-offset: 2px;
 }
+
+/* ─── Selection ──────────────────────────────────────────────────────────── */
+::selection {
+  background: rgba(0, 102, 204, 0.18);
+  color: var(--color-ink);
+}
+
+/* ─── Button press micro-interaction ─────────────────────────────────────── */
+.btn-press:active {
+  transform: scale(0.95);
+}
+
+/* ─── Frosted glass nav ──────────────────────────────────────────────────── */
+.nav-frosted {
+  background: rgba(245, 245, 247, 0.80);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+
+/* ─── Dark tile text ─────────────────────────────────────────────────────── */
+.tile-dark {
+  background-color: var(--color-tile-1);
+  color: var(--color-on-dark);
+}
+
+/* ─── Scrollbar (light) ──────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--color-canvas-parchment); }
+::-webkit-scrollbar-thumb { background: var(--color-hairline); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #c0c0c0; }

@@ -82,7 +82,7 @@ export default function TopicsPage() {
 
       <section className="grid gap-4 xl:grid-cols-2">
         <Card>
-          <h2 className="text-lg font-semibold text-[#11100e]">Create Topic</h2>
+          <h2 className="text-lg font-semibold text-foreground">Create Topic</h2>
           <form
             className="mt-4 space-y-3"
             onSubmit={(event) => {
@@ -99,7 +99,7 @@ export default function TopicsPage() {
             }}
           >
             <label className="block space-y-2">
-              <span className="text-sm text-[#3f3b34]">Topic</span>
+              <span className="text-sm text-strong">Topic</span>
               <Input
                 value={createTopicValue}
                 onChange={(event) => setCreateTopicValue(event.target.value)}
@@ -110,7 +110,7 @@ export default function TopicsPage() {
 
             <div className="grid gap-3 md:grid-cols-3">
               <label className="block space-y-2">
-                <span className="text-sm text-[#3f3b34]">Style</span>
+                <span className="text-sm text-strong">Style</span>
                 <Select value={createStyle} onChange={(event) => setCreateStyle(event.target.value)}>
                   <option value="">Auto/default</option>
                   {styles.map((item) => (
@@ -122,7 +122,7 @@ export default function TopicsPage() {
               </label>
 
               <label className="block space-y-2">
-                <span className="text-sm text-[#3f3b34]">Priority</span>
+                <span className="text-sm text-strong">Priority</span>
                 <Input
                   type="number"
                   min={0}
@@ -133,7 +133,7 @@ export default function TopicsPage() {
               </label>
 
               <label className="block space-y-2">
-                <span className="text-sm text-[#3f3b34]">Source</span>
+                <span className="text-sm text-strong">Source</span>
                 <Input
                   value={createSource}
                   onChange={(event) => setCreateSource(event.target.value)}
@@ -143,7 +143,7 @@ export default function TopicsPage() {
             </div>
 
             <label className="block space-y-2">
-              <span className="text-sm text-[#3f3b34]">Tags (comma separated)</span>
+              <span className="text-sm text-strong">Tags (comma separated)</span>
               <Input
                 value={createTags}
                 onChange={(event) => setCreateTags(event.target.value)}
@@ -152,7 +152,7 @@ export default function TopicsPage() {
             </label>
 
             {createMutation.isError ? (
-              <p className="rounded-none border border-[#b42318]/30 bg-[#b42318]/10 px-3 py-2 text-sm text-[#b42318]">
+              <p className="rounded-xl border border-danger/30 bg-danger/10 px-3 py-2 text-sm text-danger">
                 {getErrorMessage(createMutation.error)}
               </p>
             ) : null}
@@ -170,9 +170,9 @@ export default function TopicsPage() {
         </Card>
 
         <Card>
-          <h2 className="text-lg font-semibold text-[#11100e]">Import Topics</h2>
-          <p className="mt-2 text-sm text-[#686157]">
-            One per line. Format: <code className="text-[#2c2a25]">topic | style | priority</code>
+          <h2 className="text-lg font-semibold text-foreground">Import Topics</h2>
+          <p className="mt-2 text-sm text-muted">
+            One per line. Format: <code className="text-strong">topic | style | priority</code>
           </p>
 
           <form
@@ -187,7 +187,7 @@ export default function TopicsPage() {
             }}
           >
             <label className="block space-y-2">
-              <span className="text-sm text-[#3f3b34]">Default source</span>
+              <span className="text-sm text-strong">Default source</span>
               <Input
                 value={importDefaultSource}
                 onChange={(event) => setImportDefaultSource(event.target.value)}
@@ -201,16 +201,16 @@ export default function TopicsPage() {
               className="min-h-36"
             />
 
-            <p className="text-xs text-[#9a948b]">{parsedImportPreview.length} valid topic(s) detected.</p>
+            <p className="text-xs text-faint">{parsedImportPreview.length} valid topic(s) detected.</p>
 
             {importResult ? (
-              <p className="rounded-none border border-[#126b42]/30 bg-[#126b42]/10 px-3 py-2 text-sm text-[#126b42]">
+              <p className="rounded-xl border border-success/30 bg-success/10 px-3 py-2 text-sm text-success">
                 {importResult}
               </p>
             ) : null}
 
             {importMutation.isError ? (
-              <p className="rounded-none border border-[#b42318]/30 bg-[#b42318]/10 px-3 py-2 text-sm text-[#b42318]">
+              <p className="rounded-xl border border-danger/30 bg-danger/10 px-3 py-2 text-sm text-danger">
                 {getErrorMessage(importMutation.error)}
               </p>
             ) : null}
@@ -254,13 +254,13 @@ export default function TopicsPage() {
           </div>
 
           {topicsQuery.isLoading ? (
-            <p className="text-sm text-[#686157]">Loading topics...</p>
+            <p className="text-sm text-muted">Loading topics...</p>
           ) : topicsQuery.isError ? (
-            <p className="text-sm text-[#b42318]">Failed to load topic feed.</p>
+            <p className="text-sm text-danger">Failed to load topic feed.</p>
           ) : topicsQuery.data && topicsQuery.data.items.length > 0 ? (
-            <div className="overflow-x-auto rounded-none border border-[#d8d0c1]">
+            <div className="overflow-x-auto rounded-xl border border-border">
               <table className="min-w-full text-left text-sm">
-                <thead className="bg-[#eee7da] text-[#686157]">
+                <thead className="bg-subtle text-muted">
                   <tr>
                     <th className="px-4 py-3 font-medium">Topic</th>
                     <th className="px-4 py-3 font-medium">Style</th>
@@ -271,12 +271,12 @@ export default function TopicsPage() {
                 </thead>
                 <tbody>
                   {topicsQuery.data.items.map((topic) => (
-                    <tr key={topic.id} className="border-t border-[#d8d0c1]">
-                      <td className="px-4 py-3 text-[#11100e]">{topic.topic}</td>
-                      <td className="px-4 py-3 text-[#3f3b34]">{topic.contentStyle || "-"}</td>
-                      <td className="px-4 py-3 text-[#3f3b34]">{topic.status}</td>
-                      <td className="px-4 py-3 text-[#3f3b34]">{topic.priority ?? 0}</td>
-                      <td className="px-4 py-3 text-[#686157]">{formatDateTime(topic.createdAt)}</td>
+                    <tr key={topic.id} className="border-t border-border">
+                      <td className="px-4 py-3 text-foreground">{topic.topic}</td>
+                      <td className="px-4 py-3 text-strong">{topic.contentStyle || "-"}</td>
+                      <td className="px-4 py-3 text-strong">{topic.status}</td>
+                      <td className="px-4 py-3 text-strong">{topic.priority ?? 0}</td>
+                      <td className="px-4 py-3 text-muted">{formatDateTime(topic.createdAt)}</td>
                     </tr>
                   ))}
                 </tbody>

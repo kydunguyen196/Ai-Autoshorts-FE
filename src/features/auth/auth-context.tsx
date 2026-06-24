@@ -30,6 +30,7 @@ type AuthContextValue = {
   setActiveChannelId: (channelId: string | null) => void;
   isHydrated: boolean;
   isAuthenticated: boolean;
+  isAdmin: boolean;
   isBootstrappingUser: boolean;
   userBootstrapError: string | null;
   login: (payload: LoginRequest) => Promise<AuthResponse>;
@@ -140,6 +141,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setActiveChannelId,
     isHydrated,
     isAuthenticated: Boolean(token),
+    isAdmin: (currentUserQuery.data?.user?.role ?? "").toUpperCase() === "ADMIN",
     isBootstrappingUser: Boolean(token) && currentUserQuery.isLoading,
     userBootstrapError: currentUserQuery.isError
       ? getAuthErrorMessage(currentUserQuery.error)

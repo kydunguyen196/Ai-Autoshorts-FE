@@ -69,11 +69,11 @@ export function IntroAnimation() {
   return (
     <div
       aria-hidden="true"
-      className="fixed inset-0 z-[100] grid place-items-center overflow-hidden bg-[#f6f0e5] text-[#11100e]"
+      className="fixed inset-0 z-[100] grid place-items-center overflow-hidden bg-background text-foreground"
       ref={rootRef}
     >
       <div className="absolute inset-0 landing-grid opacity-50" />
-      <svg className="absolute h-[46vmin] w-[46vmin] text-[#11100e]/45" viewBox="0 0 420 420">
+      <svg className="absolute h-[46vmin] w-[46vmin] text-foreground/45" viewBox="0 0 420 420">
         <path
           d="M34 210 C96 78 305 72 378 210 C305 349 96 342 34 210Z"
           data-intro-line
@@ -95,12 +95,12 @@ export function IntroAnimation() {
           strokeWidth="1"
         />
       </svg>
-      <div data-intro-pulse className="absolute h-48 w-48 rounded-full border border-[#11100e]/20 blur-[1px]" />
+      <div data-intro-pulse className="absolute h-48 w-48 rounded-full border border-border-strong/20 blur-[1px]" />
       <div className="relative text-center">
-        <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.46em] text-[#686157]">
+        <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.46em] text-muted">
           please wait experience loading
         </p>
-        <div className="text-4xl font-semibold tracking-[0.08em] text-[#11100e] md:text-6xl">
+        <div className="text-4xl font-semibold tracking-[0.08em] text-foreground md:text-6xl">
           {Array.from(title).map((char, index) => (
             <span className="inline-block" data-intro-char key={`${char}-${index}`}>
               {char === " " ? "\u00a0" : char}

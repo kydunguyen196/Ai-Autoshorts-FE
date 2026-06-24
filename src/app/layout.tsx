@@ -3,6 +3,7 @@ import { Geist_Mono, Inter } from "next/font/google";
 import Script from "next/script";
 
 import { AppProviders } from "@/components/providers/app-providers";
+import { themeInitScript } from "@/features/theme/theme-context";
 import { env } from "@/lib/env";
 
 import "./globals.css";
@@ -44,8 +45,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${geistMono.variable} h-full antialiased`}>
-      <body className="min-h-full">
+    <html
+      lang="en"
+      data-theme="dark"
+      suppressHydrationWarning
+      className={`${inter.variable} ${geistMono.variable} h-full antialiased`}
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
+      <body className="min-h-full bg-background text-foreground">
         <AppProviders>{children}</AppProviders>
         {env.gaMeasurementId ? (
           <>

@@ -87,8 +87,8 @@ export default function TikTokIntegrationPage() {
       ) : (
         <section className="grid gap-4 xl:grid-cols-2">
           <Card>
-            <h2 className="text-lg font-semibold text-[#11100e]">Connection Settings</h2>
-            <p className="mt-2 text-sm text-[#686157]">
+            <h2 className="text-lg font-semibold text-foreground">Connection Settings</h2>
+            <p className="mt-2 text-sm text-muted">
               This form stores connection metadata in backend. Real OAuth exchange can be plugged in later.
             </p>
 
@@ -124,7 +124,7 @@ export default function TikTokIntegrationPage() {
                 />
 
                 <label className="block space-y-2">
-                  <span className="text-sm text-[#3f3b34]">Token Expires At</span>
+                  <span className="text-sm text-strong">Token Expires At</span>
                   <Input
                     type="datetime-local"
                     value={form.tokenExpiresAt}
@@ -133,7 +133,7 @@ export default function TikTokIntegrationPage() {
                 </label>
 
                 <label className="block space-y-2">
-                  <span className="text-sm text-[#3f3b34]">Status</span>
+                  <span className="text-sm text-strong">Status</span>
                   <Select
                     value={form.status}
                     onChange={(event) =>
@@ -168,7 +168,7 @@ export default function TikTokIntegrationPage() {
               />
 
               {upsertMutation.isError ? (
-                <p className="rounded-none border border-[#b42318]/30 bg-[#b42318]/10 px-3 py-2 text-sm text-[#b42318]">
+                <p className="rounded-xl border border-danger/30 bg-danger/10 px-3 py-2 text-sm text-danger">
                   {getErrorMessage(upsertMutation.error)}
                 </p>
               ) : null}
@@ -186,12 +186,12 @@ export default function TikTokIntegrationPage() {
           </Card>
 
           <Card>
-            <h2 className="text-lg font-semibold text-[#11100e]">Current Status</h2>
+            <h2 className="text-lg font-semibold text-foreground">Current Status</h2>
 
             {connectionQuery.isLoading ? (
-              <p className="mt-4 text-sm text-[#686157]">Loading connection status...</p>
+              <p className="mt-4 text-sm text-muted">Loading connection status...</p>
             ) : connectionQuery.isError ? (
-              <p className="mt-4 text-sm text-[#b42318]">Failed to load connection status.</p>
+              <p className="mt-4 text-sm text-danger">Failed to load connection status.</p>
             ) : connection ? (
               <ConnectionSummary connection={connection} />
             ) : (
@@ -299,7 +299,7 @@ function Field({
 }) {
   return (
     <label className="block space-y-2">
-      <span className="text-sm text-[#3f3b34]">{label}</span>
+      <span className="text-sm text-strong">{label}</span>
       <Input value={value} onChange={(event) => onChange(event.target.value)} />
     </label>
   );
@@ -307,9 +307,9 @@ function Field({
 
 function InfoRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-none border border-[#d8d0c1] bg-[#fffaf0] px-3 py-2">
-      <p className="text-xs uppercase tracking-wide text-[#9a948b]">{label}</p>
-      <p className="mt-1 break-all text-[#11100e]">{value}</p>
+    <div className="rounded-xl border border-border bg-surface px-3 py-2">
+      <p className="text-xs uppercase tracking-wide text-faint">{label}</p>
+      <p className="mt-1 break-all text-foreground">{value}</p>
     </div>
   );
 }

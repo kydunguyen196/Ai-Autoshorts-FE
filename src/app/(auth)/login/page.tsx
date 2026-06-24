@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Clapperboard } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -45,18 +46,23 @@ export default function LoginPage() {
 
   return (
     <div className="studio-card p-8">
-      <p className="studio-kicker">AutoShorts AI</p>
+      <Link href="/" className="group mb-6 inline-flex items-center gap-2.5">
+        <span className="grid h-9 w-9 place-items-center rounded-xl border border-border bg-accent text-on-accent glow-accent transition-transform group-hover:scale-105">
+          <Clapperboard className="h-4 w-4" />
+        </span>
+        <span className="font-mono text-[11px] uppercase tracking-[0.26em] text-muted">AutoShorts AI</span>
+      </Link>
 
-      <h1 className="mt-5 text-[48px] font-semibold leading-[0.92] text-[#11100e]">
+      <h1 className="text-[44px] font-semibold leading-[0.95] tracking-tight text-foreground">
         Sign in.
       </h1>
-      <p className="mt-4 text-[16px] leading-7 text-[#686157]">
+      <p className="mt-4 text-[16px] leading-7 text-muted">
         Continue building your AI video pipeline.
       </p>
 
       <form className="mt-8 space-y-4" onSubmit={handleSubmit}>
         <label className="block space-y-1.5">
-          <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#686157]">Email</span>
+          <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">Email</span>
           <Input
             type="email"
             value={email}
@@ -67,7 +73,7 @@ export default function LoginPage() {
         </label>
 
         <label className="block space-y-1.5">
-          <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#686157]">Password</span>
+          <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">Password</span>
           <Input
             type="password"
             value={password}
@@ -78,7 +84,7 @@ export default function LoginPage() {
         </label>
 
         {error ? (
-          <p className="border border-[#b42318]/30 bg-[#b42318]/10 px-4 py-2.5 text-[14px] text-[#b42318]">
+          <p className="border border-danger/30 bg-danger/10 px-4 py-2.5 text-[14px] text-danger">
             {error}
           </p>
         ) : null}
@@ -94,9 +100,9 @@ export default function LoginPage() {
         </Button>
       </form>
 
-      <p className="mt-6 text-[14px] text-[#686157]">
+      <p className="mt-6 text-[14px] text-muted">
         New here?{" "}
-        <Link className="font-medium text-[#11100e] underline decoration-[#c9ff4a] decoration-4 underline-offset-4" href="/register">
+        <Link className="font-medium text-foreground underline decoration-accent decoration-4 underline-offset-4" href="/register">
           Create account
         </Link>
       </p>

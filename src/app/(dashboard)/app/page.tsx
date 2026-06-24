@@ -60,12 +60,12 @@ export default function DashboardHomePage() {
       <section className="mt-6 grid gap-4 xl:grid-cols-3">
         <Card className="xl:col-span-2">
           <div className="mb-5 flex items-center justify-between">
-            <h2 className="text-[21px] font-semibold  text-[#11100e]">
+            <h2 className="text-[21px] font-semibold  text-foreground">
               Latest Jobs
             </h2>
             <Link
               href="/app/jobs"
-              className="text-[14px]  text-[#11100e] hover:underline"
+              className="text-[14px]  text-foreground hover:underline"
             >
               View all
             </Link>
@@ -78,20 +78,20 @@ export default function DashboardHomePage() {
               <Skeleton className="h-16 w-full" />
             </div>
           ) : jobsQuery.isError ? (
-            <p className="text-[17px] text-[#ff3b30]">Failed to load jobs.</p>
+            <p className="text-[17px] text-danger">Failed to load jobs.</p>
           ) : jobsQuery.data && jobsQuery.data.length > 0 ? (
             <div className="space-y-2">
               {jobsQuery.data.map((job) => (
                 <Link
                   key={job.jobId}
                   href={`/app/jobs/${job.jobId}`}
-                  className="flex items-center justify-between gap-3 rounded-none border border-[#d8d0c1] bg-[#f6f0e5] px-4 py-3 transition-colors hover:border-[#11100e] hover:bg-[#fffaf0]"
+                  className="flex items-center justify-between gap-3 rounded-xl border border-border bg-background px-4 py-3 transition-colors hover:border-border-strong hover:bg-surface"
                 >
                   <div>
-                    <p className="text-[17px] font-normal  text-[#11100e]">
+                    <p className="text-[17px] font-normal  text-foreground">
                       {job.topic}
                     </p>
-                    <p className="mt-0.5 text-[12px]  text-[#686157]">
+                    <p className="mt-0.5 text-[12px]  text-muted">
                       {formatDateTime(job.createdAt)}
                     </p>
                   </div>
@@ -114,7 +114,7 @@ export default function DashboardHomePage() {
 
         {/* System snapshot */}
         <Card>
-          <h2 className="text-[21px] font-semibold  text-[#11100e]">
+          <h2 className="text-[21px] font-semibold  text-foreground">
             System Snapshot
           </h2>
           <div className="mt-4 space-y-2">
@@ -153,7 +153,7 @@ export default function DashboardHomePage() {
       {/* -- Recent topics ------------------------------------------------- */}
       <section className="mt-6">
         <Card>
-          <h2 className="mb-5 text-[21px] font-semibold  text-[#11100e]">
+          <h2 className="mb-5 text-[21px] font-semibold  text-foreground">
             Recent Topics
           </h2>
 
@@ -163,16 +163,16 @@ export default function DashboardHomePage() {
               <Skeleton className="h-14 w-full" />
             </div>
           ) : topicsQuery.isError ? (
-            <p className="text-[17px] text-[#ff3b30]">Failed to load topics.</p>
+            <p className="text-[17px] text-danger">Failed to load topics.</p>
           ) : topicsQuery.data && topicsQuery.data.length > 0 ? (
             <div className="grid gap-3 md:grid-cols-2">
               {topicsQuery.data.map((topic) => (
                 <div
                   key={topic.id}
-                  className="rounded-none border border-[#d8d0c1] bg-[#f6f0e5] p-4"
+                  className="rounded-xl border border-border bg-background p-4"
                 >
-                  <p className="text-[17px]  text-[#11100e]">{topic.topic}</p>
-                  <p className="mt-1 text-[12px]  text-[#686157]">
+                  <p className="text-[17px]  text-foreground">{topic.topic}</p>
+                  <p className="mt-1 text-[12px]  text-muted">
                     {topic.contentStyle || "No style"} · {topic.status}
                   </p>
                 </div>
@@ -199,20 +199,21 @@ export default function DashboardHomePage() {
 
 function StatCard({ label, value }: { label: string; value: number }) {
   return (
-    <Card>
-      <p className="text-[14px]  text-[#686157]">{label}</p>
-      <p className="mt-2 text-[40px] font-semibold leading-[1.1]  text-[#11100e]">
-        {value}
-      </p>
+    <Card className="card-hover">
+      <div className="flex items-center gap-2">
+        <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+        <p className="font-mono text-[12px] uppercase tracking-[0.16em] text-muted">{label}</p>
+      </div>
+      <p className="gradient-text mt-3 text-[44px] font-semibold leading-[1.05]">{value}</p>
     </Card>
   );
 }
 
 function SnapshotRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-none border border-[#d8d0c1] bg-[#f6f0e5] px-4 py-3">
-      <p className="text-[12px]  text-[#686157]">{label}</p>
-      <p className="mt-0.5 text-[17px]  text-[#11100e]">{value}</p>
+    <div className="rounded-xl border border-border bg-background px-4 py-3">
+      <p className="text-[12px]  text-muted">{label}</p>
+      <p className="mt-0.5 text-[17px]  text-foreground">{value}</p>
     </div>
   );
 }
@@ -230,15 +231,15 @@ function QuickActionCard({
 }) {
   return (
     <Link href={href} className="group block">
-      <Card className="h-full transition-colors hover:border-[#11100e]">
-        <div className="flex h-10 w-10 items-center justify-center rounded-none bg-[#c9ff4a] text-[#11100e]">
+      <Card className="card-hover h-full">
+        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent text-on-accent glow-accent">
           {icon}
         </div>
-        <h3 className="mt-4 text-[21px] font-semibold  text-[#11100e]">{title}</h3>
-        <p className="mt-2 text-[17px] leading-[1.47]  text-[#686157]">
+        <h3 className="mt-4 text-[21px] font-semibold  text-foreground">{title}</h3>
+        <p className="mt-2 text-[17px] leading-[1.47]  text-muted">
           {description}
         </p>
-        <span className="mt-5 inline-flex items-center gap-1 text-[17px]  text-[#11100e] group-hover:underline">
+        <span className="mt-5 inline-flex items-center gap-1 text-[17px]  text-foreground group-hover:underline">
           Open <ArrowRight className="h-4 w-4" />
         </span>
       </Card>

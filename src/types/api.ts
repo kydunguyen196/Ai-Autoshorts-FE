@@ -539,3 +539,92 @@ export interface BillingPortalResponse {
   url: string;
   mode: string;
 }
+
+// --- Notifications ---
+export interface NotificationItem {
+  id: string;
+  type: string;
+  title: string;
+  message?: string | null;
+  dataJson?: string | null;
+  read: boolean;
+  readAt?: string | null;
+  createdAt?: string;
+}
+
+// --- News ---
+export interface NewsSource {
+  id: string;
+  channelId: string;
+  name: string;
+  feedUrl: string;
+  enabled: boolean;
+  autoPublish: boolean;
+  fetchIntervalMinutes: number;
+  maxItemsPerFetch: number;
+  contentStyle?: string | null;
+  lastFetchedAt?: string | null;
+  lastStatus?: string | null;
+  lastError?: string | null;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface NewsSourceRequest {
+  name: string;
+  feedUrl: string;
+  channelId?: string | null;
+  enabled: boolean;
+  autoPublish: boolean;
+  fetchIntervalMinutes: number;
+  maxItemsPerFetch: number;
+  contentStyle?: string | null;
+}
+
+export interface NewsItem {
+  id: string;
+  newsSourceId: string;
+  title: string;
+  link?: string | null;
+  summary?: string | null;
+  publishedAt?: string | null;
+  status: string;
+  topicIdeaId?: string | null;
+  createdAt?: string;
+}
+
+// --- Admin ---
+export interface AdminOverview {
+  totalUsers: number;
+  enabledUsers: number;
+  jobsPending: number;
+  jobsProcessing: number;
+  jobsCompleted: number;
+  jobsFailed: number;
+  jobsLast24h: number;
+  jobsLast7d: number;
+  newsSourcesEnabled: number;
+  schedulerEnabled: boolean;
+  newsEnabled: boolean;
+  queueEnabled: boolean;
+  providerModes: Record<string, string>;
+}
+
+export interface AdminUser {
+  id: string;
+  email: string;
+  displayName: string;
+  role: string;
+  enabled: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface AppSetting {
+  key: string;
+  value?: string | null;
+  valueType: string;
+  category: string;
+  description?: string | null;
+  updatedAt?: string;
+}

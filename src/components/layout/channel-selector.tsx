@@ -18,7 +18,7 @@ export function ChannelSelector() {
 
   if (channelsQuery.isLoading) {
     return (
-      <div className="flex h-9 w-40 items-center justify-center rounded-full border border-[#d8d0c1] bg-[#fffaf0] text-[#686157]">
+      <div className="flex h-9 w-40 items-center justify-center rounded-full border border-border bg-surface text-muted">
         <Loader2 className="h-4 w-4 animate-spin" />
       </div>
     );
@@ -29,7 +29,7 @@ export function ChannelSelector() {
       <select
         value={value}
         onChange={(e) => setActiveChannelId(e.target.value)}
-        className="h-9 cursor-pointer appearance-none rounded-full border border-[#d8d0c1] bg-[#fffaf0] pl-4 pr-9 text-[14px] text-[#11100e] focus:outline-2 focus:outline-[#4b6fff]"
+        className="h-9 cursor-pointer appearance-none rounded-full border border-border bg-surface pl-4 pr-9 text-[14px] text-foreground transition-colors hover:border-border-strong focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent-2/40"
       >
         {(channelsQuery.data ?? []).map((channel) => (
           <option key={channel.id} value={channel.id}>
@@ -37,7 +37,7 @@ export function ChannelSelector() {
           </option>
         ))}
       </select>
-      <ChevronDown className="pointer-events-none absolute right-3 top-2.5 h-4 w-4 text-[#686157]" />
+      <ChevronDown className="pointer-events-none absolute right-3 top-2.5 h-4 w-4 text-muted" />
     </div>
   );
 }

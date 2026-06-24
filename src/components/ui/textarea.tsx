@@ -1,4 +1,4 @@
-﻿import { forwardRef } from "react";
+import { forwardRef } from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -10,10 +10,11 @@ export const Textarea = forwardRef<
     <textarea
       ref={ref}
       className={cn(
-        "min-h-[112px] w-full rounded-none border border-[#d8d0c1] bg-[#fffaf0] px-4 py-3",
-        "text-[16px] text-[#11100e] placeholder:text-[#9a948b]",
-        "leading-[1.45] resize-y transition-colors duration-150",
-        "focus:border-[#11100e] focus:outline-2 focus:outline-[#4b6fff] focus:outline-offset-0",
+        "min-h-[112px] w-full rounded-xl border border-border bg-surface px-4 py-3",
+        "text-[16px] text-foreground placeholder:text-faint",
+        "leading-[1.5] resize-y transition-all duration-200",
+        "hover:border-border-strong",
+        "focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent-2/40",
         className,
       )}
       {...props}

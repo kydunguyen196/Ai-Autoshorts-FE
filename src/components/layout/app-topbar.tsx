@@ -5,6 +5,8 @@ import { Menu } from "lucide-react";
 
 import { ChannelSelector } from "@/components/layout/channel-selector";
 import { LanguageSwitcher } from "@/components/layout/language-switcher";
+import { NotificationBell } from "@/components/layout/notification-bell";
+import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/features/auth/use-auth";
 import { useI18n } from "@/features/i18n/language-context";
@@ -20,12 +22,12 @@ export function AppTopbar({ onOpenMenu }: { onOpenMenu: () => void }) {
   });
 
   return (
-    <header className="nav-frosted sticky top-0 z-20 flex h-[60px] items-center border-b border-[#11100e] px-5 py-0">
+    <header className="nav-frosted sticky top-0 z-20 flex h-[60px] items-center border-b border-border px-5 py-0">
       <div className="flex w-full items-center justify-between gap-3">
         {/* Left: hamburger (mobile) + channel selector */}
         <div className="flex items-center gap-3">
           <button
-            className="rounded-full border border-[#11100e] p-2 text-[#11100e] hover:bg-[#c9ff4a] md:hidden"
+            className="rounded-full border border-border p-2 text-foreground transition-colors hover:border-accent hover:text-accent md:hidden"
             onClick={onOpenMenu}
             aria-label="Open menu"
           >
@@ -34,21 +36,24 @@ export function AppTopbar({ onOpenMenu }: { onOpenMenu: () => void }) {
           <ChannelSelector />
         </div>
 
-        {/* Right: credits + language + user + logout */}
-        <div className="flex items-center gap-4">
+        {/* Right: credits + theme + language + user + logout */}
+        <div className="flex items-center gap-3">
           {creditsQuery.data ? (
-            <span className="hidden font-mono text-[12px] uppercase tracking-[0.16em] text-[#686157] sm:block">
+            <span className="hidden items-center gap-1.5 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 font-mono text-[12px] uppercase tracking-[0.14em] text-foreground sm:inline-flex">
+              <span className="h-1.5 w-1.5 rounded-full bg-accent" />
               {creditsQuery.data.creditsBalance} credits
             </span>
           ) : null}
 
+          <NotificationBell />
+          <ThemeToggle />
           <LanguageSwitcher />
 
           <div className="hidden text-right sm:block">
-            <p className="text-[14px] font-semibold text-[#11100e]">
+            <p className="text-[14px] font-semibold text-foreground">
               {user?.displayName ?? t("topbar.userFallback")}
             </p>
-            <p className="text-[12px] text-[#686157]">{user?.email}</p>
+            <p className="text-[12px] text-muted">{user?.email}</p>
           </div>
 
           <Button variant="ghost" size="sm" onClick={logout}>

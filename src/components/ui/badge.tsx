@@ -1,15 +1,16 @@
-﻿import { cn, toTitleCase } from "@/lib/utils";
+import { cn, toTitleCase } from "@/lib/utils";
 
 /**
- * Apple configurator-option-chip style badges.
- * Pill shape, 14px caption text, hairline border.
+ * Pill-shaped status chip with a hairline border and tinted background.
+ * Colours are theme-aware via semantic tokens.
  */
 const intentStyles = {
-  neutral: "border-[#d8d0c1] bg-[#fffaf0] text-[#11100e]",
-  success: "border-[#126b42]/30 bg-[#126b42]/10 text-[#126b42]",
-  warning: "border-[#8a5a00]/30 bg-[#c9ff4a]/25 text-[#5d4100]",
-  danger: "border-[#b42318]/30 bg-[#b42318]/10 text-[#b42318]",
-  info: "border-[#4b6fff]/30 bg-[#4b6fff]/10 text-[#243fbd]",
+  neutral: "border-border bg-surface text-strong",
+  success: "border-success/40 bg-success/10 text-success",
+  warning: "border-warning/40 bg-warning/15 text-warning-strong",
+  danger: "border-danger/40 bg-danger/10 text-danger",
+  info: "border-accent-2/40 bg-accent-2/10 text-info",
+  accent: "border-accent/50 bg-accent/15 text-foreground",
 } as const;
 
 export function Badge({

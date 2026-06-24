@@ -339,14 +339,14 @@ const guideContent: Record<Language, GuideContent> = {
 
 function getNoteClassName(tone: GuideSection["noteTone"]) {
   if (tone === "amber") {
-    return "border-amber-700/40 bg-amber-500/10 text-[#5d4100]";
+    return "border-amber-700/40 bg-amber-500/10 text-warning-strong";
   }
 
   if (tone === "indigo") {
-    return "border-[#4b6fff]/30 bg-[#4b6fff]/10 text-[#243fbd]";
+    return "border-accent-2/30 bg-accent-2/10 text-info";
   }
 
-  return "border-[#d8d0c1] bg-[#fffaf0] text-[#686157]";
+  return "border-border bg-surface text-muted";
 }
 
 export default function GuidePage() {
@@ -358,13 +358,13 @@ export default function GuidePage() {
       <PageHeader title={content.title} description={content.description} />
 
       <Card>
-        <h2 className="text-lg font-semibold text-[#11100e]">{content.tocTitle}</h2>
+        <h2 className="text-lg font-semibold text-foreground">{content.tocTitle}</h2>
         <div className="mt-3 grid gap-2 md:grid-cols-2">
           {content.sections.map((item) => (
             <a
               key={item.id}
               href={`#${item.id}`}
-              className="rounded-none border border-[#d8d0c1] bg-[#fffaf0] px-3 py-2 text-sm text-[#243fbd] hover:text-[#243fbd]"
+              className="rounded-xl border border-border bg-surface px-3 py-2 text-sm text-info hover:text-info"
             >
               {item.label}
             </a>
@@ -375,16 +375,16 @@ export default function GuidePage() {
       {content.sections.map((section) => (
         <section key={section.id} id={section.id} className="mt-6">
           <Card>
-            <h2 className="text-lg font-semibold text-[#11100e]">{section.title}</h2>
+            <h2 className="text-lg font-semibold text-foreground">{section.title}</h2>
 
             {section.paragraphs?.map((paragraph) => (
-              <p key={paragraph} className="mt-3 text-sm text-[#3f3b34]">
+              <p key={paragraph} className="mt-3 text-sm text-strong">
                 {paragraph}
               </p>
             ))}
 
             {section.steps?.length ? (
-              <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm text-[#3f3b34]">
+              <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm text-strong">
                 {section.steps.map((step) => (
                   <li key={step}>{step}</li>
                 ))}
@@ -397,7 +397,7 @@ export default function GuidePage() {
                   <Link
                     key={`${section.id}-${link.href}`}
                     href={link.href}
-                    className="rounded-none border border-[#4b6fff]/30 bg-[#4b6fff]/10 px-2.5 py-1 text-xs text-[#243fbd] hover:bg-[#c9ff4a]"
+                    className="rounded-xl border border-accent-2/30 bg-accent-2/10 px-2.5 py-1 text-xs text-info hover:bg-accent"
                   >
                     {link.label}
                   </Link>
@@ -406,7 +406,7 @@ export default function GuidePage() {
             ) : null}
 
             {section.note ? (
-              <p className={`mt-3 rounded-none border px-3 py-2 text-xs ${getNoteClassName(section.noteTone)}`}>
+              <p className={`mt-3 rounded-xl border px-3 py-2 text-xs ${getNoteClassName(section.noteTone)}`}>
                 {section.note}
               </p>
             ) : null}

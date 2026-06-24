@@ -1,29 +1,113 @@
-﻿@import "tailwindcss";
+@import "tailwindcss";
 
-:root {
-  --studio-ink: #11100e;
-  --studio-muted: #686157;
-  --studio-faint: #9a948b;
-  --studio-paper: #f6f0e5;
-  --studio-paper-soft: #fbf7ef;
-  --studio-panel: #fffaf0;
-  --studio-line: #d8d0c1;
-  --studio-line-strong: #15130f;
-  --studio-accent: #c9ff4a;
-  --studio-accent-2: #4b6fff;
-  --studio-danger: #b42318;
-  --studio-success: #126b42;
-  --color-primary: var(--studio-ink);
-  --color-primary-focus: var(--studio-accent-2);
-  --color-canvas-parchment: var(--studio-paper);
-  --color-ink: var(--studio-ink);
-  --color-hairline: var(--studio-line);
+/* =========================================================================
+   AutoShorts AI — design tokens
+   Two themes share one semantic vocabulary. Dark is the default ("futuristic
+   premium"); light preserves the original editorial palette. Switching is done
+   by toggling `data-theme` on <html>; every token below is referenced through
+   Tailwind utilities (bg-surface, text-muted, border-border, ...) so a single
+   change here re-skins the whole app.
+   ========================================================================= */
+
+:root,
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #080910;
+  --bg-2: #0d0f1a;
+  --surface: #141826;
+  --surface-glass: rgba(22, 26, 42, 0.72);
+  --subtle: #1b2032;
+  --foreground: #eef1fb;
+  --strong: #cdd4e6;
+  --muted: #99a1ba;
+  --faint: #6c7490;
+  --border: #262b40;
+  --border-strong: #3b425e;
+
+  --accent: #c9ff4a;
+  --accent-soft: #1f2a17;
+  --on-accent: #0a0d05;
+  --accent-2: #6d8bff;
+  --info: #a7bcff;
+  --success: #4ade80;
+  --warning: #fbbf24;
+  --warning-strong: #fcd34d;
+  --danger: #fb7185;
+  --danger-strong: #f43f5e;
+  --on-dark: #eef1fb;
+
+  --grid-line: rgba(255, 255, 255, 0.045);
+  --halo-1: rgba(201, 255, 74, 0.16);
+  --halo-2: rgba(109, 139, 255, 0.18);
+  --ring: rgba(109, 139, 255, 0.55);
+
+  --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.4), 0 16px 40px -24px rgba(0, 0, 0, 0.85);
+  --shadow-float: 0 2px 6px rgba(0, 0, 0, 0.45), 0 28px 60px -28px rgba(0, 0, 0, 0.9);
+  --radius: 16px;
   --text-body: 16px;
 }
 
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --bg: #f6f0e5;
+  --bg-2: #efe8da;
+  --surface: #fffaf0;
+  --surface-glass: rgba(255, 250, 240, 0.78);
+  --subtle: #eee7da;
+  --foreground: #11100e;
+  --strong: #3f3b34;
+  --muted: #686157;
+  --faint: #9a948b;
+  --border: #d8d0c1;
+  --border-strong: #15130f;
+
+  --accent: #c9ff4a;
+  --accent-soft: #eef7cf;
+  --on-accent: #11100e;
+  --accent-2: #4b6fff;
+  --info: #243fbd;
+  --success: #126b42;
+  --warning: #8a5a00;
+  --warning-strong: #5d4100;
+  --danger: #b42318;
+  --danger-strong: #8f1c14;
+  --on-dark: #fffaf0;
+
+  --grid-line: rgba(17, 16, 14, 0.05);
+  --halo-1: rgba(201, 255, 74, 0.26);
+  --halo-2: rgba(75, 111, 255, 0.12);
+  --ring: rgba(75, 111, 255, 0.6);
+
+  --shadow-soft: 0 1px 2px rgba(17, 16, 14, 0.05), 0 14px 34px -22px rgba(17, 16, 14, 0.35);
+  --shadow-float: 0 2px 8px rgba(17, 16, 14, 0.08), 0 26px 54px -26px rgba(17, 16, 14, 0.4);
+}
+
 @theme inline {
-  --color-background: var(--studio-paper);
-  --color-foreground: var(--studio-ink);
+  --color-background: var(--bg);
+  --color-background-2: var(--bg-2);
+  --color-surface: var(--surface);
+  --color-subtle: var(--subtle);
+  --color-foreground: var(--foreground);
+  --color-strong: var(--strong);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-on-accent: var(--on-accent);
+  --color-accent-2: var(--accent-2);
+  --color-info: var(--info);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-warning-strong: var(--warning-strong);
+  --color-danger: var(--danger);
+  --color-danger-strong: var(--danger-strong);
+  --color-on-dark: var(--on-dark);
+
   --font-sans: var(--font-inter), Arial, Helvetica, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
 }
@@ -41,18 +125,40 @@ body {
 }
 
 body {
-  background:
-    linear-gradient(rgba(17, 16, 14, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(17, 16, 14, 0.035) 1px, transparent 1px),
-    var(--studio-paper);
-  background-size: 48px 48px;
-  color: var(--studio-ink);
+  position: relative;
+  background-color: var(--bg);
+  color: var(--foreground);
   font-family: var(--font-inter), Arial, Helvetica, sans-serif;
   font-size: var(--text-body);
-  line-height: 1.45;
-  letter-spacing: 0;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Ambient app backdrop: faint grid + drifting color halos. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(60vw 50vh at 12% -8%, var(--halo-1), transparent 60%),
+    radial-gradient(55vw 45vh at 92% 4%, var(--halo-2), transparent 62%);
+  animation: halo-drift 18s ease-in-out infinite alternate;
 }
 
 a {
@@ -61,62 +167,55 @@ a {
 }
 
 :focus-visible {
-  outline: 2px solid var(--studio-accent-2);
+  outline: 2px solid var(--accent-2);
   outline-offset: 3px;
+  border-radius: 4px;
 }
 
 ::selection {
-  background: var(--studio-accent);
-  color: var(--studio-ink);
+  background: var(--accent);
+  color: var(--on-accent);
 }
 
-.btn-press:active {
-  transform: scale(0.98);
+/* ---- Reusable surface system ------------------------------------------- */
+
+.glass {
+  background: var(--surface-glass);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
 }
 
-.nav-frosted {
-  background: rgba(246, 240, 229, 0.86);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+.panel {
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-glass);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  box-shadow: var(--shadow-soft);
 }
 
-.tile-dark {
-  background-color: var(--studio-ink);
-  color: var(--studio-paper);
+.soft-shadow {
+  box-shadow: var(--shadow-soft);
 }
 
-.studio-kicker,
-.landing-kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.65rem;
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-size: 0.68rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--studio-muted);
+.float-shadow {
+  box-shadow: var(--shadow-float);
 }
 
-.studio-kicker::before,
-.landing-kicker::before {
-  display: inline-block;
-  width: 2.25rem;
-  height: 1px;
-  content: "";
-  background: var(--studio-line-strong);
-}
-
+/* Floating card with a sheen on hover + lift. */
 .studio-card,
 .landing-card,
 .landing-gallery-card {
   position: relative;
   overflow: hidden;
-  border: 1px solid var(--studio-line);
-  border-radius: 0;
-  background: rgba(255, 250, 240, 0.76);
-  box-shadow: none;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-glass);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.32s ease, border-color 0.32s ease;
 }
 
 .studio-card::before,
@@ -128,9 +227,15 @@ a {
   content: "";
   opacity: 0;
   background:
-    linear-gradient(120deg, rgba(201, 255, 74, 0.28), transparent 42%),
-    linear-gradient(180deg, rgba(75, 111, 255, 0.08), transparent 55%);
-  transition: opacity 260ms ease;
+    radial-gradient(120% 80% at 0% 0%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 45%),
+    radial-gradient(120% 80% at 100% 100%, color-mix(in srgb, var(--accent-2) 18%, transparent), transparent 55%);
+  transition: opacity 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-float);
 }
 
 .studio-card:hover::before,
@@ -139,44 +244,63 @@ a {
   opacity: 1;
 }
 
+/* ---- Typography helpers ------------------------------------------------ */
+
+.studio-kicker,
+.landing-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.studio-kicker::before,
+.landing-kicker::before {
+  display: inline-block;
+  width: 2.25rem;
+  height: 1px;
+  content: "";
+  background: linear-gradient(90deg, var(--accent), transparent);
+}
+
+.gradient-text {
+  background: linear-gradient(120deg, var(--foreground) 0%, var(--accent-2) 70%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---- Buttons ----------------------------------------------------------- */
+
+.btn-press:active {
+  transform: scale(0.98);
+}
+
+.nav-frosted {
+  background: color-mix(in srgb, var(--bg) 78%, transparent);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+}
+
+.tile-dark {
+  background-color: var(--foreground);
+  color: var(--bg);
+}
+
 .landing-surface {
   isolation: isolate;
-  background:
-    linear-gradient(rgba(17, 16, 14, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(17, 16, 14, 0.045) 1px, transparent 1px),
-    var(--studio-paper);
-  background-size: 54px 54px;
-  color: var(--studio-ink);
-}
-
-.landing-surface::before {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  content: "";
-  background:
-    radial-gradient(circle at 14% 18%, rgba(201, 255, 74, 0.26), transparent 19%),
-    radial-gradient(circle at 86% 8%, rgba(75, 111, 255, 0.12), transparent 24%),
-    linear-gradient(145deg, rgba(255, 250, 240, 0.88), rgba(238, 231, 218, 0.58));
-}
-
-.landing-surface::after {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  content: "";
-  opacity: 0.13;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.65'/%3E%3C/svg%3E");
-  mix-blend-mode: multiply;
+  color: var(--foreground);
 }
 
 .landing-grid {
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(17, 16, 14, 0.055) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(17, 16, 14, 0.055) 1px, transparent 1px);
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-position: center;
   background-size: 54px 54px;
   mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 78%, transparent 100%);
@@ -185,9 +309,9 @@ a {
 .landing-aurora {
   pointer-events: none;
   background:
-    linear-gradient(115deg, transparent 18%, rgba(201, 255, 74, 0.22) 34%, transparent 50%),
-    linear-gradient(64deg, transparent 36%, rgba(75, 111, 255, 0.1) 52%, transparent 70%);
-  filter: blur(18px);
+    linear-gradient(115deg, transparent 18%, color-mix(in srgb, var(--accent) 22%, transparent) 34%, transparent 50%),
+    linear-gradient(64deg, transparent 36%, color-mix(in srgb, var(--accent-2) 24%, transparent) 52%, transparent 70%);
+  filter: blur(26px);
   animation: aurora-drift 14s ease-in-out infinite alternate;
 }
 
@@ -202,34 +326,45 @@ a {
   overflow: hidden;
   border-radius: 999px;
   white-space: nowrap;
-  transition:
-    transform 180ms ease,
-    border-color 180ms ease,
-    background 180ms ease;
+  font-weight: 500;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 220ms ease;
 }
 
 .landing-button,
 .landing-button-compact {
-  color: var(--studio-paper);
-  background: var(--studio-ink);
+  color: var(--on-accent);
+  background: linear-gradient(120deg, var(--accent), color-mix(in srgb, var(--accent) 70%, var(--accent-2)));
+  box-shadow: 0 8px 30px -10px color-mix(in srgb, var(--accent) 70%, transparent);
+}
+
+.landing-button:hover,
+.landing-button-compact:hover {
+  box-shadow: 0 12px 40px -8px color-mix(in srgb, var(--accent) 80%, transparent);
+  transform: translateY(-1px);
 }
 
 .landing-button {
   min-height: 3.25rem;
-  padding: 0 1.45rem;
+  padding: 0 1.6rem;
 }
 
 .landing-button-compact {
   min-height: 2.4rem;
-  padding: 0 1rem;
+  padding: 0 1.1rem;
 }
 
 .landing-button-secondary {
   min-height: 3.25rem;
-  padding: 0 1.35rem;
-  color: var(--studio-ink);
-  border: 1px solid var(--studio-line-strong);
-  background: rgba(255, 250, 240, 0.55);
+  padding: 0 1.4rem;
+  color: var(--foreground);
+  border: 1px solid var(--border-strong);
+  background: var(--surface-glass);
+  backdrop-filter: blur(10px);
+}
+
+.landing-button-secondary:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), 0 10px 30px -16px color-mix(in srgb, var(--accent) 60%, transparent);
 }
 
 .landing-button::before,
@@ -238,10 +373,10 @@ a {
   inset: -70% auto -70% -45%;
   width: 36%;
   content: "";
-  background: rgba(201, 255, 74, 0.85);
-  filter: blur(12px);
+  background: rgba(255, 255, 255, 0.55);
+  filter: blur(14px);
   transform: rotate(18deg);
-  transition: left 520ms ease;
+  transition: left 560ms ease;
 }
 
 .landing-button:hover::before,
@@ -249,8 +384,10 @@ a {
   left: 116%;
 }
 
-.landing-button-secondary:hover {
-  background: var(--studio-accent);
+/* Glow ring used on primary CTAs / focus-worthy elements. */
+.glow-accent {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 35%, transparent),
+    0 10px 36px -12px color-mix(in srgb, var(--accent) 65%, transparent);
 }
 
 .landing-nav-link {
@@ -264,7 +401,7 @@ a {
   width: 100%;
   height: 1px;
   content: "";
-  background: var(--studio-line-strong);
+  background: var(--accent);
   transform: scaleX(0);
   transform-origin: right;
   transition: transform 220ms ease;
@@ -276,7 +413,12 @@ a {
 }
 
 .tech-visual {
-  filter: drop-shadow(0 18px 44px rgba(17, 16, 14, 0.08));
+  filter: drop-shadow(0 18px 44px rgba(0, 0, 0, 0.4));
+}
+
+/* Page transition wrapper. */
+.page-enter {
+  animation: page-fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 [data-reveal-item] {
@@ -287,17 +429,56 @@ a {
   from {
     transform: translate3d(-2%, -1%, 0) scale(1);
   }
-
   to {
-    transform: translate3d(2%, 1.5%, 0) scale(1.05);
+    transform: translate3d(2%, 1.5%, 0) scale(1.06);
   }
+}
+
+@keyframes halo-drift {
+  from {
+    transform: translate3d(-1.5%, -1%, 0);
+  }
+  to {
+    transform: translate3d(1.5%, 1%, 0);
+  }
+}
+
+@keyframes page-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--subtle);
+}
+
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--foreground) 8%, transparent), transparent);
+  animation: shimmer 1.5s infinite;
 }
 
 @media (max-width: 640px) {
   .landing-grid {
     background-size: 38px 38px;
   }
-
   .landing-button,
   .landing-button-secondary {
     width: 100%;
@@ -313,22 +494,25 @@ a {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
-
   [data-reveal-item] {
     opacity: 1;
   }
 }
 
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--studio-paper);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--studio-line-strong);
-  border-radius: 0;
+  background: var(--border-strong);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
 }

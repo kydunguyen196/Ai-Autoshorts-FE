@@ -90,17 +90,17 @@ export function LandingExperience() {
 function FloatingNav() {
   return (
     <header className="fixed left-0 right-0 top-0 z-50 px-4 py-4 md:px-8">
-      <nav className="mx-auto flex h-14 max-w-7xl items-center justify-between rounded-full border border-[#11100e] bg-[#fffaf0]/82 px-4 backdrop-blur-2xl md:px-6">
+      <nav className="mx-auto flex h-14 max-w-7xl items-center justify-between rounded-full border border-border-strong bg-surface/82 px-4 backdrop-blur-2xl md:px-6">
         <Link className="group flex items-center gap-3" href="/">
-          <span className="grid h-8 w-8 place-items-center rounded-full border border-[#11100e] bg-[#c9ff4a] text-[#11100e]">
+          <span className="grid h-8 w-8 place-items-center rounded-full border border-border-strong bg-accent text-on-accent">
             <Clapperboard className="h-4 w-4" />
           </span>
-          <span className="text-sm font-semibold tracking-[0.18em] text-[#11100e]">AUTOSHORTS</span>
+          <span className="text-sm font-semibold tracking-[0.18em] text-foreground">AUTOSHORTS</span>
         </Link>
         <div className="hidden items-center gap-7 md:flex">
           {navItems.map((item) => (
             <Link
-              className="landing-nav-link text-[12px] uppercase tracking-[0.26em] text-[#686157] transition-colors hover:text-[#11100e]"
+              className="landing-nav-link text-[12px] uppercase tracking-[0.26em] text-muted transition-colors hover:text-foreground"
               href={item.href}
               key={item.href}
             >
@@ -109,7 +109,7 @@ function FloatingNav() {
           ))}
         </div>
         <div className="flex items-center gap-2">
-          <Link className="hidden text-sm text-[#686157] transition hover:text-[#11100e] sm:inline-flex" href="/login">
+          <Link className="hidden text-sm text-muted transition hover:text-foreground sm:inline-flex" href="/login">
             Sign in
           </Link>
           <Link className="landing-button landing-button-compact" href="/register">
@@ -126,20 +126,20 @@ function HeroSection() {
     <section className="relative flex min-h-[92svh] items-center px-5 pb-10 pt-24 md:px-8">
       <div className="absolute inset-0 landing-grid" />
       <div className="absolute inset-0 landing-aurora" />
-      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#f6f0e5] to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background to-transparent" />
 
       <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-8 lg:grid-cols-[1.12fr_0.88fr]">
         <div>
-          <p className="mb-5 inline-flex rounded-full border border-[#11100e] bg-[#fffaf0]/70 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.32em] text-[#686157]">
+          <p className="mb-5 inline-flex rounded-full border border-border-strong bg-surface/70 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.32em] text-muted">
             hello there / AI video systems
           </p>
           <AnimatedText
             as="h1"
-            className="max-w-5xl text-[clamp(3rem,6.35vw,5.8rem)] font-semibold leading-[0.89] text-[#11100e]"
+            className="max-w-5xl text-[clamp(3rem,6.35vw,5.8rem)] font-semibold leading-[0.89] text-foreground"
             delay={2050}
             text="Creator operations. Built with design and technology."
           />
-          <p className="mt-5 max-w-2xl text-lg leading-8 text-[#686157] md:text-xl">
+          <p className="mt-5 max-w-2xl text-lg leading-8 text-muted md:text-xl">
             AutoShorts AI turns topics, characters, batches, and publishing checks into a premium creator
             pipeline with step-level visibility.
           </p>
@@ -152,19 +152,19 @@ function HeroSection() {
         </div>
 
         <div className="relative min-h-[420px]">
-          <div className="absolute inset-0 border border-[#11100e] bg-[#fffaf0]/64 backdrop-blur-xl" />
-          <div className="absolute inset-4 border border-[#d8d0c1] bg-[#f6f0e5]/72" />
-          <div className="absolute left-6 right-6 top-6 z-10 flex items-center justify-between rounded-full border border-[#11100e] bg-[#fffaf0] px-4 py-3">
-            <span className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#686157]">latest system</span>
-            <span className="h-2 w-2 rounded-full bg-[#c9ff4a] ring-1 ring-[#11100e]" />
+          <div className="absolute inset-0 border border-border-strong bg-surface/64 backdrop-blur-xl" />
+          <div className="absolute inset-4 border border-border bg-background/72" />
+          <div className="absolute left-6 right-6 top-6 z-10 flex items-center justify-between rounded-full border border-border-strong bg-surface px-4 py-3">
+            <span className="font-mono text-[11px] uppercase tracking-[0.28em] text-muted">latest system</span>
+            <span className="h-2 w-2 rounded-full bg-accent ring-1 ring-foreground" />
           </div>
           <div className="absolute inset-x-5 bottom-6 z-10 grid gap-3 sm:grid-cols-3">
             {["Script", "Voice", "Render"].map((step, index) => (
-              <div className="border border-[#11100e] bg-[#fffaf0] p-4" key={step}>
-                <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-[#686157]">
+              <div className="border border-border-strong bg-surface p-4" key={step}>
+                <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-muted">
                   0{index + 1}
                 </p>
-                <p className="mt-2 text-sm text-[#11100e]">{step}</p>
+                <p className="mt-2 text-sm text-foreground">{step}</p>
               </div>
             ))}
           </div>
@@ -191,9 +191,9 @@ function ProductSection() {
               const Icon = pillar.icon;
               return (
                 <InteractiveCard className="landing-card p-6" key={pillar.title}>
-                  <Icon className="h-6 w-6 text-[#11100e]" />
+                  <Icon className="h-6 w-6 text-foreground" />
                   <h3 className="mt-8 text-xl font-semibold">{pillar.title}</h3>
-                  <p className="mt-4 text-sm leading-7 text-[#686157]">{pillar.description}</p>
+                  <p className="mt-4 text-sm leading-7 text-muted">{pillar.description}</p>
                 </InteractiveCard>
               );
             })}
@@ -208,15 +208,15 @@ function TechShowcase() {
   return (
     <section className="relative px-5 py-24 md:px-8" id="studio">
       <ScrollReveal className="mx-auto max-w-7xl" staggerChildren>
-        <div className="border border-[#11100e] bg-[#fffaf0]/64 p-5 backdrop-blur-xl md:p-8">
-          <div className="grid items-end gap-8 border-b border-[#11100e] pb-8 md:grid-cols-[1fr_auto]">
+        <div className="border border-border-strong bg-surface/64 p-5 backdrop-blur-xl md:p-8">
+          <div className="grid items-end gap-8 border-b border-border-strong pb-8 md:grid-cols-[1fr_auto]">
             <div data-reveal-item>
               <p className="landing-kicker">Technology showcase</p>
               <h2 className="mt-4 max-w-3xl text-4xl font-semibold leading-tight md:text-6xl">
                 Pipeline telemetry, rendered as a creative control room.
               </h2>
             </div>
-            <div className="hidden rounded-full border border-[#11100e] bg-[#c9ff4a] px-5 py-3 font-mono text-xs uppercase tracking-[0.28em] text-[#11100e] md:block">
+            <div className="hidden rounded-full border border-border-strong bg-accent px-5 py-3 font-mono text-xs uppercase tracking-[0.28em] text-on-accent md:block">
               est. 2026
             </div>
           </div>
@@ -226,10 +226,10 @@ function TechShowcase() {
               return (
                 <InteractiveCard className="landing-card p-5" key={item.label}>
                   <div className="flex items-center justify-between">
-                    <Icon className="h-5 w-5 text-[#11100e]" />
-                    <Zap className="h-4 w-4 text-[#4b6fff]" />
+                    <Icon className="h-5 w-5 text-foreground" />
+                    <Zap className="h-4 w-4 text-accent-2" />
                   </div>
-                  <p className="mt-10 font-mono text-[11px] uppercase tracking-[0.26em] text-[#686157]">
+                  <p className="mt-10 font-mono text-[11px] uppercase tracking-[0.26em] text-muted">
                     {item.label}
                   </p>
                   <p className="mt-3 text-lg font-medium">{item.value}</p>
@@ -257,15 +257,15 @@ function FeatureGallery() {
           {gallery.map((item, index) => (
             <InteractiveCard className="landing-gallery-card min-h-[360px] p-7" key={item.title}>
               <div className="flex items-start justify-between">
-                <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-[#686157]">
+                <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-muted">
                   Exhibit 0{index + 1}
                 </span>
-                <Boxes className="h-5 w-5 text-[#11100e]" />
+                <Boxes className="h-5 w-5 text-foreground" />
               </div>
               <div className="mt-24">
-                <p className="font-mono text-4xl text-[#11100e]">{item.stat}</p>
+                <p className="font-mono text-4xl text-foreground">{item.stat}</p>
                 <h3 className="mt-6 text-2xl font-semibold">{item.title}</h3>
-                <p className="mt-4 max-w-sm text-sm leading-7 text-[#686157]">{item.copy}</p>
+                <p className="mt-4 max-w-sm text-sm leading-7 text-muted">{item.copy}</p>
               </div>
             </InteractiveCard>
           ))}
@@ -286,7 +286,7 @@ function FinalCta() {
           className="mt-5 block text-4xl font-semibold leading-tight md:text-7xl"
           text="Build the next channel from a system that feels alive."
         />
-        <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-[#686157]">
+        <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-muted">
           Start with the public studio, then continue into the existing dashboard without changing the auth or
           API flow.
         </p>
@@ -303,14 +303,14 @@ function FinalCta() {
 
 function Footer() {
   return (
-    <footer className="border-t border-[#11100e] px-5 py-10 md:px-8">
-      <div className="mx-auto flex max-w-7xl flex-col gap-4 text-sm text-[#686157] md:flex-row md:items-center md:justify-between">
+    <footer className="border-t border-border-strong px-5 py-10 md:px-8">
+      <div className="mx-auto flex max-w-7xl flex-col gap-4 text-sm text-muted md:flex-row md:items-center md:justify-between">
         <p>Copyright 2026 AutoShorts AI. All rights reserved.</p>
         <div className="flex gap-5">
-          <Link className="transition hover:text-[#11100e]" href="/login">
+          <Link className="transition hover:text-foreground" href="/login">
             Dashboard
           </Link>
-          <Link className="transition hover:text-[#11100e]" href="/register">
+          <Link className="transition hover:text-foreground" href="/register">
             Register
           </Link>
         </div>

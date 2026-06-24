@@ -31,9 +31,9 @@ export function ProtectedAppShell({ children }: { children: React.ReactNode }) {
   /* Loading state */
   if (!isHydrated || (!isAuthenticated && isHydrated) || isBootstrappingUser) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-[#f6f0e5]">
-        <div className="studio-card flex items-center gap-3 px-6 py-4 text-[16px] text-[#11100e]">
-          <Spinner className="h-4 w-4" />
+      <div className="flex min-h-screen items-center justify-center">
+        <div className="studio-card flex items-center gap-3 px-6 py-4 text-[16px] text-foreground">
+          <Spinner className="h-4 w-4 text-accent" />
           {t("shell.loadingWorkspace")}
         </div>
       </div>
@@ -43,12 +43,12 @@ export function ProtectedAppShell({ children }: { children: React.ReactNode }) {
   /* Session error */
   if (userBootstrapError) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-[#f6f0e5] px-4">
+      <div className="flex min-h-screen items-center justify-center px-4">
         <div className="studio-card w-full max-w-md p-8">
-          <h2 className="text-[28px] font-semibold leading-tight text-[#11100e]">
+          <h2 className="text-[28px] font-semibold leading-tight text-foreground">
             {t("shell.sessionExpired")}
           </h2>
-          <p className="mt-2 text-[16px] text-[#686157]">{userBootstrapError}</p>
+          <p className="mt-2 text-[16px] text-muted">{userBootstrapError}</p>
           <div className="mt-6">
             <Button onClick={logout}>{t("shell.signInAgain")}</Button>
           </div>
@@ -58,7 +58,7 @@ export function ProtectedAppShell({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="min-h-screen bg-[#f6f0e5] text-[#11100e]">
+    <div className="min-h-screen text-foreground">
       <div className="flex min-h-screen">
         <AppSidebar mobileOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
 
@@ -66,12 +66,14 @@ export function ProtectedAppShell({ children }: { children: React.ReactNode }) {
           <AppTopbar onOpenMenu={() => setMobileOpen(true)} />
 
           {bootstrapQuery.isError ? (
-            <div className="mx-5 mt-4 border border-[#8a5a00]/30 bg-[#c9ff4a]/20 px-4 py-3 font-mono text-[12px] uppercase tracking-[0.12em] text-[#5d4100]">
+            <div className="mx-5 mt-4 rounded-xl border border-warning/40 bg-warning/10 px-4 py-3 font-mono text-[12px] uppercase tracking-[0.12em] text-warning-strong">
               {t("shell.metadataFallback")}
             </div>
           ) : null}
 
-          <main className="flex-1 px-5 py-8 md:px-8">{children}</main>
+          <main key={pathname} className="page-enter flex-1 px-5 py-8 md:px-8">
+            {children}
+          </main>
         </div>
       </div>
     </div>

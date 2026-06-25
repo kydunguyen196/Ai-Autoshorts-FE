@@ -6,13 +6,21 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   clearActiveChannelId,
   clearAuthToken,
+  clearRefreshToken,
   getActiveChannelId,
   getAuthToken,
+  getRefreshToken,
   setActiveChannelId as setActiveChannelIdStorage,
   setAuthToken as setAuthTokenStorage,
+  setRefreshToken as setRefreshTokenStorage,
   storageChangeEventName,
 } from "@/lib/auth-storage";
-import { getCurrentUser, login as loginRequest, register as registerRequest } from "@/services/auth-service";
+import {
+  getCurrentUser,
+  login as loginRequest,
+  logout as logoutRequest,
+  register as registerRequest,
+} from "@/services/auth-service";
 import type {
   AuthResponse,
   Channel,
@@ -87,6 +95,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const applyAuth = useCallback(
     (response: AuthResponse) => {
       setAuthTokenStorage(response.accessToken);
+      if (response.refreshToken) {
+        setRefreshTokenStorage(response.refreshToken);
+      }
 
       const defaultChannelId = response.defaultChannel?.id ?? null;
       if (defaultChannelId) {
@@ -120,7 +131,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   );
 
   const logout = useCallback(() => {
+    const refreshToken = getRefreshToken();
+    if (refreshToken) {
+      // Best-effort server-side revocation; never block local logout on it.
+      void logoutRequest(refreshToken).catch(() => {});
+    }
     clearAuthToken();
+    clearRefreshToken();
     clearActiveChannelId();
     queryClient.removeQueries({ queryKey: ["auth"] });
   }, [queryClient]);

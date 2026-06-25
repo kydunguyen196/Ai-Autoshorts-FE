@@ -20,3 +20,12 @@ export async function getCurrentUser() {
   const { data } = await httpClient.get<CurrentUserResponse>("/api/auth/me");
   return data;
 }
+
+export async function refreshSession(refreshToken: string) {
+  const { data } = await httpClient.post<AuthResponse>("/api/auth/refresh", { refreshToken });
+  return data;
+}
+
+export async function logout(refreshToken: string) {
+  await httpClient.post("/api/auth/logout", { refreshToken });
+}

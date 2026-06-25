@@ -1,4 +1,5 @@
 ﻿const AUTH_TOKEN_KEY = "autoshorts.auth.token";
+const REFRESH_TOKEN_KEY = "autoshorts.auth.refresh";
 const ACTIVE_CHANNEL_KEY = "autoshorts.active.channel";
 const STORAGE_EVENT_NAME = "autoshorts-storage";
 
@@ -38,6 +39,27 @@ export function clearAuthToken() {
   }
   window.localStorage.removeItem(AUTH_TOKEN_KEY);
   notifyStorageChange();
+}
+
+export function getRefreshToken(): string | null {
+  if (!isBrowser()) {
+    return null;
+  }
+  return window.localStorage.getItem(REFRESH_TOKEN_KEY);
+}
+
+export function setRefreshToken(token: string) {
+  if (!isBrowser()) {
+    return;
+  }
+  window.localStorage.setItem(REFRESH_TOKEN_KEY, token);
+}
+
+export function clearRefreshToken() {
+  if (!isBrowser()) {
+    return;
+  }
+  window.localStorage.removeItem(REFRESH_TOKEN_KEY);
 }
 
 export function getActiveChannelId(): string | null {

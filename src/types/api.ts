@@ -62,6 +62,7 @@ export interface Channel {
 export interface AuthResponse {
   tokenType: string;
   accessToken: string;
+  refreshToken: string;
   expiresInSeconds: number;
   user: UserProfile;
   defaultChannel: Channel;

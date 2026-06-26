@@ -33,6 +33,7 @@ const navItems = [
   { href: "/app",                        labelKey: "nav.overview",    icon: LayoutDashboard },
   { href: "/app/generate",               labelKey: "nav.generate",    icon: Sparkles },
   { href: "/app/jobs",                   labelKey: "nav.jobs",        icon: ListChecks },
+  { href: "/app/analytics",              labelKey: "nav.analytics",   icon: Gauge },
   { href: "/app/topics",                 labelKey: "nav.topics",      icon: Layers },
   { href: "/app/news",                   labelKey: "nav.news",        icon: Newspaper },
   { href: "/app/batch",                  labelKey: "nav.batch",       icon: Bot },

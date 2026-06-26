@@ -475,6 +475,32 @@ export interface TikTokConnectionUpsertRequest {
   status?: TikTokConnectionStatus;
 }
 
+export interface AnalyticsCount {
+  key: string;
+  count: number;
+}
+
+export interface AnalyticsDailyPoint {
+  date: string;
+  jobs: number;
+  completed: number;
+  costCredits: number;
+}
+
+export interface AnalyticsSummaryResponse {
+  windowDays: number;
+  totalJobs: number;
+  completedJobs: number;
+  failedJobs: number;
+  publishedCount: number;
+  successRate: number;
+  totalEstimatedCostCredits: number;
+  jobsByStatus: AnalyticsCount[];
+  publishByStatus: AnalyticsCount[];
+  publishedByPlatform: AnalyticsCount[];
+  timeseries: AnalyticsDailyPoint[];
+}
+
 export type SocialPlatform = "youtube" | "instagram";
 
 export type SocialConnectionStatus = "PENDING" | "ACTIVE" | "EXPIRED" | "REVOKED" | "ERROR";

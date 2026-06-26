@@ -64,6 +64,7 @@ export default function GeneratePage() {
   const [adDisclosureMode, setAdDisclosureMode] = useState("");
   const [sceneCountTarget, setSceneCountTarget] = useState("");
   const [characterConsistencyMode, setCharacterConsistencyMode] = useState("");
+  const [reviewBeforeRender, setReviewBeforeRender] = useState(false);
 
   const selectedChannelName = useMemo(() => {
     return channelsQuery.data?.find((channel) => channel.id === activeChannelId)?.name ?? "No channel selected";
@@ -93,6 +94,7 @@ export default function GeneratePage() {
         voiceProvider: voiceProvider || undefined,
         voicePersona,
         qualityPreset,
+        reviewBeforeRender,
       }),
     onSuccess: (job) => {
       router.push(`/app/jobs/${job.jobId}`);
@@ -343,6 +345,21 @@ export default function GeneratePage() {
               <p className="mt-2 text-xs text-warning-strong">Could not load campaigns for this channel.</p>
             ) : null}
           </div>
+
+          <label className="flex items-start gap-2 rounded-xl border border-border bg-surface px-3 py-3 text-sm text-strong">
+            <input
+              type="checkbox"
+              className="mt-0.5"
+              checked={reviewBeforeRender}
+              onChange={(event) => setReviewBeforeRender(event.target.checked)}
+            />
+            <span>
+              Review before render
+              <span className="mt-0.5 block text-xs text-muted">
+                Pause after the script is generated so you can edit it before the video is rendered.
+              </span>
+            </span>
+          </label>
 
           {generateMutation.isError ? (
             <p className="rounded-xl border border-danger/30 bg-danger/10 px-3 py-2 text-sm text-danger">

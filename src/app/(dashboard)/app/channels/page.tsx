@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
+import { BrandKitEditor } from "@/components/channels/brand-kit-editor";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -36,6 +37,8 @@ export default function ChannelsPage() {
       queryClient.invalidateQueries({ queryKey: ["channels", "list"] });
     },
   });
+
+  const activeBrandKitChannel = channelsQuery.data?.find((channel) => channel.id === activeChannelId) ?? null;
 
   return (
     <div>
@@ -141,6 +144,12 @@ export default function ChannelsPage() {
           )}
         </Card>
       </section>
+
+      {activeBrandKitChannel ? (
+        <section className="mt-4">
+          <BrandKitEditor channel={activeBrandKitChannel} />
+        </section>
+      ) : null}
     </div>
   );
 }

@@ -8,6 +8,7 @@ import type {
   PagedResponse,
   PublishVideoRequest,
   RejectVideoRequest,
+  UpdateDraftRequest,
   VideoJob,
   VideoPublishStatus,
 } from "@/types/api";
@@ -76,6 +77,16 @@ export async function retryJob(jobId: string) {
 
 export async function approveJob(jobId: string) {
   const { data } = await httpClient.post<VideoJob>(`/api/videos/${jobId}/approve`);
+  return data;
+}
+
+export async function updateJobDraft(jobId: string, payload: UpdateDraftRequest) {
+  const { data } = await httpClient.patch<VideoJob>(`/api/videos/${jobId}/draft`, payload);
+  return data;
+}
+
+export async function finalizeJobDraft(jobId: string) {
+  const { data } = await httpClient.post<VideoJob>(`/api/videos/${jobId}/finalize`);
   return data;
 }
 

@@ -8,6 +8,7 @@ import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { JobDraftEditor } from "@/components/jobs/job-draft-editor";
 import { PageHeader } from "@/components/ui/page-header";
 import { Skeleton } from "@/components/ui/skeleton";
 import { JobStatusBadge } from "@/features/jobs/job-status-badge";
@@ -176,6 +177,7 @@ export default function JobDetailPage() {
         </Card>
       ) : (
         <div className="space-y-4">
+          <JobDraftEditor job={job} />
           <Card>
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div>

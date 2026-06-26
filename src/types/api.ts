@@ -1,4 +1,4 @@
-﻿export type JobStatus = "PENDING" | "PROCESSING" | "COMPLETED" | "FAILED";
+﻿export type JobStatus = "PENDING" | "PROCESSING" | "AWAITING_REVIEW" | "COMPLETED" | "FAILED";
 
 export type GenerationStep =
   | "QUEUED"
@@ -55,6 +55,11 @@ export interface Channel {
   name: string;
   description?: string | null;
   isDefault?: boolean;
+  brandLogoUrl?: string | null;
+  brandPrimaryColor?: string | null;
+  brandAccentColor?: string | null;
+  brandIntroUrl?: string | null;
+  brandOutroUrl?: string | null;
   createdAt?: string;
   updatedAt?: string;
 }
@@ -107,6 +112,8 @@ export interface VideoJob {
   hookText?: string | null;
   ctaText?: string | null;
   captionText?: string | null;
+  reviewBeforeRender?: boolean;
+  templateId?: string | null;
   hashtags?: string[] | null;
   sceneBreakdownJson?: string | null;
   sceneAssetsJson?: string | null;
@@ -225,6 +232,40 @@ export interface GenerateVideoRequest {
 
   durationSeconds: number;
   variantCount?: number;
+  autoPublish?: boolean;
+  reviewBeforeRender?: boolean;
+}
+
+export interface UpdateDraftRequest {
+  scriptText?: string;
+  captionText?: string;
+  hookText?: string;
+  ctaText?: string;
+  voiceId?: string;
+  templateId?: string;
+}
+
+export interface VideoTemplate {
+  id: string;
+  name: string;
+  description?: string | null;
+  captionPosition: string;
+  fontFamily?: string | null;
+  primaryColor?: string | null;
+  accentColor?: string | null;
+  default: boolean;
+  createdAt?: string | null;
+  updatedAt?: string | null;
+}
+
+export interface VideoTemplateRequest {
+  name: string;
+  description?: string;
+  captionPosition?: string;
+  fontFamily?: string;
+  primaryColor?: string;
+  accentColor?: string;
+  makeDefault?: boolean;
 }
 
 export interface BatchGenerateItemRequest {

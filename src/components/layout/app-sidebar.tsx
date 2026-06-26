@@ -40,6 +40,7 @@ const navItems = [
   { href: "/app/channels",               labelKey: "nav.channels",    icon: FolderKanban },
   { href: "/app/characters/profiles",    labelKey: "nav.characters",  icon: UserRound },
   { href: "/app/characters/campaigns",   labelKey: "nav.campaigns",   icon: Megaphone },
+  { href: "/app/templates",              labelKey: "nav.templates",   icon: Layers },
   { href: "/app/integrations/tiktok",    labelKey: "nav.tiktok",      icon: Link2 },
   { href: "/app/integrations/youtube",   labelKey: "nav.youtube",     icon: MonitorPlay },
   { href: "/app/integrations/instagram", labelKey: "nav.instagram",   icon: Camera },

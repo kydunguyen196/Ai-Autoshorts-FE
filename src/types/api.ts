@@ -475,6 +475,36 @@ export interface TikTokConnectionUpsertRequest {
   status?: TikTokConnectionStatus;
 }
 
+export type SocialPlatform = "youtube" | "instagram";
+
+export type SocialConnectionStatus = "PENDING" | "ACTIVE" | "EXPIRED" | "REVOKED" | "ERROR";
+
+export interface SocialConnectionStatusResponse {
+  id?: string;
+  channelId: string;
+  platform?: SocialPlatform;
+  platformAccountId?: string | null;
+  platformUsername?: string | null;
+  tokenExpiresAt?: string | null;
+  scopes?: string[];
+  status: SocialConnectionStatus;
+  active?: boolean;
+  lastSyncAt?: string | null;
+  createdAt?: string | null;
+  updatedAt?: string | null;
+}
+
+export interface SocialConnectionUpsertRequest {
+  channelId?: string;
+  platformAccountId?: string;
+  platformUsername?: string;
+  accessToken?: string;
+  refreshToken?: string;
+  tokenExpiresAt?: string;
+  scopes?: string[];
+  status?: SocialConnectionStatus;
+}
+
 export interface FrontendBootstrapDefaults {
   defaultStyle: string;
   defaultDurationSeconds: number;
